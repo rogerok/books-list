@@ -1,0 +1,87 @@
+.Typography {
+  margin: 0;
+
+  &_fullWidth {
+    display: block;
+    width: 100%;
+  }
+
+  &_variant {
+    &_primary {
+      color: var(--neutral-900);
+    }
+
+    &_secodary {
+      color: var(--neutral-700);
+    }
+
+    &_warn {
+      color: var(--orange-200)
+    }
+
+    &_light {
+      color: var(--neutral-600)
+    }
+
+  }
+
+  &_size {
+    &_3xs {
+      font: var(--font-3xs);
+    }
+
+    &_2xs {
+      font: var(--font-2xs);
+    }
+
+    &_xs {
+      font: var(--font-xs);
+    }
+
+    &_sm {
+      font: var(--font-sm);
+    }
+
+    &_md {
+      font: var(--font-md);
+    }
+
+  }
+
+  &_weight {
+    &_normal {
+      font-weight: 400;
+    }
+
+    &_medium {
+      font-weight: 500;
+    }
+
+    &_semibold {
+      font-weight: 600;
+    }
+
+
+  }
+
+  &_align {
+    &_left {
+      text-align: left;
+    }
+
+    &_right {
+      text-align: right;
+    }
+
+    &_center {
+      text-align: center;
+    }
+  }
+
+
+  &_break {
+    hyphens: auto;
+    overflow-wrap: break-word;
+  }
+
+}
