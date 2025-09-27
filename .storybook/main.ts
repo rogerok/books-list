@@ -1,7 +1,5 @@
 import type { StorybookConfig } from '@storybook/react-vite';
 
-import '../src/app/styles/index.scss';
-
 const config: StorybookConfig = {
   addons: [
     '@chromatic-com/storybook',
@@ -13,6 +11,11 @@ const config: StorybookConfig = {
     name: '@storybook/react-vite',
     options: {},
   },
-  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+  stories: [
+    '../src/app/**/*.stories.@(js|jsx|ts|tsx|mdx)',
+    '../src/shared/**/*.stories.@(js|jsx|ts|tsx|mdx)',
+    '../src/widgets/**/*.stories.@(js|jsx|ts|tsx|mdx)',
+    '../src/pages/**/*.stories.@(js|jsx|ts|tsx|mdx)',
+  ],
 };
 export default config;

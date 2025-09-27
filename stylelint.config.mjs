@@ -7,5 +7,6 @@ export default {
   ],
   rules: {
     'custom-property-empty-line-before': null,
+    'selector-class-pattern': [''],
   },
 };

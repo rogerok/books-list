@@ -1,0 +1,23 @@
+.IconComponent {
+  color: currentcolor;
+
+  &.IconButton {
+    cursor: pointer;
+
+    padding: 0;
+    border: none;
+
+    color: currentcolor;
+
+    background: none;
+    outline: none;
+
+    transition: var(--transition-1);
+
+    @media (hover: hover) {
+      &:hover {
+        filter: brightness(90%);
+      }
+    }
+  }
+}

@@ -1,5 +1,7 @@
 import type { Preview } from '@storybook/react-vite';
 
+import '../src/app/styles/index.scss';
+
 const preview: Preview = {
   parameters: {
     a11y: {
