@@ -1,0 +1,26 @@
+@use 'helpers' as h;
+
+:root {
+  --font-family: 'Inter';
+
+  --font-size-3xs: h.rem(12);
+  --font-line-3xs: 1.33;
+  --font-3xs: var(--font-size-3xs) / var(--font-line-3xs) var(--font-family);
+
+  --font-size-2xs: h.rem(13);
+  --font-line-2xs: 1.44;
+  --font-2xs: var(--font-size-2xs) / var(--font-line-2xs) var(--font-family);
+
+  --font-size-xs: h.rem(14);
+  --font-line-xs: 1.43;
+  --font-s: var(--font-size-s) / var(--font-line-s) var(--font-family);
+
+
+  --font-size-sm: h.rem(15);
+  --font-line-sm: 1.54;
+  --font-sm: var(--font-size-sm) / var(--font-line-sm) var(--font-family);
+
+  --font-size-md: h.rem(17);
+  --font-line-md: 1.65;
+  --font-md: var(--font-size-md) / var(--font-line-md) var(--font-family);
+}
