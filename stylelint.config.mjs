@@ -5,4 +5,7 @@ export default {
     'stylelint-config-clean-order',
     'stylelint-config-prettier-scss',
   ],
+  rules: {
+    'custom-property-empty-line-before': null,
+  },
 };

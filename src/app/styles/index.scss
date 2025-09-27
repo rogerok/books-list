@@ -1,3 +1,13 @@
 @use 'reset';
+@use 'helpers';
 @use 'mixins';
+@use 'typography';
+@use 'colors';
 @use 'variables';
+@use 'fonts';
+@use 'breakpoints';
+
+html {
+  overflow: hidden;
+  font-family: var(--font-family), sans-serif;
+}
