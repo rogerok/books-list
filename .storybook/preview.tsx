@@ -1,8 +1,10 @@
 import type { Preview } from '@storybook/react-vite';
 
 import '../src/app/styles/index.scss';
+import { RouterDecorator } from '../src/shared/config/router-decorator';
 
 const preview: Preview = {
+  decorators: [RouterDecorator],
   parameters: {
     a11y: {
       // 'todo' - show a11y violations in the test UI only
@@ -10,7 +12,6 @@ const preview: Preview = {
       // 'off' - skip a11y checks entirely
       test: 'todo',
     },
-
     controls: {
       matchers: {
         color: /(background|color)$/i,
