@@ -24,5 +24,16 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src"]
+  "include": ["src"],
+  "paths": {
+    "@pages/*": [
+      "./src/pages/*"
+    ],
+    "@shared/*": [
+      "./src/shared/*"
+    ],
+    "@widgets/*": [
+      "./src/widgets/*"
+    ]
+  }
 }
