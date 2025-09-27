@@ -1,0 +1,21 @@
+.AppLink {
+  text-decoration: none;
+  transition: var(--transition-1);
+
+  &_variant {
+    &_primary {
+      color: var(--neutral-900);
+    }
+
+    &_secodary {
+      color: var(--neutral-700);
+    }
+  }
+
+
+    @media (hover: hover) {
+      &:hover {
+      filter: brightness(85%);
+      }
+    }
+}
