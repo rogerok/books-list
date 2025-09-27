@@ -1,3 +1,4 @@
+import { tanstackRouter } from '@tanstack/router-plugin/vite';
 import react from '@vitejs/plugin-react-swc';
 import sass from 'sass';
 import { defineConfig } from 'vite';
@@ -16,6 +17,9 @@ export default defineConfig({
     react(),
     checker({
       typescript: true,
+    }),
+    tanstackRouter({
+      routesDirectory: './src/app/routes',
     }),
   ],
 });
