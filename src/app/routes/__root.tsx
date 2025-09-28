@@ -1,4 +1,4 @@
-import { Typography } from '@shared/ui/typography/typography.tsx';
+import { Typography } from '@shared/ui/typography/typography';
 import { createRootRoute, Link, Outlet } from '@tanstack/react-router';
 
 const RootLayout = () => (

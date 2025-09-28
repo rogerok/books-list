@@ -122,6 +122,7 @@ export default [
         { allowConstantExport: true },
       ],
       'react/display-name': 'off',
+      'react/prop-types': 'off',
       'react/react-in-jsx-scope': 'off',
       // SonarJS rules
       'sonarjs/cognitive-complexity': ['warn', 15],

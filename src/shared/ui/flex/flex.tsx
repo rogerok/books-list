@@ -1,4 +1,4 @@
-import './Flex.scss';
+import './flex.scss';
 
 import type {
   ComponentPropsWithoutRef,

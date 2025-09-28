@@ -15,8 +15,12 @@
       color: var(--neutral-700);
     }
 
+    &_dark {
+      color: var(--neutral-1000);
+    }
+
     &_warn {
-      color: var(--orange-200)
+      color: var(--warn)
     }
 
     &_light {
