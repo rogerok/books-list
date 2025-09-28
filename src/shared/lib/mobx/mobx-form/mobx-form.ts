@@ -36,7 +36,7 @@ type FormFullState<TFieldValues extends FieldValues> = {
   values: TFieldValues;
 } & FormState<TFieldValues>;
 
-export class Form<
+export class MobxForm<
   TFieldValues extends FieldValues = FieldValues,
   TContext = any,
   TTransformedValues = TFieldValues,

@@ -1,16 +1,29 @@
-import type { FC } from 'react';
+import { cn } from '@bem-react/classname';
 
 import './sign-in-page.scss';
-import { cn } from '@bem-react/classname';
-import { ColorConstant } from '@shared/constants/style-system/colors.ts';
-import { HStack } from '@shared/ui/hstack/hstack.tsx';
-import { IconComponent } from '@shared/ui/icon-component/icon-component.tsx';
-import { Typography } from '@shared/ui/typography/typography.tsx';
-import { VStack } from '@shared/ui/vstack/vstack.tsx';
+import { Form } from '@shared/components/form/form';
+import { TextField } from '@shared/components/text-field/text-field.tsx';
+import { ColorConstant } from '@shared/constants/style-system/colors';
+import { MobxForm } from '@shared/lib/mobx/mobx-form/mobx-form';
+import { HStack } from '@shared/ui/hstack/hstack';
+import { IconComponent } from '@shared/ui/icon-component/icon-component';
+import { Typography } from '@shared/ui/typography/typography';
+import { VStack } from '@shared/ui/vstack/vstack';
+import { observer } from 'mobx-react-lite';
+import { type FC, useState } from 'react';
 
 const cnSignInPage = cn('SignInPage');
 
-export const SignInPage: FC = () => {
+export const SignInPage: FC = observer(() => {
+  const [form] = useState(
+    () =>
+      new MobxForm({
+        defaultValues: {
+          first: '123',
+        },
+      }),
+  );
+
   return (
     <VStack
       align={'center'}
@@ -52,6 +65,9 @@ export const SignInPage: FC = () => {
           </VStack>
         </VStack>
       </HStack>
+      <Form methods={form}>
+        <TextField name={'first'} />
+      </Form>
     </VStack>
   );
-};
+});

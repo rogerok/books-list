@@ -6,9 +6,9 @@ import type {
   UseFormProps,
 } from 'react-hook-form';
 
-import type { Form } from './mobx-form.ts';
+import type { MobxForm } from './mobx-form';
 
-export type AnyForm = Form<any, any, any>;
+export type AnyForm = MobxForm<any, any, any>;
 
 export interface FormParams<
   TFieldValues extends FieldValues = FieldValues,
@@ -32,13 +32,3 @@ export interface FormParams<
 
   onReset?: (event: any) => void;
 }
-
-export type ExtractFormFieldValues<T extends AnyForm> = Exclude<
-  T['values'],
-  null | undefined
->;
-
-export type ExtractFormFieldOutputValues<T extends AnyForm> =
-  T extends Form<any, any, infer TFieldOutputValues>
-    ? TFieldOutputValues
-    : never;
