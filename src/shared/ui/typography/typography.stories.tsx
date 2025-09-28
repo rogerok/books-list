@@ -13,7 +13,7 @@ const meta: Meta<typeof Typography> = {
     weight: 'normal',
   },
   component: Typography,
-  title: 'ui/Typography',
+  title: 'Shared/Typography',
 };
 
 export default meta;

@@ -1,4 +1,4 @@
-@use 'helpers' as h;
+@use '../../shared/style/helpers' as h;
 
 :root {
   --font-family: 'Inter';
@@ -13,7 +13,7 @@
 
   --font-size-xs: #{h.to-rem(14)};
   --font-line-xs: 1.43;
-  --font-s: var(--font-size-xs) / var(--font-line-xs) var(--font-family);
+  --font-xs: var(--font-size-xs) / var(--font-line-xs) var(--font-family);
 
 
   --font-size-sm: #{h.to-rem(15)};

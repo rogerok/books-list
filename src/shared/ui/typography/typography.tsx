@@ -10,7 +10,7 @@ import {
 
 const cnTypography = cn('Typography');
 
-type TypographyVariants = 'light' | 'primary' | 'secondary' | 'warn';
+type TypographyVariants = 'dark' | 'light' | 'primary' | 'secondary' | 'warn';
 type TypographySize = '2xs' | '3xs' | 'lg' | 'md' | 'sm' | 'xl' | 'xs';
 type TypographyWeight = 'medium' | 'normal' | 'semibold';
 type TypographyAlign = 'center' | 'left' | 'right';
@@ -37,7 +37,7 @@ export const Typography = memo(
       className,
       dataTestId,
       fullWidth,
-      size = 'md',
+      size = 'xs',
       variant = 'primary',
       weight = 'normal',
       wordBreak = true,

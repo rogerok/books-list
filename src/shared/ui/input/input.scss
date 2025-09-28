@@ -1,0 +1,106 @@
+
+.Input {
+
+  --icon-x-position: 3.4rem;
+
+  font: var(--font-size-xs);
+  color: var(--neutral-1000);
+
+  &_fullWidth {
+    width: 100%;
+  }
+
+  &-Inner {
+    position: relative;
+
+    &_fullWidth {
+      width: 100%;
+    }
+  }
+
+
+  &-AddonLeft {
+    position: absolute;
+    top: calc(50% + 4px);
+    left: 8px;
+    transform: translateY(-50%);
+  }
+
+  &-AddonRight {
+    position: absolute;
+    top: calc(50% + 4px);
+    right: 8px;
+    transform: translateY(-50%);
+  }
+
+  &_disabled {
+    color: var(--neutral-500);
+  }
+
+  &-Input {
+    transform: var(--transition-1);
+
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+
+    font: var(--font-xs);
+    color: var(--neutral-1000);
+
+    background: var(--white);
+
+    &::placeholder {
+      font: var(--font-2xs);
+      color: var(--neutral-500);
+    }
+
+    &_error {
+      border-color: var(--warn);
+    }
+
+    // TODO: maybe need rewrite
+
+    &_pr {
+      padding-right: var(--icon-x-position)
+    }
+
+    &_pl {
+      padding-left: var(--icon-x-position)
+    }
+
+    &_fullWidth {
+      width: 100%;
+    }
+
+    &_hasValue,
+    &:active,
+    &:focus,
+     {
+      outline: 2px solid var(--neutral-500);
+      box-shadow: var(--shadow-sm);
+    }
+
+    &:disabled {
+      background: var(--neutral-300);
+    }
+
+    @media (hover: hover) {
+      &:not(:disabled,:focus):hover {
+        border-color: var(--neutral-500);
+      }
+
+    }
+  }
+
+  &-ErrorText {
+    color: var(--warn);
+  }
+
+  @media (hover: hover) {
+    &-AddonLeft, &-AddonRight {
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+}
