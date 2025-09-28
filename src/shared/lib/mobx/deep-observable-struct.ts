@@ -1,10 +1,7 @@
+import { isObject } from '@shared/utils/ts-utils/ts-utils.ts';
 import { action, makeObservable, observable } from 'mobx';
 
 type AnyObject = Record<keyof any, any>;
-
-const isObject = (value: unknown): value is Record<string, unknown> => {
-  return Object.prototype.toString.call(value) === '[object Object]';
-};
 
 export class DeepObservableStruct<TData extends AnyObject> {
   data: TData;
