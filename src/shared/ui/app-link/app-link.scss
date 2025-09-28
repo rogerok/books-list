@@ -15,7 +15,7 @@
 
     @media (hover: hover) {
       &:hover {
-      filter: brightness(85%);
+        filter: var(--hover-brightness);
       }
     }
 }
