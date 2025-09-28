@@ -1,5 +1,7 @@
 export type ObjectValues<T> = T[keyof T];
 
-export const isObject = (value: unknown): value is Record<string, unknown> => {
-  return Object.prototype.toString.call(value) === '[object Object]';
-};
+export type MaybeFn<T, TArgs extends any[] = []> = ((...args: TArgs) => T) | T;
+
+export type Nullable<T> = T | null;
+
+export type Maybe<T> = Nullable<T> | undefined;

@@ -1,7 +1,7 @@
 import type { Preview } from '@storybook/react-vite';
 
 import '../src/app/styles/index.scss';
-import { RouterDecorator } from '../src/shared/config/router-decorator';
+import { RouterDecorator } from '../src/shared/config/router/router-decorator';
 
 const preview: Preview = {
   decorators: [RouterDecorator],

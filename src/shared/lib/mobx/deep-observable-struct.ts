@@ -1,4 +1,4 @@
-import { isObject } from '@shared/utils/ts-utils/ts-utils.ts';
+import { isObject } from '@shared/utils/common.ts';
 import { action, makeObservable, observable } from 'mobx';
 
 type AnyObject = Record<keyof any, any>;
