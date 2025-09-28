@@ -11,7 +11,7 @@
       color: var(--neutral-900);
     }
 
-    &_secodary {
+    &_secondary {
       color: var(--neutral-700);
     }
 
@@ -48,6 +48,18 @@
 
     &_md {
       font: var(--font-md);
+    }
+
+    &_lg {
+      font: var(--font-lg);
+    }
+
+    &_xl {
+      font: var(--font-xl);
+    }
+
+    &_2xl {
+      font: var(--font-2xl);
     }
 
   }

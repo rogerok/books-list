@@ -23,4 +23,16 @@
   --font-size-md: #{h.to-rem(17)};
   --font-line-md: 1.65;
   --font-md: var(--font-size-md) / var(--font-line-md) var(--font-family);
+
+  --font-size-lg: #{h.to-rem(18)};
+  --font-line-lg: 1.4;
+  --font-lg: var(--font-size-lg) / var(--font-size-lg) var(--font-family);
+
+  --font-size-xl: #{h.to-rem(22)};
+  --font-line-xl: 1.4;
+  --font-xl: var(--font-size-xl) / var(--font-size-xl) var(--font-family);
+
+  --font-size-2xl: #{h.to-rem(27)};
+  --font-line-2xl: 1.3;
+  --font-2xl: var(--font-size-2xl) / var(--font-line-2xl) var(--font-family);
 }

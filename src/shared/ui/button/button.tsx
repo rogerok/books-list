@@ -1,7 +1,7 @@
 import './button.scss';
 
 import { cn } from '@bem-react/classname';
-import { type ButtonHTMLAttributes, type FC, memo } from 'react';
+import { type ButtonHTMLAttributes, type FC } from 'react';
 
 const cnButton = cn('Button');
 
@@ -19,7 +19,7 @@ export type ButtonProps = {
   variant?: ButtonVariantsType;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
-export const Button: FC<ButtonProps> = memo((props) => {
+export const Button: FC<ButtonProps> = (props) => {
   const {
     className,
     disabled,
@@ -45,4 +45,4 @@ export const Button: FC<ButtonProps> = memo((props) => {
       {props.children}
     </button>
   );
-});
+};

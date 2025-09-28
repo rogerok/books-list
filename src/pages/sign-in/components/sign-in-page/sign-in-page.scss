@@ -1,0 +1,15 @@
+.SignInPage {
+  padding-top: 16.25rem;
+
+  &-Icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 56px;
+    height: 56px;
+    border-radius: 1rem;
+
+    background: var(--green-100);
+  }
+}

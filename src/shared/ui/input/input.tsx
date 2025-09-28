@@ -7,7 +7,6 @@ import {
   type ChangeEvent,
   type FC,
   type InputHTMLAttributes,
-  memo,
   type ReactNode,
   useId,
 } from 'react';
@@ -31,7 +30,7 @@ interface InputProps extends HTMLInputProps {
   onChange?: (value: number | string) => void;
 }
 
-export const Input: FC<InputProps> = memo((props) => {
+export const Input: FC<InputProps> = (props) => {
   const {
     addonLeft,
     addonRight,
@@ -95,4 +94,4 @@ export const Input: FC<InputProps> = memo((props) => {
       {error && <Typography variant={'warn'}>{error}</Typography>}
     </VStack>
   );
-});
+};
