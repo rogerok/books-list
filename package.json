@@ -16,8 +16,11 @@
     "@bem-react/classname": "^1.7.0",
     "@tanstack/react-router": "^1.132.7",
     "@tanstack/react-router-devtools": "^1.132.11",
+    "mobx": "^6.15.0",
+    "mobx-react-lite": "^4.1.1",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "react-hook-form": "^7.63.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.1.1",
