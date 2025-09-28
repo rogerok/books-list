@@ -1,0 +1,58 @@
+.Button {
+  $parent: &;
+
+  width: fit-content;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 8px;
+
+  font: var(--font-2xs);
+  font-weight: 500;
+  color: var(--white);
+  text-align: center;
+
+  box-shadow: var(--shadow-md);
+
+  transition: var(--transition-1);
+
+  &_variant {
+    &_primary {
+      background: linear-gradient(90deg, var(--green-200) 0%, var(--green-600) 100%);
+    }
+
+    &_secondary {
+      background: linear-gradient(90deg, var(--purple-200) 0%, var(--purple-300) 100%);
+    }
+
+    &_accent {
+      background: linear-gradient(90deg, var(--green-500) 0%, var(--green-300) 100%);
+    }
+
+    &_clear {
+      margin: 0;
+      padding: 0;
+      border: none;
+
+      color: var(--neutral-1000);
+
+      background: none;
+      box-shadow: none;
+    }
+  }
+
+  &_fullWidth {
+    width: 100%;
+  }
+
+  &_disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  @media (hover: hover) {
+    &:not(#{$parent}_disabled):hover {
+      cursor: pointer;
+      filter: var(--hover-brightness);
+    }
+  }
+}
