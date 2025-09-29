@@ -1,13 +1,11 @@
 import { cn } from '@bem-react/classname';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { SignUpRequestSchema } from '@pages/sign-up/model/model.ts';
+import { useSignUpStore } from '@pages/sign-up/store/sign-up-store.ts';
 import { Form } from '@shared/components/form/form.tsx';
 import { TextField } from '@shared/components/text-field/text-field.tsx';
-import { routes } from '@shared/config/router/routes.ts';
 
 import './sign-up-form.scss';
+import { routes } from '@shared/config/router/routes.ts';
 import { ColorConstant } from '@shared/constants/style-system/colors.ts';
-import { MobxForm } from '@shared/lib/mobx/mobx-form/mobx-form.ts';
 import { AppLink } from '@shared/ui/app-link/app-link.tsx';
 import { Button } from '@shared/ui/button/button.tsx';
 import { Card } from '@shared/ui/card/card.tsx';
@@ -16,7 +14,8 @@ import { HStack } from '@shared/ui/hstack/hstack.tsx';
 import { IconComponent } from '@shared/ui/icon-component/icon-component.tsx';
 import { Typography } from '@shared/ui/typography/typography.tsx';
 import { VStack } from '@shared/ui/vstack/vstack.tsx';
-import { type FC, useState } from 'react';
+import { observer } from 'mobx-react-lite';
+import { type FC } from 'react';
 
 const cnSignUpForm = cn('SignUpForm');
 
@@ -24,21 +23,9 @@ interface SignUpFormProps {
   className?: string;
 }
 
-export const SignUpForm: FC<SignUpFormProps> = (props) => {
+export const SignUpForm: FC<SignUpFormProps> = observer((props) => {
   const { className } = props;
-
-  const [form] = useState(
-    () =>
-      new MobxForm({
-        defaultValues: {
-          confirmPassword: '',
-          email: '',
-          name: '',
-          password: '',
-        },
-        resolver: zodResolver(SignUpRequestSchema),
-      }),
-  );
+  const { form } = useSignUpStore();
 
   return (
     <Card className={cnSignUpForm(undefined, [className])}>
@@ -141,4 +128,4 @@ export const SignUpForm: FC<SignUpFormProps> = (props) => {
       </VStack>
     </Card>
   );
-};
+});

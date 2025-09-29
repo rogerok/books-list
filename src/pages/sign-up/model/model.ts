@@ -1,16 +1,16 @@
-import { EmailSchema, PasswordSchema } from '@shared/lib/validation/schemas.ts';
+import { PasswordSchema } from '@shared/lib/validation/schemas.ts';
+import { SignUpRequestSchema } from '@shared/models/auth.ts';
 import { z } from 'zod';
 
-export const SignUpRequestSchema = z
+export const SignUpFormSchema = z
   .object({
+    ...SignUpRequestSchema.shape,
     confirmPassword: PasswordSchema,
-    email: EmailSchema,
     name: z.string().max(255),
-    password: PasswordSchema,
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: 'Пароли не совпадают',
     path: ['confirmPassword'],
   });
 
-export type SignUpRequestModel = z.infer<typeof SignUpRequestSchema>;
+export type SignUpFormType = z.infer<typeof SignUpFormSchema>;
