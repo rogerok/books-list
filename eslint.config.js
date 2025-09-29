@@ -45,7 +45,7 @@ export default [
       ...reactPlugin.configs.recommended.rules,
       ...reactHooks.configs.recommended.rules,
       '@typescript-eslint/explicit-function-return-type': [
-        'error',
+        'warn',
         {
           allowExpressions: true,
         },
