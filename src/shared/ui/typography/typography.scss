@@ -19,12 +19,20 @@
       color: var(--neutral-1000);
     }
 
+    &_lightDark {
+      color: var(--neutral-800)
+    }
+
     &_warn {
       color: var(--warn)
     }
 
     &_light {
       color: var(--neutral-600)
+    }
+
+    &_white {
+      color: var(--white)
     }
 
   }
@@ -100,4 +108,8 @@
     overflow-wrap: break-word;
   }
 
+  &_gutterBottom {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
 }

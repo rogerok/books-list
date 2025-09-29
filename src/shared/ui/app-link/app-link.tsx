@@ -5,7 +5,7 @@ import { createLink, type LinkComponent } from '@tanstack/react-router';
 import { type AnchorHTMLAttributes, forwardRef, type ReactNode } from 'react';
 
 const cnAppLink = cn('AppLink');
-type AppLinkVariant = 'primary' | 'secondary';
+type AppLinkVariant = 'outline' | 'primary' | 'secondary';
 
 interface AppLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   children: ReactNode;

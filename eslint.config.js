@@ -37,7 +37,6 @@ export default [
       sonarjs: sonarjs,
     },
     rules: {
-      '@typescript-eslint/explicit-function-return-type': 'warn',
       // TypeScript rules
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-unused-vars': 'warn',
@@ -45,7 +44,12 @@ export default [
       // React rules
       ...reactPlugin.configs.recommended.rules,
       ...reactHooks.configs.recommended.rules,
-
+      '@typescript-eslint/explicit-function-return-type': [
+        'error',
+        {
+          allowExpressions: true,
+        },
+      ],
       // Perfectionist sorting rules
       'perfectionist/sort-classes': [
         'warn',

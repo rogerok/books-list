@@ -1,5 +1,9 @@
+html {
+  overflow: auto;
+}
+
 .App {
   min-height: 100svh;
   color: var(--neutral-1000);
-  background:  linear-gradient(167deg, var(--neutral-100) 0%, var(--blue-50) 100%);;
+  background: linear-gradient(167deg, var(--neutral-100) 0%, var(--blue-50) 100%);
 }

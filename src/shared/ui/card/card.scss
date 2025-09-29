@@ -1,0 +1,20 @@
+.Card {
+  border-radius: 14px;
+  background: rgb(255 255 255 / 80%);
+  backdrop-filter: blur(8px);
+
+  &_elevation {
+    &_sm {
+      box-shadow: var(--shadow-sm);
+    }
+
+    &_md {
+      box-shadow: var(--shadow-md);
+    }
+
+    &_lg {
+      box-shadow: var(--shadow-lg);
+    }
+  }
+
+}

@@ -7,9 +7,16 @@ import {
   type ReactNode,
 } from 'react';
 
-const cnTypography = cn('Typography');
+type TypographyVariant =
+  | 'dark'
+  | 'light'
+  | 'lightDark'
+  | 'primary'
+  | 'secondary'
+  | 'warn'
+  | 'white';
 
-type TypographyVariant = 'dark' | 'light' | 'primary' | 'secondary' | 'warn';
+const cnTypography = cn('Typography');
 type TypographySize = '2xl' | '2xs' | '3xs' | 'lg' | 'md' | 'sm' | 'xl' | 'xs';
 type TypographyWeight = 'medium' | 'normal' | 'semibold';
 type TypographyAlign = 'center' | 'left' | 'right';
@@ -21,6 +28,7 @@ type TypographyProps<T extends ElementType> = {
   className?: string;
   dataTestId?: string;
   fullWidth?: boolean;
+  gutterBottom?: boolean;
   size?: TypographySize;
   variant?: TypographyVariant;
   weight?: TypographyWeight;
@@ -37,6 +45,7 @@ export const Typography = <T extends ElementType = 'span'>(
     className,
     dataTestId,
     fullWidth,
+    gutterBottom,
     size = 'xs',
     variant = 'primary',
     weight = 'normal',
@@ -48,6 +57,7 @@ export const Typography = <T extends ElementType = 'span'>(
     align: align,
     break: wordBreak,
     fullWidth: fullWidth,
+    gutterBottom: gutterBottom,
     size: size,
     variant: variant,
     weight: weight,

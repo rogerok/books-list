@@ -49,11 +49,8 @@ export class MobxForm<
     >
   >;
   protected abortController: AbortController;
-
   clearErrors: UseFormClearErrors<TFieldValues>;
-
   control: Control<TFieldValues, TContext, TTransformedValues>;
-
   defaultValues!: Readonly<DefaultValues<TFieldValues>>;
   dirtyFields: Partial<Readonly<DeepMap<DeepPartial<TFieldValues>, boolean>>>;
   disabled: boolean = false;
@@ -66,40 +63,25 @@ export class MobxForm<
   isSubmitting: boolean = false;
   isValid: boolean = false;
   isValidating: boolean = false;
-
   originalForm: ReturnType<
     typeof createFormControl<TFieldValues, TContext, TTransformedValues>
   >;
-
   register: UseFormRegister<TFieldValues>;
-
   resetField: UseFormResetField<TFieldValues>;
-
   resetForm: UseFormReset<TFieldValues>;
-
   setError: UseFormSetError<TFieldValues>;
-
   setFocus: UseFormSetFocus<TFieldValues>;
-
   setValue: UseFormSetValue<TFieldValues>;
-
   submitCount: number = 0;
-
   touchedFields: Partial<Readonly<DeepMap<DeepPartial<TFieldValues>, boolean>>>;
-
   trigger: UseFormTrigger<TFieldValues>;
-
   unregister: UseFormUnregister<TFieldValues>;
-
   validatingFields: Partial<
     Readonly<DeepMap<DeepPartial<TFieldValues>, boolean>>
   >;
-
   values: TFieldValues;
 
   constructor(
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
     private config: FormParams<TFieldValues, TContext, TTransformedValues>,
   ) {
     this.abortController = new LinkedAbortController(config.abortSignal);

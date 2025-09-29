@@ -12,10 +12,17 @@
     }
   }
 
+  &_outline {
+    padding: 0.8125rem;
+    border: 1px solid var(--neutral-300);
+    border-radius: 10px;
+    text-align: center;
+  }
 
-    @media (hover: hover) {
-      &:hover {
-        filter: var(--hover-brightness);
-      }
+
+  @media (hover: hover) {
+    &:hover {
+      filter: var(--hover-brightness);
     }
+  }
 }

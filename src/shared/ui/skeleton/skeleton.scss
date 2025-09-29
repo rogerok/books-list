@@ -1,0 +1,72 @@
+.Skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--neutral-700);
+
+  &_rounded_14 {
+    border-radius: 14px;
+  }
+
+  &_rounded_16 {
+    border-radius: 16px;
+  }
+
+  &_variant {
+    &_circle {
+      border-radius: 50%;
+    }
+  }
+
+  &_animation {
+    &_pulse {
+      animation: skeleton-pulse 1.5s ease-in-out infinite;
+    }
+
+    &_wave {
+      &::after {
+        content: '';
+
+        position: absolute;
+        inset: 0;
+
+        background: linear-gradient(
+                        90deg,
+                        transparent,
+                        rgb(255 255 255 / 40%),
+                        transparent
+        );
+
+        animation: skeleton-wave 1.6s linear infinite;
+      }
+    }
+
+    &_none {
+      animation: none;
+    }
+  }
+
+}
+
+@keyframes skeleton-pulse {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes skeleton-wave {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
