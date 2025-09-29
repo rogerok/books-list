@@ -1,6 +1,6 @@
-@use "../../../../shared/style/breakpoints" as b;
+@use '../../style/breakpoints' as b;
 
-.SignInPage {
+.SignLayout {
   width: 100%;
   height: 100svh;
   padding: 2rem;
@@ -9,9 +9,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
-    max-width: 100%;
-    height: 100%;
+    height: fit-content;
     @media (min-width: b.$md-breakpoint) {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -21,7 +19,6 @@
 
       width: 1152px;
       max-width: 100%;
-
     }
 
   }

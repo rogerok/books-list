@@ -1,0 +1,46 @@
+.SignUpInfoPanel {
+  &-Icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 16px;
+
+    background: var(--purple-100);
+  }
+
+  &-FeaturesList {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    padding-left: 2rem;
+
+    font: var(--font-sm);
+    color: var(--neutral-800);
+  }
+
+  &-FeatureListItem {
+    &::marker {
+      color: var(--purple-200);
+    }
+  }
+
+  &-HeroImage {
+    position: relative;
+
+    &::after {
+      content: '';
+
+      position: absolute;
+      inset: 0;
+
+      border-radius: 1rem;
+
+      background: linear-gradient(0deg, rgb(89 22 139 / 20%) 0%, rgb(89 22 139 / 0%) 100%);
+    }
+  }
+
+}

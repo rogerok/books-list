@@ -1,12 +1,12 @@
 import { cn } from '@bem-react/classname';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { SignInRequestSchema } from '@pages/sign-in/model/model.ts';
+import { SignUpRequestSchema } from '@pages/sign-up/model/model.ts';
 import { Form } from '@shared/components/form/form.tsx';
 import { TextField } from '@shared/components/text-field/text-field.tsx';
 import { routes } from '@shared/config/router/routes.ts';
-import { ColorConstant } from '@shared/constants/style-system/colors.ts';
 
-import './sign-in-form.scss';
+import './sign-up-form.scss';
+import { ColorConstant } from '@shared/constants/style-system/colors.ts';
 import { MobxForm } from '@shared/lib/mobx/mobx-form/mobx-form.ts';
 import { AppLink } from '@shared/ui/app-link/app-link.tsx';
 import { Button } from '@shared/ui/button/button.tsx';
@@ -18,38 +18,46 @@ import { Typography } from '@shared/ui/typography/typography.tsx';
 import { VStack } from '@shared/ui/vstack/vstack.tsx';
 import { type FC, useState } from 'react';
 
-const cnSignInForm = cn('SignInForm');
+const cnSignUpForm = cn('SignUpForm');
 
-interface SignInFormProps {
+interface SignUpFormProps {
   className?: string;
 }
 
-export const SignInForm: FC<SignInFormProps> = (props) => {
+export const SignUpForm: FC<SignUpFormProps> = (props) => {
   const { className } = props;
 
   const [form] = useState(
     () =>
       new MobxForm({
         defaultValues: {
+          confirmPassword: '',
           email: '',
+          name: '',
           password: '',
         },
-        resolver: zodResolver(SignInRequestSchema),
+        resolver: zodResolver(SignUpRequestSchema),
       }),
   );
 
   return (
-    <Card className={cnSignInForm(undefined, [className])}>
+    <Card className={cnSignUpForm(undefined, [className])}>
       <VStack gap={'8'}>
         <Typography as={'h2'} size={'xl'} weight={'semibold'}>
-          Добро пожаловать!
+          Создать аккаунт
         </Typography>
         <Typography size={'sm'} variant={'secondary'}>
-          Войдите в свой аккаунт, чтобы продолжить чтение
+          Заполните данные для создания вашего аккаунта
         </Typography>
       </VStack>
 
-      <Form className={cnSignInForm('Form')} methods={form}>
+      <Form className={cnSignUpForm('Form')} methods={form}>
+        <TextField
+          fullWidth
+          label={'Имя'}
+          name={'name'}
+          placeholder={'Ваше имя'}
+        />
         <TextField
           fullWidth
           label={'Электронная почта'}
@@ -60,24 +68,31 @@ export const SignInForm: FC<SignInFormProps> = (props) => {
           fullWidth
           label={'Пароль'}
           name={'password'}
-          placeholder={'Введите пароль'}
+          placeholder={'Минимум 6 символов'}
+        />
+        <TextField
+          fullWidth
+          label={'Подтвердите пароль'}
+          name={'confirmPassword'}
+          placeholder={'Повторите пароль'}
         />
         <Button
-          className={cnSignInForm('FormButton')}
+          className={cnSignUpForm('FormButton')}
           fullWidth
           type={'submit'}
-          variant={'primary'}
+          variant={'secondary'}
         >
           <IconComponent
             color={ColorConstant.White}
-            name={'signInIcon'}
+            name={'createAccountIcon'}
             size={'xs'}
           />
           <Typography variant={'white'} weight={'medium'}>
-            Войти
+            Создать аккаунт
           </Typography>
         </Button>
       </Form>
+
       <VStack gap={'8'}>
         <HStack
           align={'center'}
@@ -93,20 +108,35 @@ export const SignInForm: FC<SignInFormProps> = (props) => {
         </HStack>
 
         <Typography align={'center'} size={'2xs'} variant={'secondary'}>
-          Нет аккаунта?
+          Уже есть аккаунт?
         </Typography>
         <AppLink
-          className={cnSignInForm('Link')}
-          to={routes.signUp()}
+          className={cnSignUpForm('Link')}
+          to={routes.signIn()}
           variant={'outline'}
         >
-          <Typography variant={'lightDark'}>Создать аккаунт</Typography>
           <IconComponent
             color={ColorConstant.Neutral800}
-            name={'arrowRightIcon'}
+            name={'arrowLeftIcon'}
             size={'xs'}
           />
+          <Typography variant={'lightDark'}>Войти в аккаунт</Typography>
         </AppLink>
+        <Typography as={'p'} size={'3xs'} variant={'secondary'}>
+          Создавая аккаунт, вы соглашаетесь с нашими{' '}
+          <AppLink to={'/'}>
+            <Typography size={'sm'} variant={'accent'} weight={'medium'}>
+              Условиями использования{' '}
+            </Typography>
+          </AppLink>
+          и
+          <AppLink to={'/'}>
+            <Typography size={'sm'} variant={'accent'} weight={'medium'}>
+              {' '}
+              Политикой конфиденциальности
+            </Typography>
+          </AppLink>
+        </Typography>
       </VStack>
     </Card>
   );
