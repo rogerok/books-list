@@ -56,6 +56,7 @@ export const SignInForm: FC<SignInFormProps> = (props) => {
           name={'email'}
           placeholder={'example@email.com'}
         />
+        {/*TODO add show/hide button*/}
         <TextField
           fullWidth
           label={'Пароль'}
