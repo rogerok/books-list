@@ -1,0 +1,52 @@
+.Divider {
+  $parent: &;
+
+  display: block;
+  flex-shrink: 0;
+
+  margin: 8px 0;
+  border: none;
+  border-bottom: 1px solid var(--neutral-300);
+
+  background: var(--neutral-300);
+
+  &:not(#{$parent}_vertical) {
+    flex-grow: 1;
+    width: auto;
+    height: 1px;
+  }
+
+  &_vertical {
+    width: 1px;
+    height: 100%;
+    margin: 0 8px;
+    border-right: 1px solid var(--neutral-300);
+    border-bottom: none;
+  }
+
+  &_flexItem {
+    display: flex;
+    align-self: stretch;
+    width: auto;
+    height: auto;
+
+
+    &:not(#{$parent}_vertical) {
+      flex-grow: 1;
+      height: 1px;
+    }
+  }
+
+  &_flexItem#{$parent}_vertical {
+    width: auto;
+    height: auto;
+
+    &#{$parent}_vertical {
+      flex-grow: 0;
+      width: 1px;
+      height: auto;
+    }
+  }
+
+}
+

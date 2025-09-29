@@ -22,7 +22,7 @@ export type Justify =
 
 export type FlexDirection = 'column' | 'row';
 export type FlexWrap = 'nowrap' | 'wrap';
-export type FlexGap = '16' | '32' | '8';
+export type FlexGap = '12' | '16' | '24' | '32' | '8';
 
 export type FlexProps<T extends ElementType = 'div'> = {
   align?: Alignment;
@@ -31,6 +31,8 @@ export type FlexProps<T extends ElementType = 'div'> = {
   className?: string;
   direction?: FlexDirection;
   flexJustify?: Justify;
+  fullHeight?: boolean;
+  fullWidth?: boolean;
   gap?: FlexGap;
   wrap?: FlexWrap;
 } & ComponentPropsWithoutRef<T>;
@@ -45,6 +47,8 @@ export const Flex = <T extends ElementType = 'div'>(
     className,
     direction = 'row',
     flexJustify = 'start',
+    fullHeight,
+    fullWidth,
     gap,
     wrap = 'wrap',
     ...otherProps
@@ -60,7 +64,10 @@ export const Flex = <T extends ElementType = 'div'>(
           align: align,
           direction: direction,
 
+          fullHeight: fullHeight,
+          fullWidth: fullWidth,
           gap: gap,
+
           justify: flexJustify,
           wrap: wrap,
         },

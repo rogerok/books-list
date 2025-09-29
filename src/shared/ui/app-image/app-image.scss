@@ -1,0 +1,20 @@
+.AppImage {
+  &-Img {
+    width: 100%;
+    object-fit: cover;
+  }
+
+  &-Img_rounded {
+    &_10 {
+      border-radius: 10px;
+    }
+
+    &_14 {
+      border-radius: 14px;
+    }
+
+    &_16 {
+      border-radius: 16px;
+    }
+  }
+}

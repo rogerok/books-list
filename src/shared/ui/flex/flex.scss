@@ -1,5 +1,13 @@
 .Flex {
   display: flex;
+
+  &_fullHeight {
+    height: 100%;
+  }
+
+  &_fullWidth {
+    width: 100%;
+  }
 }
 
 .Flex_direction {
@@ -60,8 +68,16 @@
     gap: 0.5rem;
   }
 
+  &_12 {
+    gap: 0.75rem;
+  }
+
   &_16 {
     gap: 1rem;
+  }
+
+  &_24 {
+    gap: 1.5rem
   }
 
   &_32 {

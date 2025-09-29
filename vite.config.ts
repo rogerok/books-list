@@ -8,12 +8,12 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 
 // https://vite.dev/config/
 export default defineConfig({
-  css: {},
   plugins: [
     react(),
     checker({
       typescript: true,
     }),
+
     svgr({
       svgrOptions: {
         icon: true,

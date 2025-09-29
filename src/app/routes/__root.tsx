@@ -1,14 +1,9 @@
-import { Typography } from '@shared/ui/typography/typography';
-import { createRootRoute, Link, Outlet } from '@tanstack/react-router';
+import type { FC } from 'react';
 
-const RootLayout = () => (
+import { createRootRoute, Outlet } from '@tanstack/react-router';
+
+const RootLayout: FC = () => (
   <>
-    <div className="p-2 flex gap-2">
-      <Link className="[&.active]:font-bold" to="/">
-        <Typography size={'3xs'}>Home</Typography>
-      </Link>{' '}
-    </div>
-    <hr />
     <Outlet />
   </>
 );

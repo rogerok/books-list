@@ -1,0 +1,18 @@
+@use "../../../../shared/style/breakpoints" as b;
+
+
+.SignInInfoPanel {
+  &-Icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 16px;
+
+    background: var(--green-100);
+  }
+
+
+}

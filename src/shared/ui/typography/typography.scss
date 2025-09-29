@@ -11,12 +11,16 @@
       color: var(--neutral-900);
     }
 
-    &_secodary {
+    &_secondary {
       color: var(--neutral-700);
     }
 
     &_dark {
       color: var(--neutral-1000);
+    }
+
+    &_lightDark {
+      color: var(--neutral-800)
     }
 
     &_warn {
@@ -25,6 +29,10 @@
 
     &_light {
       color: var(--neutral-600)
+    }
+
+    &_white {
+      color: var(--white)
     }
 
   }
@@ -48,6 +56,18 @@
 
     &_md {
       font: var(--font-md);
+    }
+
+    &_lg {
+      font: var(--font-lg);
+    }
+
+    &_xl {
+      font: var(--font-xl);
+    }
+
+    &_2xl {
+      font: var(--font-2xl);
     }
 
   }
@@ -88,4 +108,8 @@
     overflow-wrap: break-word;
   }
 
+  &_gutterBottom {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
 }
