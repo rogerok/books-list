@@ -1,27 +1,36 @@
-@use "src/app/styles/breakpoints" as b;
+@use "../../../../shared/style/breakpoints" as b;
 
 .SignInPage {
   width: 100%;
-  height: 100%;
+  height: 100svh;
   padding: 2rem;
 
   &-Content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    display: flex;
+    align-items: center;
     justify-content: center;
-    justify-self: center;
 
-    width: 1152px;
     max-width: 100%;
-    height: 100svh;
+    height: 100%;
+    @media (min-width: b.$md-breakpoint) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      justify-content: center;
+      justify-self: center;
+
+      width: 1152px;
+      max-width: 100%;
+
+    }
 
   }
 
   &-Form {
-    place-self: center center;
-    width: 100%;
-
+    @media (min-width: b.$md-breakpoint) {
+      place-self: center center;
+      width: 100%;
+    }
   }
 
   &-InfoPanel {

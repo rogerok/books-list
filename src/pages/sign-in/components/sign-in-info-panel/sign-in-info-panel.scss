@@ -1,3 +1,6 @@
+@use "../../../../shared/style/breakpoints" as b;
+
+
 .SignInInfoPanel {
   &-Icon {
     display: flex;
@@ -10,4 +13,6 @@
 
     background: var(--green-100);
   }
+
+
 }

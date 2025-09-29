@@ -1,6 +1,5 @@
 import { tanstackRouter } from '@tanstack/router-plugin/vite';
 import react from '@vitejs/plugin-react-swc';
-import path from 'node:path';
 import { defineConfig } from 'vite';
 import checker from 'vite-plugin-checker';
 import circleDependency from 'vite-plugin-circular-dependency';
@@ -9,12 +8,12 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 
 // https://vite.dev/config/
 export default defineConfig({
-  css: {},
   plugins: [
     react(),
     checker({
       typescript: true,
     }),
+
     svgr({
       svgrOptions: {
         icon: true,
@@ -32,9 +31,4 @@ export default defineConfig({
       outputFilePath: './circleDep',
     }),
   ],
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src'),
-    },
-  },
 });

@@ -17,40 +17,41 @@ interface SSignInInfoPanelProps {
 }
 
 export const SignInInfoPanel: FC<SSignInInfoPanelProps> = (props) => {
+  const { className } = props;
+
   return (
-    <VStack
-      as={'section'}
-      className={cnSignInInfoPanel(undefined, [props.className])}
-      gap={'24'}
-    >
-      <HStack align={'center'} gap={'12'}>
-        <div className={cnSignInInfoPanel('Icon')}>
-          <IconComponent
-            color={ColorConstant.Green600}
-            name={'bookIcon'}
-            size={'md'}
-          />
-        </div>
-        <div>
-          <Typography as={'h1'} size={'2xl'} weight={'semibold'}>
-            Book Tracker
+    <div className={cnSignInInfoPanel(undefined, [className])}>
+      <VStack as={'section'} gap={'24'}>
+        <HStack align={'center'} gap={'12'}>
+          <div className={cnSignInInfoPanel('Icon')}>
+            <IconComponent
+              color={ColorConstant.Green600}
+              name={'bookIcon'}
+              size={'md'}
+            />
+          </div>
+          <div>
+            <Typography as={'h1'} size={'2xl'} weight={'semibold'}>
+              Book Tracker
+            </Typography>
+            <Typography size={'md'} variant={'secondary'}>
+              Ваш персональный трекер чтения
+            </Typography>
+          </div>
+        </HStack>
+
+        <VStack gap={'16'}>
+          <Typography size={'xl'} weight={'medium'}>
+            Отслеживайте свои книги
           </Typography>
           <Typography size={'md'} variant={'secondary'}>
-            Ваш персональный трекер чтения
+            Организуйте свою библиотеку, ставьте цели чтения и следите за
+            прогрессом. Создайте идеальную систему для управления вашими
+            книгами.
           </Typography>
-        </div>
-      </HStack>
-
-      <VStack gap={'16'}>
-        <Typography size={'xl'} weight={'medium'}>
-          Отслеживайте свои книги
-        </Typography>
-        <Typography size={'md'} variant={'secondary'}>
-          Организуйте свою библиотеку, ставьте цели чтения и следите за
-          прогрессом. Создайте идеальную систему для управления вашими книгами.
-        </Typography>
+        </VStack>
+        <HeroImage />
       </VStack>
-      <HeroImage />
-    </VStack>
+    </div>
   );
 };
