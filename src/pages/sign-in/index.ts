@@ -1,1 +1,1 @@
-export { SignInPage } from './components/sign-in-page/sign-in-page.tsx';
+export { SignInPage } from './components/sign-in-page.tsx';

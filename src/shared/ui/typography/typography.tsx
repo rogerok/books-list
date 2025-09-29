@@ -8,6 +8,7 @@ import {
 } from 'react';
 
 type TypographyVariant =
+  | 'accent'
   | 'dark'
   | 'light'
   | 'lightDark'

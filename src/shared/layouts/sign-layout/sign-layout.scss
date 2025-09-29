@@ -1,6 +1,6 @@
-@use "../../../../shared/style/breakpoints" as b;
+@use '../../style/breakpoints' as b;
 
-.SignInPage {
+.SignLayout {
   width: 100%;
   height: 100svh;
   padding: 2rem;
@@ -21,7 +21,6 @@
 
       width: 1152px;
       max-width: 100%;
-
     }
 
   }
