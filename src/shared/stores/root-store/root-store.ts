@@ -1,10 +1,11 @@
 import { createStoreContext } from '@shared/lib/mobx/store-factory.tsx';
+import { AppRouter } from '@shared/lib/router/app-router.ts';
 import { AuthStore } from '@shared/stores/auth-store/auth-store.ts';
 import { ScreenStore } from '@shared/stores/screen-store.ts';
 import { makeAutoObservable } from 'mobx';
 
 class RootStore {
-  auth = new AuthStore();
+  auth = new AuthStore(AppRouter);
   screen = new ScreenStore();
 
   constructor() {
