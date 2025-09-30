@@ -4,7 +4,7 @@ import { z } from 'zod';
 export const UserCreateRequestSchema = z.object({
   email: EmailSchema,
   id: z.string(),
-  name: z.string().max(255),
+  name: z.string().min(3).max(255),
 });
 
 export type UserCreateRequestModel = z.infer<typeof UserCreateRequestSchema>;
