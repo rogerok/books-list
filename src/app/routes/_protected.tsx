@@ -1,16 +1,13 @@
 import { routes } from '@shared/config/router/routes.ts';
-import { createFileRoute, redirect } from '@tanstack/react-router';
+import { createFileRoute, Outlet, redirect } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/_protected')({
   beforeLoad: async ({ context }) => {
     if (!context.isAuth) {
-      // await context.initAuth?.();
-
-      if (!context.isAuth) {
-        throw redirect({
-          to: routes.signIn(),
-        });
-      }
+      throw redirect({
+        to: routes.signIn(),
+      });
     }
   },
+  component: () => <Outlet />,
 });

@@ -11,7 +11,7 @@ import { routes } from '@shared/config/router/routes.ts';
 import { Notifier } from '@shared/lib/notifier/notifier.ts';
 import { RequestStore } from '@shared/lib/request-store/request-store.ts';
 import { RouterController } from '@shared/lib/router/app-router.ts';
-import { makeAutoObservable, runInAction, toJS } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 
 export class AuthStore {
   session: Session | null = null;
