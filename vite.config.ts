@@ -7,11 +7,11 @@ import circleDependency from 'vite-plugin-circular-dependency';
 import svgr from 'vite-plugin-svgr';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
-import { EnvSchema } from './src/shared/config/env/envSchema.ts';
+import { EnvVarsSchema } from './src/shared/config/env/envSchema.ts';
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
-  const env = EnvSchema.safeParse(loadEnv(mode, process.cwd()));
+  const env = EnvVarsSchema.safeParse(loadEnv(mode, process.cwd()));
 
   if (!env.success) {
     throw Error(
