@@ -8,17 +8,13 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { createFileRoute } from '@tanstack/react-router'
-
 import { Route as rootRouteImport } from './app/routes/__root'
 import { Route as ProtectedRouteImport } from './app/routes/_protected'
 import { Route as IndexRouteImport } from './app/routes/index'
 import { Route as authSignUpRouteImport } from './app/routes/(auth)/sign-up'
 import { Route as authSignInRouteImport } from './app/routes/(auth)/sign-in'
-
-const ProtectedDashboardLazyRouteImport = createFileRoute(
-  '/_protected/dashboard',
-)()
+import { Route as ProtecteddashboardRouteRouteImport } from './app/routes/_protected/(dashboard)/route'
+import { Route as ProtecteddashboardHomeRouteImport } from './app/routes/_protected/(dashboard)/home'
 
 const ProtectedRoute = ProtectedRouteImport.update({
   id: '/_protected',
@@ -29,13 +25,6 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProtectedDashboardLazyRoute = ProtectedDashboardLazyRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => ProtectedRoute,
-} as any).lazy(() =>
-  import('./app/routes/_protected/dashboard.lazy').then((d) => d.Route),
-)
 const authSignUpRoute = authSignUpRouteImport.update({
   id: '/(auth)/sign-up',
   path: '/sign-up',
@@ -46,39 +35,50 @@ const authSignInRoute = authSignInRouteImport.update({
   path: '/sign-in',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProtecteddashboardRouteRoute = ProtecteddashboardRouteRouteImport.update({
+  id: '/(dashboard)',
+  getParentRoute: () => ProtectedRoute,
+} as any)
+const ProtecteddashboardHomeRoute = ProtecteddashboardHomeRouteImport.update({
+  id: '/home',
+  path: '/home',
+  getParentRoute: () => ProtecteddashboardRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof ProtecteddashboardRouteRouteWithChildren
   '/sign-in': typeof authSignInRoute
   '/sign-up': typeof authSignUpRoute
-  '/dashboard': typeof ProtectedDashboardLazyRoute
+  '/home': typeof ProtecteddashboardHomeRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/': typeof ProtecteddashboardRouteRouteWithChildren
   '/sign-in': typeof authSignInRoute
   '/sign-up': typeof authSignUpRoute
-  '/dashboard': typeof ProtectedDashboardLazyRoute
+  '/home': typeof ProtecteddashboardHomeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_protected': typeof ProtectedRouteWithChildren
+  '/_protected/(dashboard)': typeof ProtecteddashboardRouteRouteWithChildren
   '/(auth)/sign-in': typeof authSignInRoute
   '/(auth)/sign-up': typeof authSignUpRoute
-  '/_protected/dashboard': typeof ProtectedDashboardLazyRoute
+  '/_protected/(dashboard)/home': typeof ProtecteddashboardHomeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/sign-in' | '/sign-up' | '/dashboard'
+  fullPaths: '/' | '/sign-in' | '/sign-up' | '/home'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/sign-in' | '/sign-up' | '/dashboard'
+  to: '/' | '/sign-in' | '/sign-up' | '/home'
   id:
     | '__root__'
     | '/'
     | '/_protected'
+    | '/_protected/(dashboard)'
     | '/(auth)/sign-in'
     | '/(auth)/sign-up'
-    | '/_protected/dashboard'
+    | '/_protected/(dashboard)/home'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -104,13 +104,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_protected/dashboard': {
-      id: '/_protected/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof ProtectedDashboardLazyRouteImport
-      parentRoute: typeof ProtectedRoute
-    }
     '/(auth)/sign-up': {
       id: '/(auth)/sign-up'
       path: '/sign-up'
@@ -125,15 +118,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof authSignInRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_protected/(dashboard)': {
+      id: '/_protected/(dashboard)'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof ProtecteddashboardRouteRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
+    '/_protected/(dashboard)/home': {
+      id: '/_protected/(dashboard)/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof ProtecteddashboardHomeRouteImport
+      parentRoute: typeof ProtecteddashboardRouteRoute
+    }
   }
 }
 
+interface ProtecteddashboardRouteRouteChildren {
+  ProtecteddashboardHomeRoute: typeof ProtecteddashboardHomeRoute
+}
+
+const ProtecteddashboardRouteRouteChildren: ProtecteddashboardRouteRouteChildren =
+  {
+    ProtecteddashboardHomeRoute: ProtecteddashboardHomeRoute,
+  }
+
+const ProtecteddashboardRouteRouteWithChildren =
+  ProtecteddashboardRouteRoute._addFileChildren(
+    ProtecteddashboardRouteRouteChildren,
+  )
+
 interface ProtectedRouteChildren {
-  ProtectedDashboardLazyRoute: typeof ProtectedDashboardLazyRoute
+  ProtecteddashboardRouteRoute: typeof ProtecteddashboardRouteRouteWithChildren
 }
 
 const ProtectedRouteChildren: ProtectedRouteChildren = {
-  ProtectedDashboardLazyRoute: ProtectedDashboardLazyRoute,
+  ProtecteddashboardRouteRoute: ProtecteddashboardRouteRouteWithChildren,
 }
 
 const ProtectedRouteWithChildren = ProtectedRoute._addFileChildren(

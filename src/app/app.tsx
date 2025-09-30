@@ -1,6 +1,4 @@
 import './app.scss';
-import type { FC } from 'react';
-
 import { cn } from '@bem-react/classname';
 import { AppRouter } from '@shared/lib/router/app-router.ts';
 import {
@@ -9,6 +7,7 @@ import {
 } from '@shared/stores/root-store/root-store.ts';
 import { createRouter, RouterProvider } from '@tanstack/react-router';
 import { observer } from 'mobx-react-lite';
+import { type FC, useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 
 import { routeTree } from '../routeTree.gen.ts';
@@ -35,11 +34,19 @@ const cnApp = cn('App');
 const InnerApp: FC = observer(() => {
   const { auth } = useRootStore();
 
+  useEffect(() => {
+    auth.init();
+
+    return () => {
+      auth.unsubscribe();
+    };
+  }, [auth]);
+
   return (
     <RouterProvider
       context={{
         initAuth: auth.init,
-        isAuth: !!auth.session,
+        isAuth: auth.isAuthenthicated,
       }}
       router={router}
     />

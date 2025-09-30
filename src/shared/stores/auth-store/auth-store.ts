@@ -1,5 +1,5 @@
 import type { SignInRequestModel } from '@shared/models/auth.ts';
-import type { Session } from '@supabase/supabase-js';
+import type { Session, Subscription } from '@supabase/supabase-js';
 
 import {
   getSessionRequest,
@@ -11,13 +11,15 @@ import { routes } from '@shared/config/router/routes.ts';
 import { Notifier } from '@shared/lib/notifier/notifier.ts';
 import { RequestStore } from '@shared/lib/request-store/request-store.ts';
 import { RouterController } from '@shared/lib/router/app-router.ts';
-import { makeAutoObservable, runInAction } from 'mobx';
+import { makeAutoObservable, runInAction, toJS } from 'mobx';
 
 export class AuthStore {
   session: Session | null = null;
   sessionRequest = new RequestStore(getSessionRequest);
   signInRequest = new RequestStore(signInRequest);
   signOutRequest = new RequestStore(signOutRequest);
+
+  subscription: Subscription | undefined;
 
   constructor(private router: RouterController) {
     makeAutoObservable(
@@ -35,20 +37,21 @@ export class AuthStore {
     if (status === 'success' && response?.data.session) {
       this.session = response.data.session;
 
-      apiClient.auth.onAuthStateChange((_event, session) => {
-        if (session) {
-          runInAction(() => {
-            this.session = session;
-          });
-        } else {
-          this.router.toSignIn();
-          // TODO: maybe remove
+      const subscription = apiClient.auth.onAuthStateChange(
+        (_event, session) => {
+          if (session) {
+            runInAction(() => {
+              this.session = session;
+            });
+          } else {
+            this.router.toSignIn();
+            // TODO: maybe remove
 
-          window.location.reload();
-        }
-      });
-    } else {
-      this.router.toSignIn();
+            window.location.reload();
+          }
+        },
+      );
+      this.subscription = subscription.data.subscription;
     }
   }
 
@@ -74,5 +77,13 @@ export class AuthStore {
         to: routes.signIn(),
       });
     }
+  }
+
+  unsubscribe() {
+    this.subscription?.unsubscribe();
+  }
+
+  get isAuthenthicated(): boolean {
+    return !!this.session?.user;
   }
 }
