@@ -44,12 +44,7 @@ export default [
       // React rules
       ...reactPlugin.configs.recommended.rules,
       ...reactHooks.configs.recommended.rules,
-      '@typescript-eslint/explicit-function-return-type': [
-        'warn',
-        {
-          allowExpressions: true,
-        },
-      ],
+
       // Perfectionist sorting rules
       'perfectionist/sort-classes': [
         'warn',
