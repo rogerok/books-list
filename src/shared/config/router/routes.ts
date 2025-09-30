@@ -1,5 +1,6 @@
 export const routes = {
-  main: () => '/',
-  signIn: () => '/sign-in',
-  signUp: () => '/sign-up',
+  dashboard: () => '/dashboard' as const,
+  main: () => '/' as const,
+  signIn: () => '/sign-in' as const,
+  signUp: () => '/sign-up' as const,
 } as const;

@@ -1,20 +1,33 @@
+import { getErrorMessage } from '@shared/utils/getErrorMessage.ts';
 import { makeAutoObservable, runInAction } from 'mobx';
 
-type SuccessResult<T> = { data: T; status: 'success' };
-type ErrorResult = { data: null; error: any; status: 'error' };
-type LoadingResult = { data: null; status: 'loading' };
-type IdleResult = { data: null; status: 'idle' };
+type SuccessResult<T> = { response: T; status: 'success' };
+type ErrorResult = { error: any; response: null; status: 'error' };
+type LoadingResult = { response: null; status: 'loading' };
+type IdleResult = { response: null; status: 'idle' };
 
 type Result<T> = ErrorResult | IdleResult | LoadingResult | SuccessResult<T>;
 type ExecuteResult<T> = ErrorResult | SuccessResult<T>;
 
-export class RequestStore<T, Args extends any[] = []> {
-  result: Result<T> = { data: null, status: 'idle' };
+interface ExecuteOptions {
+  onError?: (errorMessage: string | undefined) => void;
+  onSuccess?: () => void;
+}
 
-  constructor(private fetchFn: (...args: Args) => Promise<T>) {
-    makeAutoObservable<this, 'fetchFn'>(
+export class RequestStore<T, Args extends any[] = []> {
+  executeOptions: ExecuteOptions | undefined;
+
+  result: Result<T> = { response: null, status: 'idle' };
+
+  constructor(
+    private fetchFn: (...args: Args) => Promise<T>,
+    executeOptions?: ExecuteOptions,
+  ) {
+    this.executeOptions = executeOptions;
+
+    makeAutoObservable<this, 'executeOptions' | 'fetchFn'>(
       this,
-      { fetchFn: false },
+      { executeOptions: false, fetchFn: false },
       { autoBind: true },
     );
   }
@@ -28,17 +41,20 @@ export class RequestStore<T, Args extends any[] = []> {
   }
 
   execute = async (...args: Args): Promise<ExecuteResult<T>> => {
-    this.result = { data: null, status: 'loading' };
+    this.result = { response: null, status: 'loading' };
     try {
-      const data = await this.fetchFn(...args);
+      const resp = await this.fetchFn(...args);
+
       runInAction(() => {
-        this.result = { data, status: 'success' };
+        this.result = { response: resp, status: 'success' };
+        this.executeOptions?.onSuccess?.();
       });
     } catch (error) {
       runInAction(() => {
-        this.result = { data: null, error, status: 'error' };
+        this.result = { error, response: null, status: 'error' };
       });
-      throw error;
+
+      this.executeOptions?.onError?.(getErrorMessage(error));
     }
 
     return this.result as unknown as ExecuteResult<T>;

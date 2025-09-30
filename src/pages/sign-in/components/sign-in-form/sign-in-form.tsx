@@ -1,13 +1,11 @@
 import { cn } from '@bem-react/classname';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { SignInRequestSchema } from '@pages/sign-in/model/model.ts';
+import { useSignInStore } from '@pages/sign-in/stores/sign-in-store.ts';
 import { Form } from '@shared/components/form/form.tsx';
 import { TextField } from '@shared/components/text-field/text-field.tsx';
 import { routes } from '@shared/config/router/routes.ts';
-import { ColorConstant } from '@shared/constants/style-system/colors.ts';
 
 import './sign-in-form.scss';
-import { MobxForm } from '@shared/lib/mobx/mobx-form/mobx-form.ts';
+import { ColorConstant } from '@shared/constants/style-system/colors.ts';
 import { AppLink } from '@shared/ui/app-link/app-link.tsx';
 import { Button } from '@shared/ui/button/button.tsx';
 import { Card } from '@shared/ui/card/card.tsx';
@@ -16,7 +14,8 @@ import { HStack } from '@shared/ui/hstack/hstack.tsx';
 import { IconComponent } from '@shared/ui/icon-component/icon-component.tsx';
 import { Typography } from '@shared/ui/typography/typography.tsx';
 import { VStack } from '@shared/ui/vstack/vstack.tsx';
-import { type FC, useState } from 'react';
+import { observer } from 'mobx-react-lite';
+import { type FC } from 'react';
 
 const cnSignInForm = cn('SignInForm');
 
@@ -24,19 +23,9 @@ interface SignInFormProps {
   className?: string;
 }
 
-export const SignInForm: FC<SignInFormProps> = (props) => {
+export const SignInForm: FC<SignInFormProps> = observer((props) => {
   const { className } = props;
-
-  const [form] = useState(
-    () =>
-      new MobxForm({
-        defaultValues: {
-          email: '',
-          password: '',
-        },
-        resolver: zodResolver(SignInRequestSchema),
-      }),
-  );
+  const { form } = useSignInStore();
 
   return (
     <Card className={cnSignInForm(undefined, [className])}>
@@ -65,6 +54,7 @@ export const SignInForm: FC<SignInFormProps> = (props) => {
         />
         <Button
           className={cnSignInForm('FormButton')}
+          disabled={form.isSubmitting}
           fullWidth
           type={'submit'}
           variant={'primary'}
@@ -98,6 +88,7 @@ export const SignInForm: FC<SignInFormProps> = (props) => {
         </Typography>
         <AppLink
           className={cnSignInForm('Link')}
+          disabled={form.isSubmitting}
           to={routes.signUp()}
           variant={'outline'}
         >
@@ -111,4 +102,4 @@ export const SignInForm: FC<SignInFormProps> = (props) => {
       </VStack>
     </Card>
   );
-};
+});

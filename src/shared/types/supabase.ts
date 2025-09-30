@@ -50,23 +50,23 @@ export type Database = {
     Tables: {
       users: {
         Insert: {
+          email: string;
           id: string;
+          name: string;
           created_at?: string | null;
-          email?: string | null;
-          name?: string | null;
         };
         Relationships: [];
         Row: {
           created_at: string | null;
-          email: string | null;
+          email: string;
           id: string;
-          name: string | null;
+          name: string;
         };
         Update: {
           created_at?: string | null;
-          email?: string | null;
+          email?: string;
           id?: string;
-          name?: string | null;
+          name?: string;
         };
       };
     };

@@ -7,3 +7,10 @@ export const SignUpRequestSchema = z.object({
 });
 
 export type SignUpRequestModel = z.infer<typeof SignUpRequestSchema>;
+
+export const SignInRequestSchema = z.object({
+  email: EmailSchema,
+  password: PasswordSchema,
+});
+
+export type SignInRequestModel = z.infer<typeof SignInRequestSchema>;

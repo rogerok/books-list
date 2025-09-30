@@ -1,10 +1,10 @@
 @use 'reset';
-@use '../../shared/style/helpers';
+@use '../../shared/styles/helpers';
 @use 'typography';
 @use 'colors';
 @use 'variables';
 @use 'fonts';
-@use '../../shared/style/breakpoints';
+@use '../../shared/styles/breakpoints';
 
 html {
   overflow: hidden;

@@ -1,5 +1,5 @@
 import { cn } from '@bem-react/classname';
-import { useSignUpStore } from '@pages/sign-up/store/sign-up-store.ts';
+import { useSignUpStore } from '@pages/sign-up/stores/sign-up-store.ts';
 import { Form } from '@shared/components/form/form.tsx';
 import { TextField } from '@shared/components/text-field/text-field.tsx';
 
@@ -14,6 +14,7 @@ import { HStack } from '@shared/ui/hstack/hstack.tsx';
 import { IconComponent } from '@shared/ui/icon-component/icon-component.tsx';
 import { Typography } from '@shared/ui/typography/typography.tsx';
 import { VStack } from '@shared/ui/vstack/vstack.tsx';
+import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import { type FC } from 'react';
 
@@ -26,6 +27,8 @@ interface SignUpFormProps {
 export const SignUpForm: FC<SignUpFormProps> = observer((props) => {
   const { className } = props;
   const { form } = useSignUpStore();
+
+  console.log(toJS(form.errors));
 
   return (
     <Card className={cnSignUpForm(undefined, [className])}>
