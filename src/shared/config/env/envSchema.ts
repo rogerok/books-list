@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const EnvSchema = z.object({
+export const EnvVarsSchema = z.object({
   VITE_SUPABASE_KEY: z.string({
     error: 'Не задана переменная окружения VITE_SUPABASE_URL',
   }),
@@ -8,3 +8,5 @@ export const EnvSchema = z.object({
     error: 'Не задана переменная окружения VITE_SUPABASE_URL',
   }),
 });
+
+export type EnvVarsType = z.infer<typeof EnvVarsSchema>;
