@@ -1,11 +1,17 @@
-import type { FC } from 'react';
+import { createRootRouteWithContext, Outlet } from '@tanstack/react-router';
 
-import { createRootRoute, Outlet } from '@tanstack/react-router';
+interface RouterContext {
+  isAuth: boolean;
+  initAuth?: () => Promise<void>;
+}
 
-const RootLayout: FC = () => (
-  <>
-    <Outlet />
-  </>
-);
-
-export const Route = createRootRoute({ component: RootLayout });
+export const Route = createRootRouteWithContext<RouterContext>()({
+  beforeLoad: async ({ context }) => {
+    if (!context.isAuth) {
+      await context.initAuth?.();
+    }
+  },
+  component: () => <Outlet />,
+  // errorComponent: ({ reset }) => <ErrorComponent reset={reset} />,
+  // notFoundComponent: () => <NotFoundPage />,
+});
