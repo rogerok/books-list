@@ -8,13 +8,18 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import { createFileRoute } from '@tanstack/react-router'
+
 import { Route as rootRouteImport } from './app/routes/__root'
 import { Route as ProtectedRouteImport } from './app/routes/_protected'
 import { Route as IndexRouteImport } from './app/routes/index'
 import { Route as authSignUpRouteImport } from './app/routes/(auth)/sign-up'
 import { Route as authSignInRouteImport } from './app/routes/(auth)/sign-in'
 import { Route as ProtecteddashboardRouteRouteImport } from './app/routes/_protected/(dashboard)/route'
-import { Route as ProtecteddashboardHomeRouteImport } from './app/routes/_protected/(dashboard)/home'
+
+const ProtecteddashboardHomeLazyRouteImport = createFileRoute(
+  '/_protected/(dashboard)/home',
+)()
 
 const ProtectedRoute = ProtectedRouteImport.update({
   id: '/_protected',
@@ -39,23 +44,28 @@ const ProtecteddashboardRouteRoute = ProtecteddashboardRouteRouteImport.update({
   id: '/(dashboard)',
   getParentRoute: () => ProtectedRoute,
 } as any)
-const ProtecteddashboardHomeRoute = ProtecteddashboardHomeRouteImport.update({
-  id: '/home',
-  path: '/home',
-  getParentRoute: () => ProtecteddashboardRouteRoute,
-} as any)
+const ProtecteddashboardHomeLazyRoute =
+  ProtecteddashboardHomeLazyRouteImport.update({
+    id: '/home',
+    path: '/home',
+    getParentRoute: () => ProtecteddashboardRouteRoute,
+  } as any).lazy(() =>
+    import('./app/routes/_protected/(dashboard)/home.lazy').then(
+      (d) => d.Route,
+    ),
+  )
 
 export interface FileRoutesByFullPath {
   '/': typeof ProtecteddashboardRouteRouteWithChildren
   '/sign-in': typeof authSignInRoute
   '/sign-up': typeof authSignUpRoute
-  '/home': typeof ProtecteddashboardHomeRoute
+  '/home': typeof ProtecteddashboardHomeLazyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof ProtecteddashboardRouteRouteWithChildren
   '/sign-in': typeof authSignInRoute
   '/sign-up': typeof authSignUpRoute
-  '/home': typeof ProtecteddashboardHomeRoute
+  '/home': typeof ProtecteddashboardHomeLazyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -64,7 +74,7 @@ export interface FileRoutesById {
   '/_protected/(dashboard)': typeof ProtecteddashboardRouteRouteWithChildren
   '/(auth)/sign-in': typeof authSignInRoute
   '/(auth)/sign-up': typeof authSignUpRoute
-  '/_protected/(dashboard)/home': typeof ProtecteddashboardHomeRoute
+  '/_protected/(dashboard)/home': typeof ProtecteddashboardHomeLazyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -129,19 +139,19 @@ declare module '@tanstack/react-router' {
       id: '/_protected/(dashboard)/home'
       path: '/home'
       fullPath: '/home'
-      preLoaderRoute: typeof ProtecteddashboardHomeRouteImport
+      preLoaderRoute: typeof ProtecteddashboardHomeLazyRouteImport
       parentRoute: typeof ProtecteddashboardRouteRoute
     }
   }
 }
 
 interface ProtecteddashboardRouteRouteChildren {
-  ProtecteddashboardHomeRoute: typeof ProtecteddashboardHomeRoute
+  ProtecteddashboardHomeLazyRoute: typeof ProtecteddashboardHomeLazyRoute
 }
 
 const ProtecteddashboardRouteRouteChildren: ProtecteddashboardRouteRouteChildren =
   {
-    ProtecteddashboardHomeRoute: ProtecteddashboardHomeRoute,
+    ProtecteddashboardHomeLazyRoute: ProtecteddashboardHomeLazyRoute,
   }
 
 const ProtecteddashboardRouteRouteWithChildren =

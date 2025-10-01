@@ -5,19 +5,19 @@ import {
   RootStoreProvider,
   useRootStore,
 } from '@shared/stores/root-store/root-store.ts';
+import { Loader } from '@shared/ui/Loader/loader.tsx';
 import { createRouter, RouterProvider } from '@tanstack/react-router';
 import { observer } from 'mobx-react-lite';
-import { type FC, useEffect, useState } from 'react';
+import { type FC, Suspense, useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 
 import { routeTree } from '../routeTree.gen.ts';
 
 const router = createRouter({
   context: {
-    initAuth: undefined,
-    isAuth: false,
+    authStore: undefined,
   },
-  defaultPendingComponent: () => <div>loading...</div>,
+  defaultPendingComponent: () => <Loader fullPage />,
   routeTree,
   scrollRestoration: true,
 });
@@ -34,32 +34,18 @@ const cnApp = cn('App');
 
 const InnerApp: FC = observer(() => {
   const { auth } = useRootStore();
-  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
-    const initialize = async () => {
-      await auth.init();
-      setIsInitialized(true);
-    };
-
-    initialize();
-
     return () => {
       auth.unsubscribe();
     };
   }, [auth]);
 
-  // Wait for initialization to complete before rendering router
-  if (!isInitialized || auth.sessionRequest.isLoading) {
-    return <div>loading</div>;
-  }
-
   return (
     <div className={cnApp()}>
       <RouterProvider
         context={{
-          initAuth: auth.init,
-          isAuth: auth.isAuthenthicated,
+          authStore: auth,
         }}
         router={router}
       />
@@ -69,9 +55,11 @@ const InnerApp: FC = observer(() => {
 
 export const App: FC = observer(() => {
   return (
-    <RootStoreProvider>
-      <InnerApp />
-      <ToastContainer />
-    </RootStoreProvider>
+    <Suspense fallback={<Loader fullPage />}>
+      <RootStoreProvider>
+        <InnerApp />
+        <ToastContainer />
+      </RootStoreProvider>
+    </Suspense>
   );
 });

@@ -68,7 +68,7 @@ export class AuthStore {
 
     if (status === 'success' && response?.data.user) {
       this.router.navigate({
-        to: routes.main(),
+        to: routes.home(),
       });
     } else {
       Notifier.error('Ошибка авторизации. Попробуйте войти заново.');
@@ -83,7 +83,7 @@ export class AuthStore {
     this.subscription?.unsubscribe();
   }
 
-  get isAuthenthicated(): boolean {
+  get isAuthenticated(): boolean {
     return !!this.session?.user;
   }
 }
