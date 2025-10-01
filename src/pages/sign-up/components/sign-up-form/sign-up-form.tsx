@@ -12,9 +12,9 @@ import { Card } from '@shared/ui/card/card.tsx';
 import { Divider } from '@shared/ui/divider/divider.tsx';
 import { HStack } from '@shared/ui/hstack/hstack.tsx';
 import { IconComponent } from '@shared/ui/icon-component/icon-component.tsx';
+import { Loader } from '@shared/ui/Loader/loader.tsx';
 import { Typography } from '@shared/ui/typography/typography.tsx';
 import { VStack } from '@shared/ui/vstack/vstack.tsx';
-import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import { type FC } from 'react';
 
@@ -28,10 +28,10 @@ export const SignUpForm: FC<SignUpFormProps> = observer((props) => {
   const { className } = props;
   const { form } = useSignUpStore();
 
-  console.log(toJS(form.errors));
-
   return (
     <Card className={cnSignUpForm(undefined, [className])}>
+      {form.isSubmitting && <Loader overlay />}
+
       <VStack gap={'8'}>
         <Typography as={'h2'} size={'xl'} weight={'semibold'}>
           Создать аккаунт

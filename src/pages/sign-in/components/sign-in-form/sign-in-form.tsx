@@ -12,6 +12,7 @@ import { Card } from '@shared/ui/card/card.tsx';
 import { Divider } from '@shared/ui/divider/divider.tsx';
 import { HStack } from '@shared/ui/hstack/hstack.tsx';
 import { IconComponent } from '@shared/ui/icon-component/icon-component.tsx';
+import { Loader } from '@shared/ui/Loader/loader.tsx';
 import { Typography } from '@shared/ui/typography/typography.tsx';
 import { VStack } from '@shared/ui/vstack/vstack.tsx';
 import { observer } from 'mobx-react-lite';
@@ -29,6 +30,8 @@ export const SignInForm: FC<SignInFormProps> = observer((props) => {
 
   return (
     <Card className={cnSignInForm(undefined, [className])}>
+      {form.isSubmitting && <Loader overlay />}
+
       <VStack gap={'8'}>
         <Typography as={'h2'} size={'xl'} weight={'semibold'}>
           Добро пожаловать!
