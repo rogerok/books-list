@@ -8,7 +8,7 @@ export { default as doneIcon } from './done.svg?react';
 export { default as goalIcon } from './goal.svg?react';
 export { default as homeIcon } from './home.svg?react';
 export { default as pencilIcon } from './pencil.svg?react';
-export { default as plusIcon } from './pencil.svg?react';
+export { default as plusIcon } from './plus.svg?react';
 export { default as progressIcon } from './progress.svg?react';
 export { default as saveIcon } from './save.svg?react';
 export { default as searchIcon } from './search.svg?react';

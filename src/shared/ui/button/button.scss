@@ -19,6 +19,17 @@
 
   transition: var(--transition-1);
 
+
+  &-Content {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    visibility: visible;
+
+    transition: opacity 0.2s ease;
+  }
+
   &_variant {
     &_primary {
       background: linear-gradient(90deg, var(--green-200) 0%, var(--green-600) 100%);
@@ -53,10 +64,43 @@
     opacity: 0.5;
   }
 
+
+  &_loading {
+    cursor: not-allowed;
+    opacity: 0.8;
+
+    #{$parent}-Content {
+      opacity: 0.3;
+    }
+
+  }
+
+
+  &-Spinner {
+    position: absolute;
+
+    display: inline-block;
+
+    width: 18px;
+    height: 18px;
+    border: 3px solid var(--neutral-500);
+    border-top-color: var(--white);
+    border-radius: 50%;
+
+    transition: opacity 0.3s ease;
+    animation: spin 1s linear infinite;
+  }
+
   @media (hover: hover) {
     &:not(#{$parent}_disabled):hover {
       cursor: pointer;
       filter: var(--hover-brightness);
     }
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }

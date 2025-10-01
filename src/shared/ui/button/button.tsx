@@ -16,14 +16,17 @@ export type ButtonProps = {
   className?: string;
   disabled?: boolean;
   fullWidth?: boolean;
+  isLoading?: boolean;
   variant?: ButtonVariantsType;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export const Button: FC<ButtonProps> = (props) => {
   const {
+    children,
     className,
     disabled,
     fullWidth,
+    isLoading,
     type = 'button',
     variant = 'primary',
     ...otherProps
@@ -32,6 +35,7 @@ export const Button: FC<ButtonProps> = (props) => {
   const mods = {
     disabled: disabled,
     fullWidth: fullWidth,
+    loading: isLoading,
     variant: variant,
   };
 
@@ -42,7 +46,8 @@ export const Button: FC<ButtonProps> = (props) => {
       disabled={disabled}
       type={type}
     >
-      {props.children}
+      <span className={cnButton('Content')}>{children}</span>
+      {isLoading && <span className={cnButton('Spinner')} />}
     </button>
   );
 };

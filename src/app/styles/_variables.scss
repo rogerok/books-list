@@ -10,5 +10,13 @@
 
   --loader-z-index: 16;
 
+  --header-height: 65px;
+  --header-z-index: 5;
+
+  --navbar-width: 320px;
+  --navbar-z-index: 7;
+  --navbar-overlay-z-index: 6;
+
+
   --main-bg: linear-gradient(167deg, var(--neutral-100) 0%, var(--blue-50) 100%)
 }

@@ -1,0 +1,138 @@
+@use '../../../shared/styles/breakpoints' as b;
+
+.Navbar {
+  position: fixed;
+  z-index: var(--navbar-z-index);
+  top: 0;
+  left: -320px;
+
+  overflow: auto;
+
+  width: var(--navbar-width);
+  height: 100vh;
+  border-right: 1px solid var(--neutral-300);
+
+  background: var(--white);
+
+  transition: left 0.3s cubic-bezier(.2, .9, .25, 1);
+
+  &_open {
+    left: 0;
+  }
+
+  &-Inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  &-Logo {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--neutral-300);
+  }
+
+  &-Icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 14px;
+
+    background: linear-gradient(90deg, var(--green-200) 0%, var(--blue-200) 100%);
+  }
+
+  &-UserMenu {
+    padding: 1rem;
+    border-bottom: 1px solid var(--neutral-300);
+
+  }
+
+
+  &-NavItem {
+    cursor: pointer;
+
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    padding: 10px;
+    border-radius: 10px;
+
+    color: #334155;
+    text-decoration: none;
+
+    transition: background 0.12s ease, color 0.12s ease;
+
+    &:hover {
+      background: #f1f5f9;
+    }
+
+    &._active,
+    &_active { /* учесть разные способы модификаторов */
+      color: #1e3a8a;
+      background: #eef2ff;
+    }
+
+    &.disabled {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+  }
+
+  &-Goal {
+    margin-top: 12px;
+    padding: 12px;
+    border-radius: 12px;
+    background: #f8fbff;
+  }
+
+  &-Footer {
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid #f1f5f9;
+
+    font-size: 13px;
+    color: #64748b;
+  }
+}
+
+/* overlay для закрытия сайдбара на мобилке */
+.Navbar-Overlay {
+  pointer-events: none;
+
+  position: fixed;
+  z-index: var(--navbar-overlay-z-index);
+  inset: 0;
+
+  opacity: 0;
+  background: rgb(7 12 21 / 32%);
+
+  transition: opacity 0.2s ease;
+
+  &_open {
+    pointer-events: auto;
+    opacity: 1;
+  }
+}
+
+
+@media (min-width: b.$md-breakpoint) {
+  .Navbar {
+    position: relative;
+    left: 0;
+
+    // width: 320px;
+    height: auto;
+    transition: none;
+  }
+
+  .Navbar-Overlay {
+    display: none;
+  }
+}

@@ -17,8 +17,14 @@ import { Route as authSignUpRouteImport } from './app/routes/(auth)/sign-up'
 import { Route as authSignInRouteImport } from './app/routes/(auth)/sign-in'
 import { Route as ProtecteddashboardRouteRouteImport } from './app/routes/_protected/(dashboard)/route'
 
+const ProtecteddashboardLibraryLazyRouteImport = createFileRoute(
+  '/_protected/(dashboard)/library',
+)()
 const ProtecteddashboardHomeLazyRouteImport = createFileRoute(
   '/_protected/(dashboard)/home',
+)()
+const ProtecteddashboardAddBookLazyRouteImport = createFileRoute(
+  '/_protected/(dashboard)/add-book',
 )()
 
 const ProtectedRoute = ProtectedRouteImport.update({
@@ -44,6 +50,16 @@ const ProtecteddashboardRouteRoute = ProtecteddashboardRouteRouteImport.update({
   id: '/(dashboard)',
   getParentRoute: () => ProtectedRoute,
 } as any)
+const ProtecteddashboardLibraryLazyRoute =
+  ProtecteddashboardLibraryLazyRouteImport.update({
+    id: '/library',
+    path: '/library',
+    getParentRoute: () => ProtecteddashboardRouteRoute,
+  } as any).lazy(() =>
+    import('./app/routes/_protected/(dashboard)/library.lazy').then(
+      (d) => d.Route,
+    ),
+  )
 const ProtecteddashboardHomeLazyRoute =
   ProtecteddashboardHomeLazyRouteImport.update({
     id: '/home',
@@ -54,18 +70,32 @@ const ProtecteddashboardHomeLazyRoute =
       (d) => d.Route,
     ),
   )
+const ProtecteddashboardAddBookLazyRoute =
+  ProtecteddashboardAddBookLazyRouteImport.update({
+    id: '/add-book',
+    path: '/add-book',
+    getParentRoute: () => ProtecteddashboardRouteRoute,
+  } as any).lazy(() =>
+    import('./app/routes/_protected/(dashboard)/add-book.lazy').then(
+      (d) => d.Route,
+    ),
+  )
 
 export interface FileRoutesByFullPath {
   '/': typeof ProtecteddashboardRouteRouteWithChildren
   '/sign-in': typeof authSignInRoute
   '/sign-up': typeof authSignUpRoute
+  '/add-book': typeof ProtecteddashboardAddBookLazyRoute
   '/home': typeof ProtecteddashboardHomeLazyRoute
+  '/library': typeof ProtecteddashboardLibraryLazyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof ProtecteddashboardRouteRouteWithChildren
   '/sign-in': typeof authSignInRoute
   '/sign-up': typeof authSignUpRoute
+  '/add-book': typeof ProtecteddashboardAddBookLazyRoute
   '/home': typeof ProtecteddashboardHomeLazyRoute
+  '/library': typeof ProtecteddashboardLibraryLazyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -74,13 +104,15 @@ export interface FileRoutesById {
   '/_protected/(dashboard)': typeof ProtecteddashboardRouteRouteWithChildren
   '/(auth)/sign-in': typeof authSignInRoute
   '/(auth)/sign-up': typeof authSignUpRoute
+  '/_protected/(dashboard)/add-book': typeof ProtecteddashboardAddBookLazyRoute
   '/_protected/(dashboard)/home': typeof ProtecteddashboardHomeLazyRoute
+  '/_protected/(dashboard)/library': typeof ProtecteddashboardLibraryLazyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/sign-in' | '/sign-up' | '/home'
+  fullPaths: '/' | '/sign-in' | '/sign-up' | '/add-book' | '/home' | '/library'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/sign-in' | '/sign-up' | '/home'
+  to: '/' | '/sign-in' | '/sign-up' | '/add-book' | '/home' | '/library'
   id:
     | '__root__'
     | '/'
@@ -88,7 +120,9 @@ export interface FileRouteTypes {
     | '/_protected/(dashboard)'
     | '/(auth)/sign-in'
     | '/(auth)/sign-up'
+    | '/_protected/(dashboard)/add-book'
     | '/_protected/(dashboard)/home'
+    | '/_protected/(dashboard)/library'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -135,6 +169,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtecteddashboardRouteRouteImport
       parentRoute: typeof ProtectedRoute
     }
+    '/_protected/(dashboard)/library': {
+      id: '/_protected/(dashboard)/library'
+      path: '/library'
+      fullPath: '/library'
+      preLoaderRoute: typeof ProtecteddashboardLibraryLazyRouteImport
+      parentRoute: typeof ProtecteddashboardRouteRoute
+    }
     '/_protected/(dashboard)/home': {
       id: '/_protected/(dashboard)/home'
       path: '/home'
@@ -142,16 +183,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtecteddashboardHomeLazyRouteImport
       parentRoute: typeof ProtecteddashboardRouteRoute
     }
+    '/_protected/(dashboard)/add-book': {
+      id: '/_protected/(dashboard)/add-book'
+      path: '/add-book'
+      fullPath: '/add-book'
+      preLoaderRoute: typeof ProtecteddashboardAddBookLazyRouteImport
+      parentRoute: typeof ProtecteddashboardRouteRoute
+    }
   }
 }
 
 interface ProtecteddashboardRouteRouteChildren {
+  ProtecteddashboardAddBookLazyRoute: typeof ProtecteddashboardAddBookLazyRoute
   ProtecteddashboardHomeLazyRoute: typeof ProtecteddashboardHomeLazyRoute
+  ProtecteddashboardLibraryLazyRoute: typeof ProtecteddashboardLibraryLazyRoute
 }
 
 const ProtecteddashboardRouteRouteChildren: ProtecteddashboardRouteRouteChildren =
   {
+    ProtecteddashboardAddBookLazyRoute: ProtecteddashboardAddBookLazyRoute,
     ProtecteddashboardHomeLazyRoute: ProtecteddashboardHomeLazyRoute,
+    ProtecteddashboardLibraryLazyRoute: ProtecteddashboardLibraryLazyRoute,
   }
 
 const ProtecteddashboardRouteRouteWithChildren =

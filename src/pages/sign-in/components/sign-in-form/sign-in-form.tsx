@@ -65,7 +65,7 @@ export const SignInForm: FC<SignInFormProps> = observer((props) => {
           <IconComponent
             color={ColorConstant.White}
             name={'signInIcon'}
-            size={'xs'}
+            size={'xxs'}
           />
           <Typography variant={'white'} weight={'medium'}>
             Войти
@@ -99,7 +99,7 @@ export const SignInForm: FC<SignInFormProps> = observer((props) => {
           <IconComponent
             color={ColorConstant.Neutral800}
             name={'arrowRightIcon'}
-            size={'xs'}
+            size={'xxs'}
           />
         </AppLink>
       </VStack>

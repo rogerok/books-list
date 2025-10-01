@@ -27,6 +27,10 @@ const IconSizesMap = {
     width: 24,
   },
   xs: {
+    height: 20,
+    width: 20,
+  },
+  xxs: {
     height: 16,
     width: 16,
   },

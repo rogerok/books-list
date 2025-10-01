@@ -1,5 +1,5 @@
 import type { SignInRequestModel } from '@shared/models/auth.ts';
-import type { Session, Subscription } from '@supabase/supabase-js';
+import type { Session, Subscription, User } from '@supabase/supabase-js';
 
 import {
   getSessionRequest,
@@ -31,7 +31,7 @@ export class AuthStore {
     );
   }
 
-  async init() {
+  async init(): Promise<void> {
     const { response, status } = await this.sessionRequest.execute();
 
     if (status === 'success' && response?.data.session) {
@@ -55,14 +55,6 @@ export class AuthStore {
     }
   }
 
-  async logout(): Promise<void> {
-    await this.signOutRequest.execute();
-    this.session = null;
-    this.router.toSignIn();
-    // TODO: maybe remove
-    window.location.reload();
-  }
-
   async signIn(credentials: SignInRequestModel) {
     const { response, status } = await this.signInRequest.execute(credentials);
 
@@ -79,11 +71,31 @@ export class AuthStore {
     }
   }
 
+  async signOut(): Promise<void> {
+    await this.signOutRequest.execute();
+    this.session = null;
+    this.router.toSignIn();
+    // TODO: maybe remove
+    window.location.reload();
+  }
+
   unsubscribe() {
     this.subscription?.unsubscribe();
   }
 
   get isAuthenticated(): boolean {
     return !!this.session?.user;
+  }
+
+  get isSigningOut(): boolean {
+    return this.signOutRequest.isLoading;
+  }
+
+  get user(): User | undefined {
+    return this.session?.user;
+  }
+
+  get userEmail(): string | undefined {
+    return this.session?.user?.email;
   }
 }

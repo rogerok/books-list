@@ -76,7 +76,7 @@ export const SignUpForm: FC<SignUpFormProps> = observer((props) => {
           <IconComponent
             color={ColorConstant.White}
             name={'createAccountIcon'}
-            size={'xs'}
+            size={'xxs'}
           />
           <Typography variant={'white'} weight={'medium'}>
             Создать аккаунт
@@ -109,7 +109,7 @@ export const SignUpForm: FC<SignUpFormProps> = observer((props) => {
           <IconComponent
             color={ColorConstant.Neutral800}
             name={'arrowLeftIcon'}
-            size={'xs'}
+            size={'xxs'}
           />
           <Typography variant={'lightDark'}>Войти в аккаунт</Typography>
         </AppLink>
