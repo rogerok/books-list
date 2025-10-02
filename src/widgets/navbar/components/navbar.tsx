@@ -11,7 +11,8 @@ import { makeAutoObservable } from 'mobx';
 import { observer } from 'mobx-react-lite';
 
 interface NavbarProps {
-  goalBanner: ReactNode;
+  bookWidget: ReactNode;
+  goalWidget: ReactNode;
   userMenu: ReactNode;
   className?: string;
 }
@@ -41,7 +42,7 @@ export const navbarStore = new NavbarStore();
 const cnNavbar = cn('Navbar');
 
 export const Navbar: FC<NavbarProps> = observer((props) => {
-  const { className, goalBanner, userMenu } = props;
+  const { bookWidget, className, goalWidget, userMenu } = props;
 
   return (
     <>
@@ -76,7 +77,8 @@ export const Navbar: FC<NavbarProps> = observer((props) => {
 
           <NavbarNav />
 
-          <div className={cnNavbar('GoalBanner')}>{goalBanner}</div>
+          <div className={cnNavbar('GoalWidget')}>{goalWidget}</div>
+          <div className={cnNavbar('BookWidget')}>{bookWidget}</div>
         </div>
       </aside>
 

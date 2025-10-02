@@ -3,24 +3,21 @@ import type { FC } from 'react';
 import { cn } from '@bem-react/classname';
 import { ProgressBar } from '@shared/ui/progress-bar/progress-bar.tsx';
 
-const cnGoalBannerProgressBar = cn('GoalBannerProgressBar');
+const cnGoalProgress = cn('GoalProgress');
 
-interface GoalBannerProgressBarProps {
+interface GoalProgressProps {
   percent: number;
   className?: string;
 }
 
-export const GoalBannerProgressBar: FC<GoalBannerProgressBarProps> = (
-  props,
-) => {
+export const GoalProgress: FC<GoalProgressProps> = (props) => {
   const { className, percent } = props;
 
   return (
     <ProgressBar
-      className={cnGoalBannerProgressBar(undefined, [className])}
+      className={cnGoalProgress(undefined, [className])}
       max={100}
       value={percent}
-      variant={'primary'}
     />
   );
 };

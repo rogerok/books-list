@@ -16,6 +16,7 @@ export const GoalTitle: FC<GoalTitleProps> = (props) => {
 
   return (
     <Typography
+      as={'h4'}
       className={cnGoalTitle(undefined, [className])}
       size={'sm'}
       weight={weight}
