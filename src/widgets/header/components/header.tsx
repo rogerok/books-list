@@ -24,7 +24,7 @@ export const Header: React.FC<{ className?: string }> = observer(
         />
 
         <Typography
-          as={'h1'}
+          as={'h2'}
           className={cnHeader('Title')}
           size={'xl'}
           weight={'semibold'}

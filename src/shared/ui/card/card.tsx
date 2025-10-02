@@ -15,7 +15,7 @@ interface CardProps {
 }
 
 export const Card: FC<CardProps> = (props) => {
-  const { children, className, elevation = 'sm', variant = 'primary' } = props;
+  const { children, className, elevation, variant = 'primary' } = props;
 
   return (
     <div

@@ -1,11 +1,18 @@
 .ProgressBar {
   overflow: hidden;
-
   width: 100%;
-  height: 0.5rem;
   border-radius: 16px;
-
   appearance: none;
+
+  &_size {
+    &_small {
+      height: 0.5rem;
+    }
+
+    &_medium {
+      height: 0.75rem;
+    }
+  }
 
   &_variant {
     &_primary {

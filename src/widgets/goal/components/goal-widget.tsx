@@ -1,5 +1,6 @@
 import { cn } from '@bem-react/classname';
 import { Card } from '@shared/ui/card/card.tsx';
+import { GoalWidgetLarge } from '@widgets/goal/components/goal-widget-large/goal-widget-large.tsx';
 import { GoalWidgetSmall } from '@widgets/goal/components/goal-widget-small/goal-widget-small.tsx';
 import { observer } from 'mobx-react-lite';
 import { type FC, useMemo } from 'react';
@@ -32,14 +33,15 @@ export const GoalWidget: FC<GoalWidgetProps> = observer((props) => {
     switch (variant) {
       case 'small':
         return <GoalWidgetSmall data={mockData} />;
-      // case 'large':
-      // component = <GoalWidget data={mockData} />;
+      case 'large':
+        return <GoalWidgetLarge data={mockData} />;
     }
   }, [variant]);
 
   return (
     <Card
       className={cnGoalWidget(undefined, [className])}
+      elevation={variant === 'large' ? 'md' : undefined}
       variant={'secondary'}
     >
       {component}

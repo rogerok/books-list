@@ -4,35 +4,31 @@
   --font-family: 'Inter';
 
   --font-size-3xs: #{h.to-rem(12)};
-  --font-line-3xs: 1.33;
-  --font-3xs: var(--font-size-3xs) / var(--font-line-3xs) var(--font-family);
+  --font-3xs: var(--font-size-3xs) /1.33 var(--font-family);
 
   --font-size-2xs: #{h.to-rem(13)};
-  --font-line-2xs: 1.44;
-  --font-2xs: var(--font-size-2xs) / var(--font-line-2xs) var(--font-family);
+  --font-2xs: var(--font-size-2xs) / 1.44 var(--font-family);
 
   --font-size-xs: #{h.to-rem(14)};
-  --font-line-xs: 1.43;
-  --font-xs: var(--font-size-xs) / var(--font-line-xs) var(--font-family);
+  --font-xs: var(--font-size-xs) / 1.43 var(--font-family);
 
 
   --font-size-sm: #{h.to-rem(15)};
-  --font-line-sm: 1.54;
-  --font-sm: var(--font-size-sm) / var(--font-line-sm) var(--font-family);
+  --font-sm: var(--font-size-sm) /1.54 var(--font-family);
 
   --font-size-md: #{h.to-rem(17)};
-  --font-line-md: 1.65;
-  --font-md: var(--font-size-md) / var(--font-line-md) var(--font-family);
+  --font-md: var(--font-size-md) / 1.65 var(--font-family);
 
   --font-size-lg: #{h.to-rem(18)};
-  --font-line-lg: 1.4;
-  --font-lg: var(--font-size-lg) / var(--font-size-lg) var(--font-family);
+  --font-lg: var(--font-size-lg) / 1.4 var(--font-family);
 
   --font-size-xl: #{h.to-rem(22)};
-  --font-line-xl: 1.4;
-  --font-xl: var(--font-size-xl) / var(--font-size-xl) var(--font-family);
+  --font-xl: var(--font-size-xl) / 1.4 var(--font-family);
 
   --font-size-2xl: #{h.to-rem(27)};
-  --font-line-2xl: 1.3;
-  --font-2xl: var(--font-size-2xl) / var(--font-line-2xl) var(--font-family);
+  --font-2xl: var(--font-size-2xl) / 1.3 var(--font-family);
+
+  --font-size-3xl: #{h.to-rem(33)};
+  --font-line-3xl: 1.18;
+  --font-3xl: var(--font-size-3xl) / 1.18 var(--font-family);
 }

@@ -37,6 +37,8 @@ export const BookWidget: FC<BookWidgetProps> = (props) => {
   }, [variant]);
 
   return (
-    <Card className={cnBookWidget(undefined, [className])}>{component}</Card>
+    <Card className={cnBookWidget(undefined, [className])} elevation={'sm'}>
+      {component}
+    </Card>
   );
 };

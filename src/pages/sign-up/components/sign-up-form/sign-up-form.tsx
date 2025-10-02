@@ -29,7 +29,7 @@ export const SignUpForm: FC<SignUpFormProps> = observer((props) => {
   const { form } = useSignUpStore();
 
   return (
-    <Card className={cnSignUpForm(undefined, [className])}>
+    <Card className={cnSignUpForm(undefined, [className])} elevation={'sm'}>
       {form.isSubmitting && <Loader overlay />}
 
       <VStack gap={'8'}>

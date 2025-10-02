@@ -7,6 +7,7 @@ import { useRootStore } from '@shared/stores/root-store/root-store.ts';
 import './navbar.scss';
 import { IconComponent } from '@shared/ui/icon-component/icon-component.tsx';
 import { Typography } from '@shared/ui/typography/typography.tsx';
+import { VStack } from '@shared/ui/vstack/vstack.tsx';
 import { NavbarNav } from '@widgets/navbar/components/navbar-nav/navbar-nav.tsx';
 import { observer } from 'mobx-react-lite';
 
@@ -20,7 +21,7 @@ interface NavbarProps {
 
 const cnNavbar = cn('Navbar');
 
-export const Navbar: FC<NavbarProps> = observer((props) => {
+const Navbar: FC<NavbarProps> = observer((props) => {
   const { bookWidget, className, goalWidget, statisticWidget, userMenu } =
     props;
 
@@ -67,7 +68,13 @@ export const Navbar: FC<NavbarProps> = observer((props) => {
           <NavbarNav />
 
           <div className={cnNavbar('GoalWidget')}>{goalWidget}</div>
-          <div className={cnNavbar('BookWidget')}>{bookWidget}</div>
+
+          <VStack className={cnNavbar('BookWidget')} gap={'12'}>
+            <Typography as={'h6'} size={'sm'} weight={'medium'}>
+              Сейчас читаю
+            </Typography>
+            <div>{bookWidget}</div>
+          </VStack>
           <div className={cnNavbar('StatisticWidget')}>{statisticWidget}</div>
         </div>
       </aside>
@@ -81,3 +88,4 @@ export const Navbar: FC<NavbarProps> = observer((props) => {
     </>
   );
 });
+export default Navbar;

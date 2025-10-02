@@ -1,0 +1,117 @@
+.HomePage {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "goal actions"
+    "current activities";
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+
+
+  &-Header {
+    display: flex;
+    grid-area: header;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+
+    width: 100%;
+
+  }
+
+}
+
+.HomePage-goal {
+  grid-area: goal;
+  padding: 16px;
+  border-radius: 12px;
+  background: #f4f7fa;
+}
+
+.HomePage-actions {
+  display: flex;
+  grid-area: actions;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.HomePage-add-btn,
+.HomePage-library-btn {
+  cursor: pointer;
+
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+
+  font-size: 16px;
+}
+
+.HomePage-add-btn {
+  color: white;
+  background: linear-gradient(90deg, #05cba0, #05a4cb);
+}
+
+.HomePage-library-btn {
+  background: #f3f3f3;
+}
+
+.HomePage-current {
+  grid-area: current;
+  padding: 16px;
+  border-radius: 12px;
+  background: #fafafa;
+}
+
+.HomePage-book {
+  display: flex;
+  gap: 16px;
+}
+
+.HomePage-book-cover {
+  border-radius: 8px;
+}
+
+.HomePage-book-info {
+  flex: 1;
+}
+
+.HomePage-progressbar {
+  overflow: hidden;
+
+  height: 8px;
+  margin: 8px 0;
+  border-radius: 6px;
+
+  background: #e6e6e6;
+}
+
+.HomePage-progressbar-fill {
+  height: 100%;
+  background: #2a82f7;
+}
+
+.HomePage-activities {
+  grid-area: activities;
+  padding: 16px;
+  border-radius: 12px;
+  background: #fafafa;
+}
+
+.HomePage-activity {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+/* Мобильная версия */
+@media (width <= 1024px) {
+  .HomePage {
+    grid-template-areas:
+      "header"
+      "goal"
+      "actions"
+      "current"
+      "activities";
+    grid-template-columns: 1fr;
+  }
+}

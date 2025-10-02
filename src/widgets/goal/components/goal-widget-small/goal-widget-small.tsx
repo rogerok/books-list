@@ -12,7 +12,6 @@ import { VStack } from '@shared/ui/vstack/vstack.tsx';
 import { GoalCounter } from '@widgets/goal/components/goal-counter/goal-counter.tsx';
 import { GoalProgress } from '@widgets/goal/components/goal-progress/goal-progress.tsx';
 import { GoalTitle } from '@widgets/goal/components/goal-title/goal-title.tsx';
-import { GoalWidgetBase } from '@widgets/goal/components/goal-widget-base/goal-widget-base.tsx';
 
 const cnGoalWidgetSmall = cn('GoalWidgetSmall');
 
@@ -25,7 +24,7 @@ export const GoalWidgetSmall: FC<GoalWidgetSmallProps> = (props) => {
   const { className, data } = props;
 
   return (
-    <GoalWidgetBase className={cnGoalWidgetSmall(undefined, [className])}>
+    <div className={cnGoalWidgetSmall(undefined, [className])}>
       <HStack align={'center'} gap={'4'}>
         <IconComponent
           color={ColorConstant.Green600}
@@ -44,6 +43,6 @@ export const GoalWidgetSmall: FC<GoalWidgetSmallProps> = (props) => {
           {data.percent}% выполнено
         </Typography>
       </VStack>
-    </GoalWidgetBase>
+    </div>
   );
 };

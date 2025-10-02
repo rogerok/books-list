@@ -20,6 +20,7 @@ export const GoalCounter: FC<GoalCounterProps> = (props) => {
   return (
     <Typography
       className={cnGoalCounter(undefined, [className])}
+      size={'2xs'}
       variant={variant}
       weight={'medium'}
     >
