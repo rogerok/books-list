@@ -10,6 +10,10 @@ import {
 type TypographyVariant =
   | 'accent'
   | 'accent2'
+  | 'accent3'
+  | 'accent4'
+  | 'accent5'
+  | 'accent6'
   | 'dark'
   | 'light'
   | 'lightDark'

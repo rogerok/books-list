@@ -13,6 +13,7 @@ import { observer } from 'mobx-react-lite';
 interface NavbarProps {
   bookWidget: ReactNode;
   goalWidget: ReactNode;
+  statisticWidget: ReactNode;
   userMenu: ReactNode;
   className?: string;
 }
@@ -42,7 +43,8 @@ export const navbarStore = new NavbarStore();
 const cnNavbar = cn('Navbar');
 
 export const Navbar: FC<NavbarProps> = observer((props) => {
-  const { bookWidget, className, goalWidget, userMenu } = props;
+  const { bookWidget, className, goalWidget, statisticWidget, userMenu } =
+    props;
 
   return (
     <>
@@ -79,6 +81,7 @@ export const Navbar: FC<NavbarProps> = observer((props) => {
 
           <div className={cnNavbar('GoalWidget')}>{goalWidget}</div>
           <div className={cnNavbar('BookWidget')}>{bookWidget}</div>
+          <div className={cnNavbar('StatisticWidget')}>{statisticWidget}</div>
         </div>
       </aside>
 

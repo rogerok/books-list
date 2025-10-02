@@ -7,6 +7,7 @@ import { BookWidget } from '@widgets/book';
 import { GoalWidget } from '@widgets/goal';
 import { Header } from '@widgets/header/components/header.tsx';
 import { Navbar } from '@widgets/navbar';
+import { StatisticWidget } from '@widgets/statistic';
 import { UserMenu } from '@widgets/user-menu';
 
 const cnMainLayout = cn('MainLayout');
@@ -22,6 +23,7 @@ export const MainLayout: FC<MainLayoutProps> = (props) => {
         bookWidget={<BookWidget variant={'compact'} />}
         className={cnMainLayout('Navbar')}
         goalWidget={<GoalWidget variant={'small'} />}
+        statisticWidget={<StatisticWidget />}
         userMenu={<UserMenu />}
       />
 
