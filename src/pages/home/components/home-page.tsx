@@ -1,6 +1,11 @@
 import { cn } from '@bem-react/classname';
 
 import './home-page.scss';
+import { LastActivity } from '@pages/home/components/last-activity/last-activity.tsx';
+import { routes } from '@shared/config/router/routes.ts';
+import { ColorConstant } from '@shared/constants/style-system/colors.ts';
+import { AppLink } from '@shared/ui/app-link/app-link.tsx';
+import { IconComponent } from '@shared/ui/icon-component/icon-component.tsx';
 import { Typography } from '@shared/ui/typography/typography.tsx';
 import { VStack } from '@shared/ui/vstack/vstack.tsx';
 import { BookWidget } from '@widgets/book';
@@ -24,51 +29,55 @@ export const HomePage = () => {
         <GoalWidget variant={'large'} />
       </section>
 
-      <div className={cnHomePage('actions')}>
-        <button className={cnHomePage('add-btn')}>+ Добавить книгу</button>
-        <button className={cnHomePage('library-btn')}>📚 Библиотека</button>
+      <div className={cnHomePage('Actions')}>
+        <AppLink
+          className={cnHomePage('ActionLink', {
+            green: true,
+          })}
+          to={routes.addBook()}
+        >
+          <IconComponent
+            color={ColorConstant.White}
+            name={'plusIcon'}
+            size={'xxs'}
+          />
+          <Typography
+            align={'center'}
+            size={'md'}
+            variant={'white'}
+            weight={'medium'}
+          >
+            Добавить книгу
+          </Typography>
+        </AppLink>
+
+        <AppLink className={cnHomePage('ActionLink')} to={routes.books()}>
+          <IconComponent
+            color={ColorConstant.Neutral700}
+            name={'plusIcon'}
+            size={'xxs'}
+          />
+          <Typography
+            align={'center'}
+            size={'md'}
+            variant={'secondary'}
+            weight={'medium'}
+          >
+            Библиотека
+          </Typography>
+        </AppLink>
       </div>
 
-      <VStack as={'section'} className={cnHomePage('current')} gap={'16'}>
+      <VStack as={'section'} className={cnHomePage('Current')} gap={'16'}>
         <Typography as={'h6'} size={'lg'} weight={'semibold'}>
           Текущие книги
         </Typography>
-
-        {/*<div className={cnHomePage('book')}>*/}
-        {/*  <img*/}
-        {/*    alt="cover"*/}
-        {/*    className={cnHomePage('book-cover')}*/}
-        {/*    src="https://placehold.co/100x140"*/}
-        {/*  />*/}
-        {/*  <div className={cnHomePage('book-info')}>*/}
-        {/*    <h3>Полуночная библиотека</h3>*/}
-        {/*    <p>Мэтт Хейг</p>*/}
-        {/*    <div className={cnHomePage('progressbar')}>*/}
-        {/*      <div*/}
-        {/*        className={cnHomePage('progressbar-fill')}*/}
-        {/*        style={{ width: '65%' }}*/}
-        {/*      />*/}
-        {/*    </div>*/}
-        {/*    <span>65%</span>*/}
-        {/*  </div>*/}
-        {/*</div>*/}
-        <div>
-          <BookWidget variant={'wide'} />
-        </div>
+        <BookWidget variant={'wide'} />
       </VStack>
 
-      <section className={cnHomePage('activities')}>
+      <section className={cnHomePage('Activities')}>
         <h2>Последние активности</h2>
-        <ul>
-          <li className={cnHomePage('activity')}>
-            <span>Закончена Гордость и предубеждение</span>
-            <span className={cnHomePage('rating')}>⭐ 5</span>
-          </li>
-          <li className={cnHomePage('activity')}>
-            <span>Закончена Великий Гэтсби</span>
-            <span className={cnHomePage('rating')}>⭐ 4</span>
-          </li>
-        </ul>
+        <LastActivity />
       </section>
     </section>
   );

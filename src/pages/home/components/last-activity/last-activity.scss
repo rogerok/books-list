@@ -1,0 +1,30 @@
+.LastActivity {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  list-style-type: none;
+
+
+  &-ItemInner {
+    padding: 1rem;
+    background: rgb(255 255 255 / 60%);
+
+    &::before {
+      content: "•";
+      display: inline-block;
+      margin-right: 12px;
+    }
+
+    &_status_toRead::before {
+      color: var(--orange-400);
+    }
+
+    &_status_read::before {
+      color: var(--green-500);
+    }
+
+    &_status_reading::before {
+      color: var(--blue-400);
+    }
+  }
+}
