@@ -22,7 +22,7 @@ export type Justify =
 
 export type FlexDirection = 'column' | 'row';
 export type FlexWrap = 'nowrap' | 'wrap';
-export type FlexGap = '12' | '16' | '24' | '32' | '8';
+export type FlexGap = '12' | '16' | '24' | '32' | '4' | '8';
 
 export type FlexProps<T extends ElementType = 'div'> = {
   align?: Alignment;

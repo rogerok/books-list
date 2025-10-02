@@ -12,6 +12,7 @@ import { Card } from '@shared/ui/card/card.tsx';
 import { Divider } from '@shared/ui/divider/divider.tsx';
 import { HStack } from '@shared/ui/hstack/hstack.tsx';
 import { IconComponent } from '@shared/ui/icon-component/icon-component.tsx';
+import { Loader } from '@shared/ui/Loader/loader.tsx';
 import { Typography } from '@shared/ui/typography/typography.tsx';
 import { VStack } from '@shared/ui/vstack/vstack.tsx';
 import { observer } from 'mobx-react-lite';
@@ -28,7 +29,9 @@ export const SignInForm: FC<SignInFormProps> = observer((props) => {
   const { form } = useSignInStore();
 
   return (
-    <Card className={cnSignInForm(undefined, [className])}>
+    <Card className={cnSignInForm(undefined, [className])} elevation={'sm'}>
+      {form.isSubmitting && <Loader overlay />}
+
       <VStack gap={'8'}>
         <Typography as={'h2'} size={'xl'} weight={'semibold'}>
           Добро пожаловать!
@@ -62,7 +65,7 @@ export const SignInForm: FC<SignInFormProps> = observer((props) => {
           <IconComponent
             color={ColorConstant.White}
             name={'signInIcon'}
-            size={'xs'}
+            size={'xxs'}
           />
           <Typography variant={'white'} weight={'medium'}>
             Войти
@@ -96,7 +99,7 @@ export const SignInForm: FC<SignInFormProps> = observer((props) => {
           <IconComponent
             color={ColorConstant.Neutral800}
             name={'arrowRightIcon'}
-            size={'xs'}
+            size={'xxs'}
           />
         </AppLink>
       </VStack>

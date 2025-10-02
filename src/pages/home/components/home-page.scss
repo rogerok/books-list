@@ -1,0 +1,76 @@
+.HomePage {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "goal actions"
+    "current activities";
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+
+
+  &-Header {
+    display: flex;
+    grid-area: header;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+
+    width: 100%;
+
+  }
+
+  &-Goal {
+    grid-area: goal;
+
+  }
+
+  &-Current {
+    grid-area: current;
+
+  }
+
+  &-Actions {
+    display: flex;
+    grid-area: actions;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &-ActionLink {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+
+    padding: 1.375rem;
+    border-radius: 8px;
+
+    background: var(--white);
+    box-shadow: var(--shadow-md);
+
+    &_green {
+      background: linear-gradient(90deg, var(--green-200) 0%, var(--green-600) 100%);
+    }
+  }
+
+  &-Activities {
+    display: flex;
+    grid-area: activities;
+    flex-direction: column;
+    gap: 1rem;
+    align-self: self-end;
+  }
+}
+
+@media (width <= 1024px) {
+  .HomePage {
+    grid-template-areas:
+      "header"
+      "goal"
+      "actions"
+      "current"
+      "activities";
+    grid-template-columns: 1fr;
+  }
+}

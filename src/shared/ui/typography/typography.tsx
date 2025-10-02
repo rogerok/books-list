@@ -9,6 +9,11 @@ import {
 
 type TypographyVariant =
   | 'accent'
+  | 'accent2'
+  | 'accent3'
+  | 'accent4'
+  | 'accent5'
+  | 'accent6'
   | 'dark'
   | 'light'
   | 'lightDark'
@@ -18,7 +23,16 @@ type TypographyVariant =
   | 'white';
 
 const cnTypography = cn('Typography');
-type TypographySize = '2xl' | '2xs' | '3xs' | 'lg' | 'md' | 'sm' | 'xl' | 'xs';
+type TypographySize =
+  | '2xl'
+  | '2xs'
+  | '3xl'
+  | '3xs'
+  | 'lg'
+  | 'md'
+  | 'sm'
+  | 'xl'
+  | 'xs';
 type TypographyWeight = 'medium' | 'normal' | 'semibold';
 type TypographyAlign = 'center' | 'left' | 'right';
 

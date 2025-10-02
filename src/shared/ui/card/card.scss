@@ -1,9 +1,23 @@
 .Card {
   border-radius: 14px;
-  background: rgb(255 255 255 / 80%);
   backdrop-filter: blur(8px);
 
+  &_variant {
+    &_primary {
+      background: rgb(255 255 255 / 80%);
+    }
+
+    &_secondary {
+      background: linear-gradient(90deg, var(--blue-50) 0%, var(--blue-50) 100%);
+    }
+  }
+
+
   &_elevation {
+    &_xs {
+      box-shadow: var(--shadow-xs);
+    }
+
     &_sm {
       box-shadow: var(--shadow-sm);
     }

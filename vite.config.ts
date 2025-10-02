@@ -21,11 +21,13 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [
+      tanstackRouter({
+        routesDirectory: './src/app/routes',
+      }),
       react(),
       checker({
         typescript: true,
       }),
-
       svgr({
         svgrOptions: {
           icon: true,
@@ -33,9 +35,6 @@ export default defineConfig(({ mode }) => {
           svgo: true,
           titleProp: true,
         },
-      }),
-      tanstackRouter({
-        routesDirectory: './src/app/routes',
       }),
       tsconfigPaths(),
       circleDependency({

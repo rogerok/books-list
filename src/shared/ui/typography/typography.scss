@@ -39,6 +39,26 @@
       color: var(--purple-300)
     }
 
+    &_accent2 {
+      color: var(--orange-200)
+    }
+
+    &_accent3 {
+      color: var(--orange-300)
+    }
+
+    &_accent4 {
+      color: var(--orange-400)
+    }
+
+    &_accent5 {
+      color: var(--blue-400)
+    }
+
+    &_accent6 {
+      color: var(--green-300)
+    }
+
   }
 
   &_size {
@@ -72,6 +92,10 @@
 
     &_2xl {
       font: var(--font-2xl);
+    }
+
+    &_3xl {
+      font: var(--font-3xl);
     }
 
   }

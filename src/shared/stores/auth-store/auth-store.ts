@@ -1,5 +1,5 @@
 import type { SignInRequestModel } from '@shared/models/auth.ts';
-import type { Session } from '@supabase/supabase-js';
+import type { Session, Subscription, User } from '@supabase/supabase-js';
 
 import {
   getSessionRequest,
@@ -19,6 +19,8 @@ export class AuthStore {
   signInRequest = new RequestStore(signInRequest);
   signOutRequest = new RequestStore(signOutRequest);
 
+  subscription: Subscription | undefined;
+
   constructor(private router: RouterController) {
     makeAutoObservable(
       this,
@@ -29,35 +31,28 @@ export class AuthStore {
     );
   }
 
-  async init() {
+  async init(): Promise<void> {
     const { response, status } = await this.sessionRequest.execute();
 
     if (status === 'success' && response?.data.session) {
       this.session = response.data.session;
 
-      apiClient.auth.onAuthStateChange((_event, session) => {
-        if (session) {
-          runInAction(() => {
-            this.session = session;
-          });
-        } else {
-          this.router.toSignIn();
-          // TODO: maybe remove
+      const subscription = apiClient.auth.onAuthStateChange(
+        (_event, session) => {
+          if (session) {
+            runInAction(() => {
+              this.session = session;
+            });
+          } else {
+            this.router.toSignIn();
+            // TODO: maybe remove
 
-          window.location.reload();
-        }
-      });
-    } else {
-      this.router.toSignIn();
+            window.location.reload();
+          }
+        },
+      );
+      this.subscription = subscription.data.subscription;
     }
-  }
-
-  async logout(): Promise<void> {
-    await this.signOutRequest.execute();
-    this.session = null;
-    this.router.toSignIn();
-    // TODO: maybe remove
-    window.location.reload();
   }
 
   async signIn(credentials: SignInRequestModel) {
@@ -65,7 +60,7 @@ export class AuthStore {
 
     if (status === 'success' && response?.data.user) {
       this.router.navigate({
-        to: routes.main(),
+        to: routes.home(),
       });
     } else {
       Notifier.error('Ошибка авторизации. Попробуйте войти заново.');
@@ -74,5 +69,33 @@ export class AuthStore {
         to: routes.signIn(),
       });
     }
+  }
+
+  async signOut(): Promise<void> {
+    await this.signOutRequest.execute();
+    this.session = null;
+    this.router.toSignIn();
+    // TODO: maybe remove
+    window.location.reload();
+  }
+
+  unsubscribe() {
+    this.subscription?.unsubscribe();
+  }
+
+  get isAuthenticated(): boolean {
+    return !!this.session?.user;
+  }
+
+  get isSigningOut(): boolean {
+    return this.signOutRequest.isLoading;
+  }
+
+  get user(): User | undefined {
+    return this.session?.user;
+  }
+
+  get userEmail(): string | undefined {
+    return this.session?.user?.email;
   }
 }
