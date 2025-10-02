@@ -1,0 +1,109 @@
+.Select {
+  --icon-x-position: 3.4rem;
+
+  font: var(--font-size-xs);
+  color: var(--neutral-1000);
+
+  &_fullWidth {
+    width: 100%;
+  }
+
+  &-Inner {
+    position: relative;
+
+    &_fullWidth {
+      width: 100%;
+    }
+  }
+
+
+  &_disabled {
+    color: var(--neutral-500);
+  }
+
+  // обёртка Select
+  &-Control {
+    .Select__control {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 8px;
+
+      font: var(--font-xs);
+      color: var(--neutral-1000);
+
+      background: var(--white);
+
+      // outline: none;
+      box-shadow: none;
+
+      transition: none;
+
+      &--is-focused {
+          outline: 2px solid var(--neutral-500) !important;
+          box-shadow: var(--shadow-sm);
+      }
+
+      &--is-disabled {
+        background: var(--neutral-300);
+      }
+
+      &--menu-is-open {
+          outline: 2px solid var(--neutral-500) !important;
+          box-shadow: var(--shadow-sm);
+      }
+
+      &--error {
+        outline: 2px solid var(--warn);
+      }
+    }
+
+    .Select__value-container {
+      padding: 0;
+    }
+
+    .Select__input-container {
+      margin: 0;
+      padding: 0;
+    }
+
+    .Select__placeholder {
+      font: var(--font-2xs);
+      color: var(--neutral-500);
+    }
+
+    .Select__single-value {
+      color: var(--neutral-1000);
+    }
+
+    .Select__indicator-separator {
+      display: none;
+    }
+
+    .Select__menu {
+      z-index: 10;
+      border-radius: 8px;
+      background: var(--white);
+      box-shadow: var(--shadow-md);
+    }
+
+    .Select__option {
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+
+      &--is-focused {
+        background: var(--neutral-200);
+      }
+
+      &--is-selected {
+        color: var(--white);
+        background: var(--neutral-400);
+      }
+    }
+
+
+  }
+
+  &-ErrorText {
+    color: var(--warn);
+  }
+}

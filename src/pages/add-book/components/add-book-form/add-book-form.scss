@@ -1,0 +1,22 @@
+.AddBookForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  padding: 2rem;
+
+  backdrop-filter: blur(8px);
+
+  &-Icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 10px;
+
+    background: var(--green-100);
+  }
+
+}
