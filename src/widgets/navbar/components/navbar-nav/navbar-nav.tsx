@@ -19,7 +19,7 @@ export const NavbarNav: FC<NavbarNavProps> = (props) => {
         <IconComponent name={'homeIcon'} size={'xs'} />
         <span>Главная</span>
       </AppLink>
-      <AppLink className={cnNavbarNav('Link')} to={routes.library()}>
+      <AppLink className={cnNavbarNav('Link')} to={routes.books()}>
         <IconComponent name={'booksIcon'} size={'xs'} />
         <span>Моя библиотека</span>
         <span className={cnNavbarNav('BooksCount')}>4</span>

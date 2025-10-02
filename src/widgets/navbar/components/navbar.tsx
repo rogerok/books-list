@@ -5,7 +5,6 @@ import { ColorConstant } from '@shared/constants/style-system/colors.ts';
 import { useRootStore } from '@shared/stores/root-store/root-store.ts';
 
 import './navbar.scss';
-import { Button } from '@shared/ui/button/button.tsx';
 import { IconComponent } from '@shared/ui/icon-component/icon-component.tsx';
 import { Typography } from '@shared/ui/typography/typography.tsx';
 import { NavbarNav } from '@widgets/navbar/components/navbar-nav/navbar-nav.tsx';
@@ -54,14 +53,13 @@ export const Navbar: FC<NavbarProps> = observer((props) => {
                 Ваш читательский журнал
               </Typography>
             </div>
-            <Button className={cnNavbar('CloseButton')} variant={'clear'}>
-              <IconComponent
-                color={ColorConstant.Neutral900}
-                name={'cancelIcon'}
-                onClick={navbar.setFalse}
-                size={'md'}
-              />
-            </Button>
+            <IconComponent
+              className={cnNavbar('CloseButton')}
+              color={ColorConstant.Neutral900}
+              name={'cancelIcon'}
+              onClick={navbar.setFalse}
+              size={'md'}
+            />
           </div>
 
           <div className={cnNavbar('UserMenu')}>{userMenu}</div>

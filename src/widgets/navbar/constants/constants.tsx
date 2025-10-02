@@ -21,7 +21,7 @@ export const NavbarLinks: NavbarLinksType[] = [
   linkOptions({
     icon: <IconComponent name={'booksIcon'} size={'xs'} />,
     label: 'Моя библиотека',
-    to: routes.library(),
+    to: routes.books(),
   }),
   linkOptions({
     icon: <IconComponent name={'plusIcon'} size={'xs'} />,

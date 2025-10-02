@@ -1,8 +1,9 @@
-import { cn } from '@bem-react/classname';
-
 import './header.scss';
+import { cn } from '@bem-react/classname';
 import { useRootStore } from '@shared/stores/root-store/root-store.ts';
-import { useRouterState } from '@tanstack/react-router';
+import { IconComponent } from '@shared/ui/icon-component/icon-component.tsx';
+import { Typography } from '@shared/ui/typography/typography.tsx';
+import { useHeaderTitle } from '@widgets/header/hooks/useHeaderTitle.ts';
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 
@@ -10,37 +11,26 @@ const cnHeader = cn('Header');
 
 export const Header: React.FC<{ className?: string }> = observer(
   ({ className }) => {
-    const state = useRouterState();
     const { navbar } = useRootStore();
-
-    const pathname = state.location.pathname;
-
-    // Простая мапа заголовков. Расширяй по нужным путям.
-    const title =
-      pathname === '/'
-        ? 'Главная'
-        : pathname.startsWith('/books')
-          ? 'Книги'
-          : pathname.startsWith('/profile')
-            ? 'Профиль'
-            : pathname.startsWith('/reports')
-              ? 'Отчёты'
-              : pathname.startsWith('/goals')
-                ? 'Цели'
-                : 'Приложение';
+    const title = useHeaderTitle();
 
     return (
       <header className={cnHeader(undefined, [className])}>
-        <button
-          aria-label="Toggle menu"
+        <IconComponent
           className={cnHeader('Burger')}
+          name={'burgerMenuIcon'}
           onClick={navbar.setTrue}
-          type="button"
-        >
-          <span aria-hidden>☰</span>
-        </button>
+          size={'md'}
+        />
 
-        <h1 className={cnHeader('Title')}>{title}</h1>
+        <Typography
+          as={'h1'}
+          className={cnHeader('Title')}
+          size={'xl'}
+          weight={'semibold'}
+        >
+          {title ?? 'Book Tracker'}
+        </Typography>
       </header>
     );
   },

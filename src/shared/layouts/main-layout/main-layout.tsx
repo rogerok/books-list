@@ -5,7 +5,7 @@ import { cn } from '@bem-react/classname';
 import { Outlet } from '@tanstack/react-router';
 import { BookWidget } from '@widgets/book';
 import { GoalWidget } from '@widgets/goal';
-import { Header } from '@widgets/header/components/header.tsx';
+import { Header } from '@widgets/header';
 import { Navbar } from '@widgets/navbar';
 import { StatisticWidget } from '@widgets/statistic';
 import { UserMenu } from '@widgets/user-menu';
