@@ -1,6 +1,7 @@
 import { cn } from '@bem-react/classname';
 import { Card } from '@shared/ui/card/card.tsx';
 import { BookWidgetCompact } from '@widgets/book/components/book-widget-compact/book-widget-compact.tsx';
+import { BookWidgetWide } from '@widgets/book/components/book-widget-wide/book-widget-wide.tsx';
 import { type FC, useMemo } from 'react';
 
 const cnBookWidget = cn('BookWidget');
@@ -33,6 +34,8 @@ export const BookWidget: FC<BookWidgetProps> = (props) => {
     switch (variant) {
       case 'compact':
         return <BookWidgetCompact data={mockData} />;
+      case 'wide':
+        return <BookWidgetWide data={mockData} />;
     }
   }, [variant]);
 

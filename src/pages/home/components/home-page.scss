@@ -19,13 +19,16 @@
 
   }
 
-}
+  &-Goal {
+    grid-area: goal;
 
-.HomePage-goal {
-  grid-area: goal;
-  padding: 16px;
-  border-radius: 12px;
-  background: #f4f7fa;
+  }
+
+  &-Current {
+    grid-area: current;
+
+  }
+
 }
 
 .HomePage-actions {
@@ -53,13 +56,6 @@
 
 .HomePage-library-btn {
   background: #f3f3f3;
-}
-
-.HomePage-current {
-  grid-area: current;
-  padding: 16px;
-  border-radius: 12px;
-  background: #fafafa;
 }
 
 .HomePage-book {

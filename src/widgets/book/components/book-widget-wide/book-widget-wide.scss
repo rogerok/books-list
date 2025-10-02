@@ -1,0 +1,18 @@
+.BookWidgetWide {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem;
+
+  &-Cover {
+    border-radius: 10px;
+  }
+
+  &-Info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 0.75rem;
+
+    margin-bottom: 3.25rem;
+  }
+}
