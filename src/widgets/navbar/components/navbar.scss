@@ -27,6 +27,8 @@
   }
 
   &-Logo {
+    position: relative;
+
     display: flex;
     gap: 0.75rem;
     align-items: center;
@@ -34,6 +36,7 @@
     padding: 1.5rem;
     border-bottom: 1px solid var(--neutral-300);
   }
+
 
   &-Icon {
     display: flex;
@@ -45,6 +48,12 @@
     border-radius: 14px;
 
     background: linear-gradient(90deg, var(--green-200) 0%, var(--blue-200) 100%);
+  }
+
+  &-CloseButton {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
   }
 
   &-UserMenu {
@@ -67,70 +76,22 @@
     border-top: 1px solid var(--neutral-300)
   }
 
-  &-NavItem {
-    cursor: pointer;
+  &-Overlay {
+    pointer-events: none;
 
-    display: flex;
-    gap: 10px;
-    align-items: center;
+    position: fixed;
+    z-index: var(--navbar-overlay-z-index);
+    inset: 0;
 
-    padding: 10px;
-    border-radius: 10px;
+    opacity: 0;
+    background: rgb(7 12 21 / 32%);
 
-    color: #334155;
-    text-decoration: none;
+    transition: opacity 0.2s ease;
 
-    transition: background 0.12s ease, color 0.12s ease;
-
-    &:hover {
-      background: #f1f5f9;
+    &_open {
+      pointer-events: auto;
+      opacity: 1;
     }
-
-    &._active,
-    &_active { /* учесть разные способы модификаторов */
-      color: #1e3a8a;
-      background: #eef2ff;
-    }
-
-    &.disabled {
-      pointer-events: none;
-      opacity: 0.5;
-    }
-  }
-
-  &-Goal {
-    margin-top: 12px;
-    padding: 12px;
-    border-radius: 12px;
-    background: #f8fbff;
-  }
-
-  &-Footer {
-    margin-top: auto;
-    padding-top: 12px;
-    border-top: 1px solid #f1f5f9;
-
-    font-size: 13px;
-    color: #64748b;
-  }
-}
-
-/* overlay для закрытия сайдбара на мобилке */
-.Navbar-Overlay {
-  pointer-events: none;
-
-  position: fixed;
-  z-index: var(--navbar-overlay-z-index);
-  inset: 0;
-
-  opacity: 0;
-  background: rgb(7 12 21 / 32%);
-
-  transition: opacity 0.2s ease;
-
-  &_open {
-    pointer-events: auto;
-    opacity: 1;
   }
 }
 
@@ -139,13 +100,16 @@
   .Navbar {
     position: relative;
     left: 0;
-
-    // width: 320px;
     height: auto;
     transition: none;
-  }
 
-  .Navbar-Overlay {
-    display: none;
+    &-Overlay {
+      display: none;
+
+    }
+
+    &-CloseButton {
+      display: none;
+    }
   }
 }

@@ -2,12 +2,13 @@ import type { FC, ReactNode } from 'react';
 
 import { cn } from '@bem-react/classname';
 import { ColorConstant } from '@shared/constants/style-system/colors.ts';
-import { IconComponent } from '@shared/ui/icon-component/icon-component.tsx';
+import { useRootStore } from '@shared/stores/root-store/root-store.ts';
 
 import './navbar.scss';
+import { Button } from '@shared/ui/button/button.tsx';
+import { IconComponent } from '@shared/ui/icon-component/icon-component.tsx';
 import { Typography } from '@shared/ui/typography/typography.tsx';
 import { NavbarNav } from '@widgets/navbar/components/navbar-nav/navbar-nav.tsx';
-import { makeAutoObservable } from 'mobx';
 import { observer } from 'mobx-react-lite';
 
 interface NavbarProps {
@@ -18,42 +19,22 @@ interface NavbarProps {
   className?: string;
 }
 
-class NavbarStore {
-  isOpen = false;
-
-  constructor() {
-    makeAutoObservable(this);
-  }
-
-  close() {
-    this.isOpen = false;
-  }
-
-  open() {
-    this.isOpen = true;
-  }
-
-  toggle() {
-    this.isOpen = !this.isOpen;
-  }
-}
-
-export const navbarStore = new NavbarStore();
-
 const cnNavbar = cn('Navbar');
 
 export const Navbar: FC<NavbarProps> = observer((props) => {
   const { bookWidget, className, goalWidget, statisticWidget, userMenu } =
     props;
 
+  const { navbar } = useRootStore();
+
   return (
     <>
       <aside
         className={cnNavbar(
           {
-            open: navbarStore.isOpen,
+            open: navbar.value,
           },
-          [className, navbarStore.isOpen ? 'open' : ''],
+          [className, navbar.value ? 'open' : ''],
         )}
       >
         <div className={cnNavbar('Inner')}>
@@ -73,6 +54,14 @@ export const Navbar: FC<NavbarProps> = observer((props) => {
                 Ваш читательский журнал
               </Typography>
             </div>
+            <Button className={cnNavbar('CloseButton')} variant={'clear'}>
+              <IconComponent
+                color={ColorConstant.Neutral900}
+                name={'cancelIcon'}
+                onClick={navbar.setFalse}
+                size={'md'}
+              />
+            </Button>
           </div>
 
           <div className={cnNavbar('UserMenu')}>{userMenu}</div>
@@ -87,9 +76,9 @@ export const Navbar: FC<NavbarProps> = observer((props) => {
 
       <div
         className={cnNavbar('Overlay', {
-          open: navbarStore.isOpen,
+          open: navbar.value,
         })}
-        onClick={() => navbarStore.close()}
+        onClick={navbar.setFalse}
       />
     </>
   );

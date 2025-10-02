@@ -3,6 +3,7 @@ export { default as arrowLeftIcon } from './arrow-left.svg?react';
 export { default as arrowRightIcon } from './arrow-right.svg?react';
 export { default as bookIcon } from './book.svg?react';
 export { default as booksIcon } from './books.svg?react';
+export { default as cancelIcon } from './cancel.svg?react';
 export { default as createAccountIcon } from './create-account.svg?react';
 export { default as doneIcon } from './done.svg?react';
 export { default as goalIcon } from './goal.svg?react';
