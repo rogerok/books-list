@@ -1,17 +1,18 @@
-import type { FC } from 'react';
+import type { FC, ReactNode } from 'react';
 
 import { cn } from '@bem-react/classname';
 
 const cnGoalBannerBase = cn('GoalBannerBase');
 
 interface GoalBannerBaseProps {
+  children: ReactNode;
   className?: string;
 }
 
 export const GoalBannerBase: FC<GoalBannerBaseProps> = (props) => {
   return (
     <div className={cnGoalBannerBase(undefined, [props.className])}>
-      GoalBannerBase
+      {props.children}
     </div>
   );
 };

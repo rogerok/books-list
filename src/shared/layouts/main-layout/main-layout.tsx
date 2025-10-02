@@ -19,7 +19,7 @@ export const MainLayout: FC<MainLayoutProps> = (props) => {
     <div className={cnMainLayout(undefined, [props.className])}>
       <Navbar
         className={cnMainLayout('Navbar')}
-        goalBanner={<GoalBanner />}
+        goalBanner={<GoalBanner variant={'small'} />}
         userMenu={<UserMenu />}
       />
 

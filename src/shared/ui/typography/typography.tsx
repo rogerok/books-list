@@ -9,6 +9,7 @@ import {
 
 type TypographyVariant =
   | 'accent'
+  | 'accent2'
   | 'dark'
   | 'light'
   | 'lightDark'
