@@ -76,7 +76,9 @@ export const HomePage = () => {
       </VStack>
 
       <section className={cnHomePage('Activities')}>
-        <h2>Последние активности</h2>
+        <Typography as={'h5'} size={'lg'} weight={'semibold'}>
+          Последние активности
+        </Typography>
         <LastActivity />
       </section>
     </section>

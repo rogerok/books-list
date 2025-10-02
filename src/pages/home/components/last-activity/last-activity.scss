@@ -6,14 +6,20 @@
 
 
   &-ItemInner {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+
     padding: 1rem;
+
     background: rgb(255 255 255 / 60%);
 
     &::before {
       content: "•";
-      display: inline-block;
-      margin-right: 12px;
+       width: 0.5rem;
     }
+
+
 
     &_status_toRead::before {
       color: var(--orange-400);
@@ -26,5 +32,12 @@
     &_status_reading::before {
       color: var(--blue-400);
     }
+  }
+
+  &-Rating {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    margin-left: auto;
   }
 }
