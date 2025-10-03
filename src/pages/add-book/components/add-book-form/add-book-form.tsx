@@ -7,10 +7,11 @@ import { SelectField } from '@shared/components/select-field/select-field.tsx';
 import { TextField } from '@shared/components/text-field/text-field.tsx';
 import { ColorConstant } from '@shared/constants/style-system/colors.ts';
 import { MobxForm } from '@shared/lib/mobx/mobx-form/mobx-form.ts';
+import { Button } from '@shared/ui/button/button.tsx';
 import { Card } from '@shared/ui/card/card.tsx';
-import { HStack } from '@shared/ui/hstack/hstack.tsx';
 import { IconComponent } from '@shared/ui/icon-component/icon-component.tsx';
 import { Typography } from '@shared/ui/typography/typography.tsx';
+import { observer } from 'mobx-react-lite';
 
 const cnAddBookForm = cn('AddBookForm');
 
@@ -27,13 +28,13 @@ const mockForm = new MobxForm({
   },
 });
 
-export const AddBookForm: FC<AddBookFormProps> = (props) => {
+export const AddBookForm: FC<AddBookFormProps> = observer((props) => {
   return (
     <Card
       className={cnAddBookForm(undefined, [props.className])}
       elevation={'md'}
     >
-      <HStack align={'center'} gap={'12'}>
+      <div className={cnAddBookForm('Logo')}>
         {/*TODO: вынести в отдельный компонент*/}
         <div className={cnAddBookForm('Icon')}>
           <IconComponent
@@ -50,15 +51,17 @@ export const AddBookForm: FC<AddBookFormProps> = (props) => {
             Пополните свою библиотеку
           </Typography>
         </div>
-      </HStack>
+      </div>
       <Form methods={mockForm}>
         <TextField
+          fullWidth
           label={'Название книги'}
           name={'name'}
           placeholder={'Введите название книги'}
           required
         />
         <TextField
+          fullWidth
           label={'Автор'}
           name={'author'}
           placeholder={'Введите имя автора'}
@@ -77,7 +80,29 @@ export const AddBookForm: FC<AddBookFormProps> = (props) => {
           required
           valueField={'id'}
         />
+        <div className={cnAddBookForm('CoverField')}>
+          <TextField
+            fullWidth
+            label={'Обложка книги'}
+            name={'cover'}
+            placeholder={'Вставьте ссылку на изображение'}
+            required
+          />
+          <Button
+            addonLeft={
+              <IconComponent
+                color={ColorConstant.Neutral550}
+                name={'searchIcon'}
+                size={'xxs'}
+              />
+            }
+            className={cnAddBookForm('SearchButton')}
+            variant={'outline'}
+          >
+            Найти
+          </Button>
+        </div>
       </Form>
     </Card>
   );
-};
+});

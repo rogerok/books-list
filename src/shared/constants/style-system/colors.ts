@@ -17,11 +17,12 @@ export const ColorConstant = {
   // Neutral / Gray scale
   Neutral100: 'neutral-100',
   Neutral1000: 'neutral-1000',
+  Neutral1100: 'neutral-1100',
   Neutral200: 'neutral-200',
   Neutral300: 'neutral-300',
   Neutral400: 'neutral-400',
   Neutral500: 'neutral-500',
-
+  Neutral550: 'neutral-500',
   Neutral600: 'neutral-600',
   Neutral700: 'neutral-700',
   Neutral800: 'neutral-800',

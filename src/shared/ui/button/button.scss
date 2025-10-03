@@ -2,6 +2,7 @@
   $parent: &;
 
   display: flex;
+  gap: 0.5rem;
   align-items: center;
   justify-content: center;
 
@@ -53,6 +54,18 @@
       background: none;
       box-shadow: none;
     }
+
+    &_outline {
+      width: 101px;
+      height: 36px;
+      border: 1px solid rgb(0 0 0 / 10%);
+      border-radius: 8px;
+
+      background: transparent;
+      box-shadow: none;
+    }
+
+
   }
 
   &_fullWidth {
