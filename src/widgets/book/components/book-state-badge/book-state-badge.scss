@@ -1,0 +1,20 @@
+.BookStateBadge {
+  &-Title {
+    &_state {
+      &_reading {
+        color: var(--blue-300)
+      }
+
+      &_read {
+        color: var(--green-700)
+
+      }
+
+      &_toRead {
+        color: var(--orange-300)
+
+      }
+    }
+
+  }
+}

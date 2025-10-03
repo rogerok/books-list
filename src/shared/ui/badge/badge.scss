@@ -15,6 +15,18 @@
     &_green-200 {
       background: var(--green-200);
     }
+
+    &_neutral-150 {
+      background: var(--neutral-150);
+    }
+
+    &_blue-100 {
+      background: var(--blue-100);
+    }
+
+    &_orange-100 {
+      background: var(--orange-100);
+    }
   }
 
   &_rounded {
@@ -53,6 +65,10 @@
     &_xl {
       width: 3.5rem;
       height: 3.5rem;
+    }
+
+    &_unset {
+      padding: 0.25rem 0.5rem;
     }
   }
 }

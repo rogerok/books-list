@@ -1,6 +1,7 @@
 import './icon-component.scss';
 
 import type { ColorConstantValuesType } from '@shared/constants/style-system/colors';
+import type { IconsNamesType } from '@shared/types/icons.ts';
 
 import { cn } from '@bem-react/classname';
 import * as Icons from '@shared/assets/icons';
@@ -44,7 +45,7 @@ export type IconSizes = keyof typeof IconSizesMap;
 
 interface IconComponentBaseProps
   extends Omit<SVGProps<SVGSVGElement>, 'onClick'> {
-  name: keyof typeof Icons;
+  name: IconsNamesType;
   className?: string;
   color?: ColorConstantValuesType;
   dataTestId?: string;

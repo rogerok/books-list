@@ -1,0 +1,27 @@
+.BookWidgetHero {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+
+  width: 100%;
+  padding: 2rem;
+
+  &-Cover {
+    border-radius: 10px;
+  }
+
+  &-Info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7512rem;
+    margin-bottom: 3.25rem;
+  }
+
+  &-Genre {
+    padding: 0.25rem 0.5rem;
+  }
+
+  &-GenreTitle {
+    color: var(--neutral-1100);
+  }
+}
