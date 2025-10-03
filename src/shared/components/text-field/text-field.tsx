@@ -17,7 +17,7 @@ interface TextFieldProps extends HTMLInputProps {
 }
 
 export const TextField: FC<TextFieldProps> = observer((props) => {
-  const { name, type = 'text', ...rest } = props;
+  const { className, name, type = 'text', ...rest } = props;
   const { control } = useFormContext();
 
   return (
@@ -28,7 +28,7 @@ export const TextField: FC<TextFieldProps> = observer((props) => {
         <Input
           {...rest}
           {...field}
-          className={props.className}
+          className={className}
           error={fieldState.error?.message}
           type={type}
         />

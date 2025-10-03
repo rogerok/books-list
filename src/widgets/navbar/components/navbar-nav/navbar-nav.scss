@@ -26,8 +26,8 @@
 
     &.active {
       #{$parent}-BooksCount {
-        color: var(--neutral-200);
-        background: var(--green-600)
+        color: var(--green-400);
+        background: var(--green-100)
       }
     }
 

@@ -7,6 +7,7 @@ export { default as burgerMenuIcon } from './burger-menu.svg?react';
 export { default as cancelIcon } from './cancel.svg?react';
 export { default as createAccountIcon } from './create-account.svg?react';
 export { default as doneIcon } from './done.svg?react';
+export { default as dropdownArrowIcon } from './dropdown-arrow.svg?react';
 export { default as goalIcon } from './goal.svg?react';
 export { default as homeIcon } from './home.svg?react';
 export { default as pencilIcon } from './pencil.svg?react';

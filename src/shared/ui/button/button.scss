@@ -2,6 +2,7 @@
   $parent: &;
 
   display: flex;
+  gap: 0.5rem;
   align-items: center;
   justify-content: center;
 
@@ -21,7 +22,8 @@
 
 
   &-Content {
-    display: inline-flex;
+    display: flex;
+    gap: 0.5rem;
     align-items: center;
     justify-content: center;
 
@@ -29,6 +31,14 @@
 
     transition: opacity 0.2s ease;
   }
+
+  .Button-AddonLeft,
+  .Button-AddonRight {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
 
   &_variant {
     &_primary {
@@ -53,6 +63,18 @@
       background: none;
       box-shadow: none;
     }
+
+    &_outline {
+      width: 101px;
+      height: 36px;
+      border: 1px solid rgb(0 0 0 / 10%);
+      border-radius: 8px;
+
+      background: transparent;
+      box-shadow: none;
+    }
+
+
   }
 
   &_fullWidth {

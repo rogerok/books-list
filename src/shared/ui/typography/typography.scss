@@ -62,6 +62,10 @@
   }
 
   &_size {
+    &_4xs {
+      font: var(--font-4xs);
+    }
+
     &_3xs {
       font: var(--font-3xs);
     }

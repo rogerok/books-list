@@ -16,6 +16,10 @@
     }
   }
 
+  &-LabelText {
+    line-height: 1;
+  }
+
   &-AddonLeft {
     position: absolute;
     top: calc(50% + 4px);

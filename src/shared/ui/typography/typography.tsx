@@ -28,6 +28,7 @@ type TypographySize =
   | '2xs'
   | '3xl'
   | '3xs'
+  | '4xs'
   | 'lg'
   | 'md'
   | 'sm'

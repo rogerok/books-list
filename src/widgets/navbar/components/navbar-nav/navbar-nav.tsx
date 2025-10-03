@@ -15,16 +15,34 @@ interface NavbarNavProps {
 export const NavbarNav: FC<NavbarNavProps> = (props) => {
   return (
     <nav className={cnNavbarNav(undefined, [props.className])}>
-      <AppLink className={cnNavbarNav('Link')} to={routes.home()}>
+      <AppLink
+        activeOptions={{
+          exact: true,
+        }}
+        className={cnNavbarNav('Link')}
+        to={routes.home()}
+      >
         <IconComponent name={'homeIcon'} size={'xs'} />
         <span>Главная</span>
       </AppLink>
-      <AppLink className={cnNavbarNav('Link')} to={routes.books()}>
+      <AppLink
+        activeOptions={{
+          exact: true,
+        }}
+        className={cnNavbarNav('Link')}
+        to={routes.books()}
+      >
         <IconComponent name={'booksIcon'} size={'xs'} />
         <span>Моя библиотека</span>
         <span className={cnNavbarNav('BooksCount')}>4</span>
       </AppLink>
-      <AppLink className={cnNavbarNav('Link')} to={routes.addBook()}>
+      <AppLink
+        activeOptions={{
+          exact: true,
+        }}
+        className={cnNavbarNav('Link')}
+        to={routes.addBook()}
+      >
         <IconComponent name={'plusIcon'} size={'xs'} />
         <span>Добавить книгу</span>
       </AppLink>

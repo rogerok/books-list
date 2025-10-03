@@ -1,7 +1,7 @@
 import './button.scss';
 
 import { cn } from '@bem-react/classname';
-import { type ButtonHTMLAttributes, type FC } from 'react';
+import { type ButtonHTMLAttributes, type FC, type ReactNode } from 'react';
 
 const cnButton = cn('Button');
 
@@ -9,10 +9,13 @@ type ButtonVariantsType =
   | 'accent'
   | 'clear'
   | 'light'
+  | 'outline'
   | 'primary'
   | 'secondary';
 
 export type ButtonProps = {
+  addonLeft?: ReactNode;
+  addonRight?: ReactNode;
   className?: string;
   disabled?: boolean;
   fullWidth?: boolean;
@@ -22,6 +25,8 @@ export type ButtonProps = {
 
 export const Button: FC<ButtonProps> = (props) => {
   const {
+    addonLeft,
+    addonRight,
     children,
     className,
     disabled,
@@ -46,8 +51,17 @@ export const Button: FC<ButtonProps> = (props) => {
       disabled={disabled}
       type={type}
     >
-      <span className={cnButton('Content')}>{children}</span>
-      {isLoading && <span className={cnButton('Spinner')} />}
+      <p className={cnButton('Content')}>
+        {addonLeft && (
+          <span className={cnButton('AddonLeft')}>{addonLeft}</span>
+        )}
+
+        <span>{children}</span>
+        {addonRight && (
+          <span className={cnButton('AddonRight')}>{addonRight}</span>
+        )}
+        {isLoading && <span className={cnButton('Spinner')} />}
+      </p>
     </button>
   );
 };

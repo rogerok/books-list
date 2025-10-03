@@ -1,0 +1,18 @@
+@use '../../../../shared/styles/breakpoints' as b;
+
+.FormTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: center;
+
+  &-Title {
+    font: 19px / 1.46 var(--font-family);
+    font-weight: 600;
+  }
+
+  @media (min-width: b.$md-breakpoint) {
+    display: flex;
+    flex-direction: row;
+  }
+}

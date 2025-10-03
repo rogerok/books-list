@@ -1,0 +1,55 @@
+@use '../../styles/breakpoints' as b;
+
+.Dropzone {
+  $parent: &;
+
+  border: 2px dashed var(--neutral-250);
+  border-radius: 10px;
+
+  &-Dropzone {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+
+    padding: 1.625rem;
+    border-radius: 10px;
+
+
+    background: var(--white);
+
+
+    &_dragActive {
+      filter: var(--hover-brightness);
+
+    }
+
+
+    @media (hover: hover) {
+      &:hover {
+        cursor: pointer;
+        filter: var(--hover-brightness);
+      }
+
+      &_loading {
+        &:hover {
+          cursor: wait;
+        }
+      }
+    }
+
+  }
+
+
+  &-Icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 0.5rem;
+    border-radius: 50%;
+
+    background: var(--green-100);
+  }
+}
