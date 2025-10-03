@@ -39,10 +39,8 @@ type SelectProps<T extends SelectOptionType> = {
   'onChange' | 'options' | 'value'
 >;
 
-class ColourOption {}
-
-const DropdownIndicator = (
-  props: DropdownIndicatorProps<ColourOption, true>,
+const DropdownIndicator = <T,>(
+  props: DropdownIndicatorProps<T, false, GroupBase<T>>,
 ) => {
   return (
     <components.DropdownIndicator {...props}>
