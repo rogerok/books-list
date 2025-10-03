@@ -1,122 +1,37 @@
 @use '../../../shared/styles/breakpoints' as b;
 
 .BookDetailsPage {
-  display: grid;
-  grid-template-rows: auto auto auto auto;
-  gap: 1.5rem;
-
-  width: 100%;
-  padding: 2rem;
-
-
-  &-Cover {
-    width: 120px;
-    height: auto;
-    border-radius: 0.75rem;
-    object-fit: cover;
-  }
-
-  &-Info {
-    display: flex;
+  &-Cards {
     flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  &-Title {
-    font: var(--font-xl);
-    font-weight: 600;
-  }
-
-  &-Author {
-    font: var(--font-sm);
-    color: var(--neutral-600);
-  }
-
-  &-Genre {
-    width: fit-content;
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.25rem;
-
-    font: var(--font-xs);
-    color: var(--neutral-500);
-
-    background: var(--neutral-100);
-  }
-
-  &-Status {
-    padding: 0.25rem 0.75rem;
-    border-radius: 6px;
-
-    font: var(--font-xs);
-    color: var(--blue-600);
-
-    background: var(--blue-100);
-  }
-
-  &-Grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
   }
 
   &-Card {
+    width: 100%;
     padding: 1rem;
     border-radius: 0.75rem;
+
     background: white;
     box-shadow: var(--shadow-sm);
   }
 
-  &-Progress {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  &-ProgressBar {
-    overflow: hidden;
-
+  &-Col {
     width: 100%;
-    height: 8px;
-    border-radius: 4px;
-
-    background: var(--neutral-200);
+    padding-bottom: 3.2rem;
   }
 
-  &-ProgressFill {
-    height: 100%;
-    background: var(--blue-500);
-  }
 
-  &-Button {
-    padding: 0.75rem;
-    border-radius: 0.75rem;
-
-    font-weight: 600;
-    color: white;
-    text-align: center;
-
-    background: linear-gradient(90deg, var(--green-200) 0%, var(--green-600) 100%);
-    box-shadow: var(--shadow-md);
-  }
 }
 
-/* Адаптив */
-@media (min-width: b.$md-breakpoint) {
-  .BooksPage {
-    grid-template-rows: auto auto auto auto;
-
-    &-Header {
-      grid-template-columns: 200px 1fr;
+@media (min-width: b.$lg-breakpoint) {
+  .BookDetailsPage {
+    &-Cards {
+      display: flex;
+      flex-flow: row nowrap;
+      gap: 2rem;
     }
 
-    &-Grid {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    &-Progress {
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
+    &-Col {
+      width: 50%
     }
   }
 }
