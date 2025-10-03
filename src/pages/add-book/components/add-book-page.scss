@@ -1,0 +1,19 @@
+@use '../../../shared/styles/breakpoints' as b;
+
+.AddBookPage {
+  &-Content {
+    display: flex;
+    flex-direction: column;
+    gap: 3.2rem;
+    width: 100%;
+  }
+}
+
+@media (min-width: b.$md-breakpoint) {
+  .AddBookPage {
+    &-Content {
+      width: 608px;
+      max-width: 100%;
+    }
+  }
+}

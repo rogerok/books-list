@@ -11,6 +11,13 @@
   backdrop-filter: blur(8px);
 
 
+  &-Form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+
   &-Icon {
     display: flex;
     flex-direction: column;
@@ -51,14 +58,16 @@
     color: var(--neutral-550);
   }
 
+  &-SubmitButton {
+    opacity: 0.5;
+    background: linear-gradient(90deg, var(--green-200) 0%, var(--green-600) 100%);
+    box-shadow: var(--shadow-md);
+  }
+
 }
 
 @media (min-width: b.$md-breakpoint) {
   .AddBookForm {
-    width: 608px;
-    max-width: 100%;
-
-
     &-Logo {
       display: flex;
       flex-direction: row;
@@ -71,6 +80,5 @@
       align-items: center;
     }
   }
-
 
 }

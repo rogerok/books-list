@@ -9,7 +9,7 @@ const cnProgressBar = cn('ProgressBar');
 interface ProgressBarProps extends ProgressHTMLAttributes<HTMLProgressElement> {
   className?: string;
   size?: 'medium' | 'small';
-  variant?: 'primary' | 'secondary';
+  variant?: 'primary' | 'purple' | 'secondary';
 }
 
 export const ProgressBar: FC<ProgressBarProps> = (props) => {

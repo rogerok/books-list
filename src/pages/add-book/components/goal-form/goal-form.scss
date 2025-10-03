@@ -1,0 +1,53 @@
+@use '../../../../shared/styles/breakpoints' as b;
+
+.GoalForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  width: 100%;
+  padding: 2rem;
+
+  background: linear-gradient(90deg, var(--neutral-100) 0%, var(--blue-50) 100%);
+
+  &-SubmitButton {
+    flex-grow: 1;
+    align-self: flex-end;
+    color: var(--neutral-450);
+  }
+
+  &-GoalField {
+    display: flex;
+    flex-flow: column wrap;
+    gap: 1rem;
+    align-items: flex-end;
+  }
+
+  &-Progress {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+
+    padding: 1rem;
+  }
+
+}
+
+
+@media (min-width: b.$md-breakpoint) {
+  .GoalForm {
+    &-Logo {
+      display: flex;
+      flex-direction: row;
+    }
+
+    &-GoalField {
+      display: flex;
+      flex-flow: row nowrap;
+      gap: 0.5rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+}

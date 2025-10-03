@@ -2,9 +2,11 @@
 
 :root {
   --font-family: 'Inter';
+  --font-size-4xs: #{h.to-rem(11)};
+  --font-4xs: var(--font-size-4xs) / 1.35 var(--font-family);
 
   --font-size-3xs: #{h.to-rem(12)};
-  --font-3xs: var(--font-size-3xs) /1.33 var(--font-family);
+  --font-3xs: var(--font-size-3xs) / 1.33 var(--font-family);
 
   --font-size-2xs: #{h.to-rem(13)};
   --font-2xs: var(--font-size-2xs) / 1.44 var(--font-family);

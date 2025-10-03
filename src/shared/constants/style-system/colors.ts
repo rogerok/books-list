@@ -19,6 +19,7 @@ export const ColorConstant = {
   Neutral1000: 'neutral-1000',
   Neutral1100: 'neutral-1100',
   Neutral200: 'neutral-200',
+  Neutral250: 'neutral-250',
   Neutral300: 'neutral-300',
   Neutral400: 'neutral-400',
   Neutral500: 'neutral-500',

@@ -2,6 +2,25 @@
   border-radius: 14px;
   backdrop-filter: blur(8px);
 
+  &_rounded {
+    &_8 {
+      border-radius: 8px
+    }
+
+    &_10 {
+      border-radius: 10px;
+    }
+
+    &_14 {
+      border-radius: 14px;
+    }
+
+    &_16 {
+      border-radius: 16px;
+    }
+
+  }
+
   &_variant {
     &_primary {
       background: rgb(255 255 255 / 80%);
@@ -9,6 +28,10 @@
 
     &_secondary {
       background: linear-gradient(90deg, var(--blue-50) 0%, var(--blue-50) 100%);
+    }
+
+    &_light {
+      background: rgb(255 255 255 / 60%);
     }
   }
 

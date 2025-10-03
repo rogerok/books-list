@@ -51,11 +51,17 @@ export const Button: FC<ButtonProps> = (props) => {
       disabled={disabled}
       type={type}
     >
-      {addonLeft && <div className={cnButton('AddonLeft')}>{addonLeft}</div>}
+      <p className={cnButton('Content')}>
+        {addonLeft && (
+          <span className={cnButton('AddonLeft')}>{addonLeft}</span>
+        )}
 
-      <span className={cnButton('Content')}>{children}</span>
-      {isLoading && <span className={cnButton('Spinner')} />}
-      {addonRight && <div className={cnButton('AddonRight')}>{addonRight}</div>}
+        <span>{children}</span>
+        {addonRight && (
+          <span className={cnButton('AddonRight')}>{addonRight}</span>
+        )}
+        {isLoading && <span className={cnButton('Spinner')} />}
+      </p>
     </button>
   );
 };

@@ -63,7 +63,12 @@ export const Input: FC<InputProps> = (props) => {
     >
       {label && (
         <label className={cnInput('Label')} htmlFor={id}>
-          <Typography size={'xs'} variant={'dark'} weight={'medium'}>
+          <Typography
+            className={cnInput('LabelText')}
+            size={'xs'}
+            variant={'dark'}
+            weight={'medium'}
+          >
             {label} {required ? ' *' : ''}
           </Typography>
         </label>

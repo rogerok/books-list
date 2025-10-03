@@ -22,7 +22,8 @@
 
 
   &-Content {
-    display: inline-flex;
+    display: flex;
+    gap: 0.5rem;
     align-items: center;
     justify-content: center;
 
@@ -30,6 +31,14 @@
 
     transition: opacity 0.2s ease;
   }
+
+  .Button-AddonLeft,
+  .Button-AddonRight {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
 
   &_variant {
     &_primary {

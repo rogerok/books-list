@@ -1,0 +1,58 @@
+.Badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &_background {
+    &_purple-100 {
+      background: var(--purple-100);
+    }
+
+    &_green-100 {
+      background: var(--green-100);
+    }
+
+    &_green-200 {
+      background: var(--green-200);
+    }
+  }
+
+  &_rounded {
+    &_8 {
+      border-radius: 8px
+    }
+
+    &_10 {
+      border-radius: 10px;
+    }
+
+    &_14 {
+      border-radius: 14px;
+    }
+
+    &_16 {
+      border-radius: 16px;
+    }
+
+    &_circle {
+      border-radius: 50%;
+    }
+  }
+
+  &_size {
+    &_md {
+      width: 2.25rem;
+      height: 2.25rem;
+    }
+
+    &_lg {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+
+    &_xl {
+      width: 3.5rem;
+      height: 3.5rem;
+    }
+  }
+}

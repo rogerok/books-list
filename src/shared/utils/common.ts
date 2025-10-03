@@ -14,3 +14,7 @@ export const callFunction = <TValue, TArgs extends any[] = []>(
 export const isObject = (value: unknown): value is Record<string, unknown> => {
   return Object.prototype.toString.call(value) === '[object Object]';
 };
+
+export const capitalizeFirstLetter = (str: string): string => {
+  return str.length ? str.charAt(0).toUpperCase() + str.slice(1) : '';
+};
