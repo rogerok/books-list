@@ -56,17 +56,19 @@ export const SignInForm: FC<SignInFormProps> = observer((props) => {
           placeholder={'Введите пароль'}
         />
         <Button
+          addonLeft={
+            <IconComponent
+              color={ColorConstant.White}
+              name={'signInIcon'}
+              size={'xxs'}
+            />
+          }
           className={cnSignInForm('FormButton')}
           disabled={form.isSubmitting}
           fullWidth
           type={'submit'}
           variant={'primary'}
         >
-          <IconComponent
-            color={ColorConstant.White}
-            name={'signInIcon'}
-            size={'xxs'}
-          />
           <Typography variant={'white'} weight={'medium'}>
             Войти
           </Typography>

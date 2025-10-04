@@ -11,7 +11,7 @@ const cnAddBookPage = cn('AddBookPage');
 
 export const AddBookPage: FC = () => {
   return (
-    <VStack align={'center'} as={'main'} className={cnAddBookPage()}>
+    <VStack align={'center'} as={'section'} className={cnAddBookPage()}>
       <div className={cnAddBookPage('Content')}>
         <AddBookForm />
         <Divider flexItem />

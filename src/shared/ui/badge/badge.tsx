@@ -9,11 +9,17 @@ const cnBadge = cn('Badge');
 type Rounded = '10' | '14' | '16' | '8' | 'circle';
 
 interface BadgeProps {
-  background: 'green-100' | 'green-200' | 'purple-100';
+  background:
+    | 'blue-100'
+    | 'green-100'
+    | 'green-200'
+    | 'neutral-150'
+    | 'orange-100'
+    | 'purple-100';
   children: ReactNode;
-  size: 'lg' | 'md' | 'xl';
   className?: string;
   rounded?: Rounded;
+  size?: 'lg' | 'md' | 'unset' | 'xl';
 }
 
 export const Badge: FC<BadgeProps> = (props) => {

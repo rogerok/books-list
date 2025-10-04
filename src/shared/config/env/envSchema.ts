@@ -2,10 +2,10 @@ import { z } from 'zod';
 
 export const EnvVarsSchema = z.object({
   VITE_SUPABASE_KEY: z.string({
-    error: 'Не задана переменная окружения VITE_SUPABASE_URL',
+    message: 'Не задана переменная окружения VITE_SUPABASE_URL',
   }),
   VITE_SUPABASE_URL: z.string({
-    error: 'Не задана переменная окружения VITE_SUPABASE_URL',
+    message: 'Не задана переменная окружения VITE_SUPABASE_URL',
   }),
 });
 

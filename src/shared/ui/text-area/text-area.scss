@@ -1,0 +1,83 @@
+.TextArea {
+  --icon-x-position: 3.4rem;
+
+  font: var(--font-size-xs);
+  color: var(--neutral-1000);
+
+  &_fullWidth {
+    width: 100%;
+  }
+
+  &-Inner {
+    position: relative;
+
+    &_fullWidth {
+      width: 100%;
+    }
+  }
+
+  &-LabelText {
+    line-height: 1;
+  }
+
+  &_disabled {
+    color: var(--neutral-500);
+  }
+
+  &-Input {
+    resize: none;
+
+    transform: var(--transition-1);
+
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+
+    font: var(--font-xs);
+    color: var(--neutral-1000);
+
+    background: var(--white);
+
+    &::placeholder {
+      font: var(--font-2xs);
+      color: var(--neutral-500);
+    }
+
+
+
+    &_fullWidth {
+      width: 100%;
+    }
+
+    &_hasValue,
+    &:active,
+    &:focus {
+      background: var(--blue-100);
+      outline: 2px solid var(--neutral-500);
+      box-shadow: var(--shadow-sm);
+    }
+
+    &_error {
+      outline: 2px solid var(--warn);
+
+      &:focus,
+      &._hasValue {
+        outline: 2px solid var(--warn);
+      }
+    }
+
+    &:disabled {
+      background: var(--neutral-300);
+    }
+
+    @media (hover: hover) {
+      &:not(:disabled, :focus):hover {
+        border-color: var(--neutral-500);
+      }
+    }
+  }
+
+  &-ErrorText {
+    color: var(--warn);
+  }
+}

@@ -1,11 +1,8 @@
+import { BookDetailsPage } from '@pages/book-details';
 import { createLazyFileRoute } from '@tanstack/react-router';
 
 export const Route = createLazyFileRoute(
   '/_protected/(dashboard)/books/$bookId',
 )({
-  component: RouteComponent,
+  component: BookDetailsPage,
 });
-
-function RouteComponent() {
-  return <div>Hello `_protected/(dashboard)/books/$bookId!`</div>;
-}

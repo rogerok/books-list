@@ -1,21 +1,22 @@
-import { Controller } from '@shared/lib/mobx/mobx-form/controller';
-import { useFormContext } from '@shared/lib/mobx/mobx-form/useFormContext.ts';
-import { Input } from '@shared/ui/input/input';
-import { observer } from 'mobx-react-lite';
-import { type ComponentProps, type FC } from 'react';
+import type { ComponentProps, FC } from 'react';
 
-type HTMLInputProps = Omit<
-  ComponentProps<typeof Input>,
+import { Controller } from '@shared/lib/mobx/mobx-form/controller.tsx';
+import { useFormContext } from '@shared/lib/mobx/mobx-form/useFormContext.ts';
+import { TextArea } from '@shared/ui/text-area/text-area.tsx';
+import { observer } from 'mobx-react-lite';
+
+type HTMLTextAreaProps = Omit<
+  ComponentProps<typeof TextArea>,
   'onChange' | 'readOnly' | 'value'
 >;
 
-interface TextFieldProps extends HTMLInputProps {
+interface TextAreaFieldProps extends HTMLTextAreaProps {
   name: string;
   className?: string;
 }
 
-export const TextField: FC<TextFieldProps> = observer((props) => {
-  const { className, name, type = 'text', ...rest } = props;
+export const TextAreaField: FC<TextAreaFieldProps> = observer((props) => {
+  const { className, name, ...rest } = props;
   const { control } = useFormContext();
 
   return (
@@ -23,12 +24,11 @@ export const TextField: FC<TextFieldProps> = observer((props) => {
       control={control}
       name={name}
       render={({ field, fieldState }) => (
-        <Input
+        <TextArea
           {...rest}
           {...field}
           className={className}
           error={fieldState.error?.message}
-          type={type}
         />
       )}
     />

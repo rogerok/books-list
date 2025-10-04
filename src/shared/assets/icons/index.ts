@@ -5,6 +5,7 @@ export { default as bookIcon } from './book.svg?react';
 export { default as booksIcon } from './books.svg?react';
 export { default as burgerMenuIcon } from './burger-menu.svg?react';
 export { default as cancelIcon } from './cancel.svg?react';
+export { default as clockIcon } from './clock.svg?react';
 export { default as createAccountIcon } from './create-account.svg?react';
 export { default as doneIcon } from './done.svg?react';
 export { default as dropdownArrowIcon } from './dropdown-arrow.svg?react';
