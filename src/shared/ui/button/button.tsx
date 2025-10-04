@@ -8,6 +8,7 @@ const cnButton = cn('Button');
 type ButtonVariantsType =
   | 'accent'
   | 'clear'
+  | 'dark'
   | 'light'
   | 'outline'
   | 'primary'

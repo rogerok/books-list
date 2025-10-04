@@ -1,4 +1,4 @@
-import './TextArea.scss';
+import './text-area.scss';
 
 import { cn } from '@bem-react/classname';
 import { Typography } from '@shared/ui/typography/typography';
@@ -70,7 +70,7 @@ export const TextArea: FC<TextAreaProps> = (props) => {
       <div className={cnTextArea('Inner', { fullWidth: fullWidth })}>
         <textarea
           {...restProps}
-          className={cnTextArea('TextArea', {
+          className={cnTextArea('Input', {
             error: !!error,
             fullWidth: fullWidth,
             hasValue: !!value,

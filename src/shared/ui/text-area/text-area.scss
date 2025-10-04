@@ -25,6 +25,8 @@
   }
 
   &-Input {
+    resize: none;
+
     transform: var(--transition-1);
 
     padding: 0.5rem 1rem;
