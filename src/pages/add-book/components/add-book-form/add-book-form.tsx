@@ -3,17 +3,17 @@ import type { FC } from 'react';
 import './add-book-form.scss';
 import { cn } from '@bem-react/classname';
 import { FormTitle } from '@pages/add-book/components/form-title/form-title.tsx';
+import { useAddBookStore } from '@pages/add-book/store/add-book-store.ts';
+import { DropzoneField } from '@shared/components/dropzone-field/dropzone-field.tsx';
 import { Form } from '@shared/components/form/form.tsx';
-import { SelectField } from '@shared/components/select-field/select-field.tsx';
 import { TextField } from '@shared/components/text-field/text-field.tsx';
 import { ColorConstant } from '@shared/constants/style-system/colors.ts';
-import { MobxForm } from '@shared/lib/mobx/mobx-form/mobx-form.ts';
 import { Button } from '@shared/ui/button/button.tsx';
 import { Card } from '@shared/ui/card/card.tsx';
-import { Dropzone } from '@shared/ui/dropzone/dropzone.tsx';
 import { IconComponent } from '@shared/ui/icon-component/icon-component.tsx';
 import { Typography } from '@shared/ui/typography/typography.tsx';
 import { VStack } from '@shared/ui/vstack/vstack.tsx';
+import { GenresSelect } from '@widgets/genres-select/genres-select.tsx';
 import { observer } from 'mobx-react-lite';
 
 const cnAddBookForm = cn('AddBookForm');
@@ -22,16 +22,8 @@ interface AddBookFormProps {
   className?: string;
 }
 
-const mockForm = new MobxForm({
-  defaultValues: {
-    author: '',
-    cover: '',
-    genre: '',
-    name: '',
-  },
-});
-
 export const AddBookForm: FC<AddBookFormProps> = observer((props) => {
+  const { form } = useAddBookStore();
   return (
     <Card
       className={cnAddBookForm(undefined, [props.className])}
@@ -50,7 +42,7 @@ export const AddBookForm: FC<AddBookFormProps> = observer((props) => {
         title={'Добавить новую книгу'}
       />
 
-      <Form className={cnAddBookForm('Form')} methods={mockForm}>
+      <Form className={cnAddBookForm('Form')} methods={form}>
         <TextField
           fullWidth
           label={'Название книги'}
@@ -65,19 +57,7 @@ export const AddBookForm: FC<AddBookFormProps> = observer((props) => {
           placeholder={'Введите имя автора'}
           required
         />
-        <SelectField
-          label={'Жанр'}
-          labelField={'label'}
-          name={'genre'}
-          options={[
-            { id: '1', label: 'Фантастика' },
-            { id: '2', label: 'Художка' },
-            { id: '3', label: 'Чёто ещё' },
-          ]}
-          placeholder={'Выберите жанр'}
-          required
-          valueField={'id'}
-        />
+        <GenresSelect />
         <div className={cnAddBookForm('CoverField')}>
           <TextField
             fullWidth
@@ -102,7 +82,7 @@ export const AddBookForm: FC<AddBookFormProps> = observer((props) => {
         </div>
 
         <VStack fullWidth gap={'12'}>
-          <Dropzone name={'cover'} />
+          <DropzoneField bucketName={'covers'} name={'cover'} />
           <Typography size={'3xs'} variant={'light'}>
             Загрузите файл изображения, вставьте ссылку или используйте кнопку
             &#34;Найти&#34;

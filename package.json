@@ -20,6 +20,7 @@
     "@tanstack/react-router-devtools": "^1.132.11",
     "mobx": "^6.15.0",
     "mobx-react-lite": "^4.1.1",
+    "nanoid": "^5.1.6",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-dropzone": "^14.3.8",

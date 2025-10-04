@@ -1,5 +1,6 @@
 import type { SignInRequestModel } from '@shared/models/auth.ts';
-import type { Session, Subscription, User } from '@supabase/supabase-js';
+import type { UserStore } from '@shared/stores/user-store/user-store.ts';
+import type { Session, Subscription } from '@supabase/supabase-js';
 
 import {
   getSessionRequest,
@@ -11,7 +12,7 @@ import { routes } from '@shared/config/router/routes.ts';
 import { Notifier } from '@shared/lib/notifier/notifier.ts';
 import { RequestStore } from '@shared/lib/request-store/request-store.ts';
 import { RouterController } from '@shared/lib/router/app-router.ts';
-import { makeAutoObservable, runInAction } from 'mobx';
+import { makeAutoObservable } from 'mobx';
 
 export class AuthStore {
   session: Session | null = null;
@@ -21,7 +22,10 @@ export class AuthStore {
 
   subscription: Subscription | undefined;
 
-  constructor(private router: RouterController) {
+  constructor(
+    private router: RouterController,
+    private user: UserStore,
+  ) {
     makeAutoObservable(
       this,
       {},
@@ -40,9 +44,8 @@ export class AuthStore {
       const subscription = apiClient.auth.onAuthStateChange(
         (_event, session) => {
           if (session) {
-            runInAction(() => {
-              this.session = session;
-            });
+            this.session = session;
+            this.user.fetchUser(session.user.id);
           } else {
             this.router.toSignIn();
             // TODO: maybe remove
@@ -89,10 +92,6 @@ export class AuthStore {
 
   get isSigningOut(): boolean {
     return this.signOutRequest.isLoading;
-  }
-
-  get user(): User | undefined {
-    return this.session?.user;
   }
 
   get userEmail(): string | undefined {
