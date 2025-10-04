@@ -46,7 +46,7 @@ export const Skeleton: FC<SkeletonProps> = memo((props) => {
   const baseStyles: CSSProperties = {
     borderRadius: variant === 'circle' ? `${width}px` : `${borderRadius}px`,
     height: `${height}px`,
-    maxWidth: `${width}px`,
+    width: `${width}px`,
     ...style,
   };
 

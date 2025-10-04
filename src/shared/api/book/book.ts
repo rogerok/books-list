@@ -6,10 +6,14 @@ import type {
 import { apiClient } from '@shared/api/client.ts';
 
 export const createUserBook = async (data: UserBookRequestModel) => {
-  return apiClient.from('userBooks').insert({
-    bookId: data.bookId,
-    userId: data.userId,
-  });
+  return apiClient
+    .from('userBooks')
+    .insert({
+      bookId: data.bookId,
+      status: data.status,
+      userId: data.userId,
+    })
+    .throwOnError();
 };
 
 export const createBook = async (data: BookCreateRequestModel) => {
@@ -22,5 +26,6 @@ export const createBook = async (data: BookCreateRequestModel) => {
       title: data.title,
     })
     .select('id')
-    .single();
+    .single()
+    .throwOnError();
 };

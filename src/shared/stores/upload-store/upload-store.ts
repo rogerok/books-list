@@ -1,12 +1,13 @@
-import { uploadFileRequest } from '@shared/api/upload/upload.ts';
+import { uploadFileRequest } from '@shared/api/storage/storage.ts';
+import { Notifier } from '@shared/lib/notifier/notifier.ts';
 import { RequestStore } from '@shared/lib/request-store/request-store.ts';
 import { makeAutoObservable } from 'mobx';
 import { nanoid } from 'nanoid';
 
 export class UploadStore {
   uploadRequest = new RequestStore(uploadFileRequest, {
-    onError: () => 'Ошибка загрузки файла',
-    onSuccess: () => 'Файл загружен',
+    onError: () => Notifier.error('Ошибка создания книги'),
+    onSuccess: () => Notifier.success('Файл загружен'),
   });
 
   constructor() {
@@ -34,8 +35,8 @@ export class UploadStore {
           file,
         );
 
-        if (status === 'success' && response?.data?.fullPath) {
-          onFileUploadSuccess(response.data.fullPath);
+        if (status === 'success' && response?.data?.path) {
+          onFileUploadSuccess(response.data.path);
         }
       }),
     );

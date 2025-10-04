@@ -7,7 +7,7 @@ import { AppImage } from '@shared/ui/app-image/app-image.tsx';
 import { Badge } from '@shared/ui/badge/badge.tsx';
 import { Card } from '@shared/ui/card/card.tsx';
 import { Typography } from '@shared/ui/typography/typography.tsx';
-import { BookStateBadge } from '@widgets/book/components/book-state-badge/book-state-badge.tsx';
+import { BookStatusBadge } from '@widgets/book/components/book-status-badge/book-status-badge.tsx';
 
 const cnBookWidgetHero = cn('BookWidgetHero');
 
@@ -50,7 +50,7 @@ export const BookWidgetHero: FC<BookWidgetHeroProps> = (props) => {
             {data.genre}
           </Typography>
         </Badge>
-        <BookStateBadge state={'read'} />
+        <BookStatusBadge status={'read'} />
       </div>
     </Card>
   );

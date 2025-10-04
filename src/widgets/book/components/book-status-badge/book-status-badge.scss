@@ -1,6 +1,6 @@
-.BookStateBadge {
+.BookStatusBadge {
   &-Title {
-    &_state {
+    &_status {
       &_reading {
         color: var(--blue-300)
       }

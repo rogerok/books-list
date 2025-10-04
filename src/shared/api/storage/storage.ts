@@ -7,3 +7,7 @@ export const uploadFileRequest = async (
 ) => {
   return apiClient.storage.from(bucket).upload(path, file);
 };
+
+export const getPublicUrl = async (bucketName: string, path: string) => {
+  return apiClient.storage.from(bucketName).getPublicUrl(path);
+};
