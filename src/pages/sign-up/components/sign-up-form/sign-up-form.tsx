@@ -68,16 +68,18 @@ export const SignUpForm: FC<SignUpFormProps> = observer((props) => {
           placeholder={'Повторите пароль'}
         />
         <Button
+          addonLeft={
+            <IconComponent
+              color={ColorConstant.White}
+              name={'createAccountIcon'}
+              size={'xxs'}
+            />
+          }
           className={cnSignUpForm('FormButton')}
           fullWidth
           type={'submit'}
           variant={'secondary'}
         >
-          <IconComponent
-            color={ColorConstant.White}
-            name={'createAccountIcon'}
-            size={'xxs'}
-          />
           <Typography variant={'white'} weight={'medium'}>
             Создать аккаунт
           </Typography>
