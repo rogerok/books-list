@@ -29,3 +29,13 @@ export const createBook = async (data: BookCreateRequestModel) => {
     .single()
     .throwOnError();
 };
+
+export const getBook = async (userId: string, bookId: string) => {
+  return apiClient
+    .from('viewUserBookDetails')
+    .select('*')
+    .eq('bookId', bookId)
+    .eq('userId', userId)
+    .single()
+    .throwOnError();
+};
