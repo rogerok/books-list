@@ -22,7 +22,7 @@ import { useRootStore } from '@shared/stores/root-store/root-store.ts';
 import { convertEmptyStringToNull } from '@shared/utils/converters.ts';
 import { makeAutoObservable, reaction } from 'mobx';
 
-class AddBookStore {
+export class AddBookStore {
   bookCreateRequest = new RequestStore(createBook);
   form = new MobxForm<BookCreateFormModel>({
     defaultValues: {
@@ -33,7 +33,7 @@ class AddBookStore {
       status: BookStatusEnumSchema.enum.toRead,
       title: '',
     },
-    onSubmit: (data) => this.submitForm(data, this.user.data?.id),
+    onSubmit: (data) => this.submitForm(data),
     resolver: zodResolver(BookCreateFormSchema),
   });
 
@@ -93,10 +93,7 @@ class AddBookStore {
     this.previewCoverUrl = url;
   }
 
-  async submitForm(
-    formData: BookCreateFormModel,
-    userId?: string,
-  ): Promise<void> {
+  async submitForm(formData: BookCreateFormModel): Promise<void> {
     const bookResp = await this.bookCreateRequest.execute({
       author: formData.author,
       coverUrl: this.previewCoverUrl,
@@ -104,11 +101,15 @@ class AddBookStore {
       title: formData.title,
     });
 
-    if (bookResp.status === 'success' && bookResp.response.data && userId) {
+    if (
+      bookResp.status === 'success' &&
+      bookResp.response.data &&
+      this.user.data?.id
+    ) {
       const userResp = await this.userBookCreateRequest.execute({
         bookId: bookResp.response.data.id,
         status: formData.status,
-        userId: userId,
+        userId: this.user.data?.id,
       });
 
       if (userResp.status === 'success') {

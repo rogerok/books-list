@@ -40,12 +40,12 @@ export class AuthStore {
 
     if (status === 'success' && response?.data.session) {
       this.session = response.data.session;
+      await this.user.fetchUser(this.session.user.id);
 
       const subscription = apiClient.auth.onAuthStateChange(
-        (_event, session) => {
+        async (_event, session) => {
           if (session) {
             this.session = session;
-            this.user.fetchUser(session.user.id);
           } else {
             this.router.toSignIn();
             // TODO: maybe remove

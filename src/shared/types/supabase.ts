@@ -45,6 +45,52 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
+      get_user_goal: {
+        Args: { puserid: string };
+        Returns: {
+          createdAt: string;
+          id: string;
+          readCount: number;
+          targetBooks: number;
+          targetDate: string;
+          updatedAt: string;
+          userId: string;
+        }[];
+      };
+      getgoalforyear: {
+        Args: { puserid: string };
+        Returns: {
+          createdat: string;
+          id: string;
+          targetbooks: number;
+          targetdate: string;
+          updatedat: string;
+          userid: string;
+        }[];
+      };
+      getGoalForYear: {
+        Args: { puserid: string };
+        Returns: {
+          createdAt: string;
+          id: string;
+          targetBooks: number;
+          targetDate: string;
+          updatedAt: string;
+          userId: string;
+        }[];
+      };
+      getgoalwithreadcount: {
+        Args: { puserid: string };
+        Returns: {
+          createdat: string;
+          id: string;
+          readcount: number;
+          targetbooks: number;
+          targetdate: string;
+          updatedat: string;
+          userid: string;
+        }[];
+      };
       getRecentRated: {
         Args: { plimit: number; puserid: string };
         Returns: {
@@ -57,12 +103,71 @@ export type Database = {
           userBookId: string;
         }[];
       };
+      getusergoal: {
+        Args: { puserid: string };
+        Returns: {
+          createdAt: string;
+          id: string;
+          readCount: number;
+          targetBooks: number;
+          targetDate: string;
+          updatedAt: string;
+          userId: string;
+        }[];
+      };
+      getUserGoal: {
+        Args: { inUserId: string };
+        Returns: {
+          createdAt: string;
+          id: string;
+          readCount: number;
+          targetBooks: number;
+          targetDate: string;
+          updatedAt: string;
+          userId: string;
+        }[];
+      };
+      getUserGoalProgress: {
+        Args: { puserid: string };
+        Returns: {
+          createdAt: string;
+          goalId: string;
+          isCompleted: boolean;
+          progressPercent: number;
+          readBooks: number;
+          targetBooks: number;
+          targetDate: string;
+          updatedAt: string;
+        }[];
+      };
       getUserStats: {
         Args: { puserid: string };
         Returns: {
-          readCount: number;
-          readingCount: number;
-          toReadCount: number;
+          read: number;
+          reading: number;
+          toRead: number;
+        }[];
+      };
+      upsertgoalforyear: {
+        Args: { ptargetbooks: number; puserid: string };
+        Returns: {
+          createdat: string;
+          id: string;
+          targetbooks: number;
+          targetdate: string;
+          updatedat: string;
+          userid: string;
+        }[];
+      };
+      upsertGoalForYear: {
+        Args: { ptargetbooks: number; puserid: string };
+        Returns: {
+          createdAt: string;
+          id: string;
+          targetBooks: number;
+          targetDate: string;
+          updatedAt: string;
+          userId: string;
         }[];
       };
     };

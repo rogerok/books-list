@@ -9,11 +9,11 @@ export const UserCreateRequestSchema = z.object({
 
 export type UserCreateRequestModel = z.infer<typeof UserCreateRequestSchema>;
 
-export const UserGetRequestSchema = z.object({
+export const UserResponseSchema = z.object({
   createdAt: z.string().nullable(),
   email: EmailSchema,
   id: z.string(),
   name: z.string().min(3).max(255),
 });
 
-export type UserGetRequestModel = z.infer<typeof UserGetRequestSchema>;
+export type UserResponseModel = z.infer<typeof UserResponseSchema>;

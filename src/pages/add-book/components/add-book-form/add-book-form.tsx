@@ -1,7 +1,6 @@
-import type { FC } from 'react';
+import { cn } from '@bem-react/classname';
 
 import './add-book-form.scss';
-import { cn } from '@bem-react/classname';
 import { BookStatusSelect } from '@pages/add-book/components/add-book-form/book-status-select.tsx';
 import { GenresSelect } from '@pages/add-book/components/add-book-form/genres-select.tsx';
 import { FormTitle } from '@pages/add-book/components/form-title/form-title.tsx';
@@ -20,6 +19,7 @@ import { Skeleton } from '@shared/ui/skeleton/skeleton.tsx';
 import { Typography } from '@shared/ui/typography/typography.tsx';
 import { VStack } from '@shared/ui/vstack/vstack.tsx';
 import { observer } from 'mobx-react-lite';
+import { type FC } from 'react';
 
 const cnAddBookForm = cn('AddBookForm');
 

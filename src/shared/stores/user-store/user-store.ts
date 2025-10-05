@@ -1,11 +1,11 @@
-import type { UserGetRequestModel } from '@shared/models/user.ts';
+import type { UserResponseModel } from '@shared/models/user.ts';
 
 import { getUSer } from '@shared/api/user/user.ts';
 import { RequestStore } from '@shared/lib/request-store/request-store.ts';
 import { makeAutoObservable } from 'mobx';
 
 export class UserStore {
-  data: UserGetRequestModel | null = null;
+  data: UserResponseModel | null = null;
 
   getUserRequest = new RequestStore(getUSer);
 
@@ -26,6 +26,10 @@ export class UserStore {
           }
         : null;
     }
+  }
+
+  get id() {
+    return this.data?.id ?? null;
   }
 
   get isLoading(): boolean {
