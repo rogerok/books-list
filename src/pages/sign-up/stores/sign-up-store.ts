@@ -8,10 +8,8 @@ import {
 import { signUpRequest } from '@shared/api/auth/auth.ts';
 import { userCreate } from '@shared/api/user/user.ts';
 import { MobxForm } from '@shared/lib/mobx/mobx-form/mobx-form.ts';
-import { createStoreContext } from '@shared/lib/mobx/store-factory.tsx';
 import { Notifier } from '@shared/lib/notifier/notifier.ts';
 import { RequestStore } from '@shared/lib/request-store/request-store.ts';
-import { useRootStore } from '@shared/stores/root-store/root-store.ts';
 import { makeAutoObservable } from 'mobx';
 
 export class SignUpStore {
@@ -72,13 +70,3 @@ export class SignUpStore {
     }
   }
 }
-
-const { createProvider, useStore } = createStoreContext<SignUpStore>();
-
-export const useSignUpStore = useStore;
-
-export const SignUpStoreProvider = createProvider(() => {
-  const { auth } = useRootStore();
-
-  return new SignUpStore(auth);
-});
