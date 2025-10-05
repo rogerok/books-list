@@ -1,11 +1,12 @@
 import { cn } from '@bem-react/classname';
-import { useSignUpStore } from '@pages/sign-up/stores/sign-up-store.ts';
+import { SignUpStore } from '@pages/sign-up/stores/sign-up-store.ts';
 import { Form } from '@shared/components/form/form.tsx';
 import { TextField } from '@shared/components/text-field/text-field.tsx';
 
 import './sign-up-form.scss';
 import { routes } from '@shared/config/router/routes.ts';
 import { ColorConstant } from '@shared/constants/style-system/colors.ts';
+import { useRootStore } from '@shared/stores/root-store/root-store.ts';
 import { AppLink } from '@shared/ui/app-link/app-link.tsx';
 import { Button } from '@shared/ui/button/button.tsx';
 import { Card } from '@shared/ui/card/card.tsx';
@@ -16,7 +17,7 @@ import { Loader } from '@shared/ui/Loader/loader.tsx';
 import { Typography } from '@shared/ui/typography/typography.tsx';
 import { VStack } from '@shared/ui/vstack/vstack.tsx';
 import { observer } from 'mobx-react-lite';
-import { type FC } from 'react';
+import { type FC, useState } from 'react';
 
 const cnSignUpForm = cn('SignUpForm');
 
@@ -26,7 +27,11 @@ interface SignUpFormProps {
 
 export const SignUpForm: FC<SignUpFormProps> = observer((props) => {
   const { className } = props;
-  const { form } = useSignUpStore();
+  const { auth } = useRootStore();
+
+  const [store] = useState(() => new SignUpStore(auth));
+
+  const { form } = store;
 
   return (
     <Card className={cnSignUpForm(undefined, [className])} elevation={'sm'}>

@@ -1,3 +1,4 @@
+import type { GoalStore } from '@shared/stores/goal-store/goal-store.ts';
 import type { UserStore } from '@shared/stores/user-store/user-store.ts';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -6,19 +7,14 @@ import { getPublicUrl } from '@shared/api/storage/storage.ts';
 import { routes } from '@shared/config/router/routes.ts';
 import { BucketsNames } from '@shared/constants/storage.ts';
 import { MobxForm } from '@shared/lib/mobx/mobx-form/mobx-form.ts';
-import { createStoreContext } from '@shared/lib/mobx/store-factory.tsx';
 import { Notifier } from '@shared/lib/notifier/notifier.ts';
 import { RequestStore } from '@shared/lib/request-store/request-store.ts';
-import {
-  AppRouter,
-  type RouterController,
-} from '@shared/lib/router/app-router.ts';
+import { type RouterController } from '@shared/lib/router/app-router.ts';
 import {
   type BookCreateFormModel,
   BookCreateFormSchema,
   BookStatusEnumSchema,
 } from '@shared/models/book.ts';
-import { useRootStore } from '@shared/stores/root-store/root-store.ts';
 import { convertEmptyStringToNull } from '@shared/utils/converters.ts';
 import { makeAutoObservable, reaction } from 'mobx';
 
@@ -52,6 +48,7 @@ export class AddBookStore {
   constructor(
     private user: UserStore,
     private router: RouterController,
+    private goal: GoalStore,
   ) {
     makeAutoObservable(
       this,
@@ -113,6 +110,8 @@ export class AddBookStore {
       });
 
       if (userResp.status === 'success') {
+        void this.goal.fetchGoal();
+
         this.router.navigate({
           params: {
             bookId: bookResp.response.data.id,
@@ -123,13 +122,3 @@ export class AddBookStore {
     }
   }
 }
-
-const { createProvider, useStore } = createStoreContext<AddBookStore>();
-
-export const useAddBookStore = useStore;
-
-export const AddBookStoreProvider = createProvider(() => {
-  const { user } = useRootStore();
-
-  return new AddBookStore(user, AppRouter);
-});

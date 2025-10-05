@@ -57,7 +57,7 @@ export const GoalWidgetLarge: FC<GoalWidgetLargeProps> = observer((props) => {
           />
           <HStack as={'p'} flexJustify={'between'}>
             <Typography size={'xs'} variant={'secondary'}>
-              2 {pluralizeBooks(goal.data.readCount)}{' '}
+              {goal.data.readCount} {pluralizeBooks(goal.data.readCount)}{' '}
               {pluralize(goal.data.readCount, [
                 'прочитана',
                 'прочитаны',
@@ -71,8 +71,8 @@ export const GoalWidgetLarge: FC<GoalWidgetLargeProps> = observer((props) => {
         </VStack>
         <Typography size={'2xs'} variant={'secondary'}>
           {goal.isCompleted
-            ? `Для достижения цели ещё ${goal.restToGoal} ${pluralizeBooks(goal.restToGoal)} !`
-            : 'Цель выполнена'}
+            ? 'Цель выполнена'
+            : `Для достижения цели ещё ${goal.restToGoal} ${pluralizeBooks(goal.restToGoal)} !`}
         </Typography>
       </div>
     )

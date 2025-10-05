@@ -4,12 +4,14 @@ import './add-book-form.scss';
 import { BookStatusSelect } from '@pages/add-book/components/add-book-form/book-status-select.tsx';
 import { GenresSelect } from '@pages/add-book/components/add-book-form/genres-select.tsx';
 import { FormTitle } from '@pages/add-book/components/form-title/form-title.tsx';
-import { useAddBookStore } from '@pages/add-book/store/add-book-store.ts';
+import { AddBookStore } from '@pages/add-book/store/add-book-store.ts';
 import { DropzoneField } from '@shared/components/dropzone-field/dropzone-field.tsx';
 import { Form } from '@shared/components/form/form.tsx';
 import { TextField } from '@shared/components/text-field/text-field.tsx';
 import { BucketsNames } from '@shared/constants/storage.ts';
 import { ColorConstant } from '@shared/constants/style-system/colors.ts';
+import { AppRouter } from '@shared/lib/router/app-router.ts';
+import { useRootStore } from '@shared/stores/root-store/root-store.ts';
 import { AppImage } from '@shared/ui/app-image/app-image.tsx';
 import { Button } from '@shared/ui/button/button.tsx';
 import { Card } from '@shared/ui/card/card.tsx';
@@ -19,7 +21,7 @@ import { Skeleton } from '@shared/ui/skeleton/skeleton.tsx';
 import { Typography } from '@shared/ui/typography/typography.tsx';
 import { VStack } from '@shared/ui/vstack/vstack.tsx';
 import { observer } from 'mobx-react-lite';
-import { type FC } from 'react';
+import { type FC, useState } from 'react';
 
 const cnAddBookForm = cn('AddBookForm');
 
@@ -28,8 +30,12 @@ interface AddBookFormProps {
 }
 
 export const AddBookForm: FC<AddBookFormProps> = observer((props) => {
+  const { goal, user } = useRootStore();
+
+  const [store] = useState(() => new AddBookStore(user, AppRouter, goal));
+
   const { form, previewCoverUrl, resetPreviewCoverUrl, setPreviewCoverUrl } =
-    useAddBookStore();
+    store;
 
   return (
     <Card

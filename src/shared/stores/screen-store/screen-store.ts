@@ -68,5 +68,3 @@ export class ScreenStore {
     return this.currentWidth >= value;
   };
 }
-
-export const screenStore = new ScreenStore();
