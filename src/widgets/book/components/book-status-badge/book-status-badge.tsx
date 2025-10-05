@@ -1,5 +1,5 @@
-import './book-state-badge.scss';
-import type { BookStateType } from '@shared/models/book.ts';
+import './book-status-badge.scss';
+import type { BookStatusType } from '@shared/models/book.ts';
 import type { FC } from 'react';
 
 import { cn } from '@bem-react/classname';
@@ -9,15 +9,15 @@ import { HStack } from '@shared/ui/hstack/hstack.tsx';
 import { IconComponent } from '@shared/ui/icon-component/icon-component.tsx';
 import { Typography } from '@shared/ui/typography/typography.tsx';
 
-const cnBookStateBadge = cn('BookStateBadge');
+const cnBookStatusBadge = cn('BookStatusBadge');
 
-interface BookStateBadgeProps {
-  state: BookStateType;
+interface BookStatusBadgeProps {
+  status: BookStatusType;
   className?: string;
 }
 
-const getContent = (state: BookStateType) => {
-  switch (state) {
+const getContent = (status: BookStatusType) => {
+  switch (status) {
     case 'reading':
       return (
         <>
@@ -28,8 +28,8 @@ const getContent = (state: BookStateType) => {
           />
           <Badge background={'blue-100'} rounded={'8'} size={'unset'}>
             <Typography
-              className={cnBookStateBadge('Title', {
-                state: state,
+              className={cnBookStatusBadge('Title', {
+                status: status,
               })}
               size={'3xs'}
               weight={'medium'}
@@ -49,8 +49,8 @@ const getContent = (state: BookStateType) => {
           />
           <Badge background={'blue-100'} rounded={'8'} size={'unset'}>
             <Typography
-              className={cnBookStateBadge('Title', {
-                state: state,
+              className={cnBookStatusBadge('Title', {
+                status: status,
               })}
               size={'3xs'}
               weight={'medium'}
@@ -70,8 +70,8 @@ const getContent = (state: BookStateType) => {
           />
           <Badge background={'orange-100'} rounded={'8'} size={'unset'}>
             <Typography
-              className={cnBookStateBadge('Title', {
-                state: state,
+              className={cnBookStatusBadge('Title', {
+                status: status,
               })}
               size={'3xs'}
               weight={'medium'}
@@ -84,16 +84,16 @@ const getContent = (state: BookStateType) => {
   }
 };
 
-export const BookStateBadge: FC<BookStateBadgeProps> = (props) => {
-  const { className, state } = props;
+export const BookStatusBadge: FC<BookStatusBadgeProps> = (props) => {
+  const { className, status } = props;
 
   return (
     <HStack
       align={'center'}
-      className={cnBookStateBadge(undefined, [className])}
+      className={cnBookStatusBadge(undefined, [className])}
       gap={'8'}
     >
-      {getContent(state)}
+      {getContent(status)}
     </HStack>
   );
 };

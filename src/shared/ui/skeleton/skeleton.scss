@@ -1,7 +1,18 @@
 .Skeleton {
   position: relative;
   overflow: hidden;
-  background: var(--neutral-700);
+  max-width: 100%;
+
+  &_background {
+    &_light {
+    background: var(--neutral-300)
+    }
+
+    &_dark {
+      background: var(--neutral-700);
+    }
+  }
+
 
   &_rounded_14 {
     border-radius: 14px;

@@ -1,20 +1,25 @@
-import type { FC } from 'react';
+import { cn } from '@bem-react/classname';
 
 import './add-book-form.scss';
-import { cn } from '@bem-react/classname';
+import { BookStatusSelect } from '@pages/add-book/components/add-book-form/book-status-select.tsx';
+import { GenresSelect } from '@pages/add-book/components/add-book-form/genres-select.tsx';
 import { FormTitle } from '@pages/add-book/components/form-title/form-title.tsx';
+import { useAddBookStore } from '@pages/add-book/store/add-book-store.ts';
+import { DropzoneField } from '@shared/components/dropzone-field/dropzone-field.tsx';
 import { Form } from '@shared/components/form/form.tsx';
-import { SelectField } from '@shared/components/select-field/select-field.tsx';
 import { TextField } from '@shared/components/text-field/text-field.tsx';
+import { BucketsNames } from '@shared/constants/storage.ts';
 import { ColorConstant } from '@shared/constants/style-system/colors.ts';
-import { MobxForm } from '@shared/lib/mobx/mobx-form/mobx-form.ts';
+import { AppImage } from '@shared/ui/app-image/app-image.tsx';
 import { Button } from '@shared/ui/button/button.tsx';
 import { Card } from '@shared/ui/card/card.tsx';
-import { Dropzone } from '@shared/ui/dropzone/dropzone.tsx';
 import { IconComponent } from '@shared/ui/icon-component/icon-component.tsx';
+import { Loader } from '@shared/ui/Loader/loader.tsx';
+import { Skeleton } from '@shared/ui/skeleton/skeleton.tsx';
 import { Typography } from '@shared/ui/typography/typography.tsx';
 import { VStack } from '@shared/ui/vstack/vstack.tsx';
 import { observer } from 'mobx-react-lite';
+import { type FC } from 'react';
 
 const cnAddBookForm = cn('AddBookForm');
 
@@ -22,21 +27,17 @@ interface AddBookFormProps {
   className?: string;
 }
 
-const mockForm = new MobxForm({
-  defaultValues: {
-    author: '',
-    cover: '',
-    genre: '',
-    name: '',
-  },
-});
-
 export const AddBookForm: FC<AddBookFormProps> = observer((props) => {
+  const { form, previewCoverUrl, resetPreviewCoverUrl, setPreviewCoverUrl } =
+    useAddBookStore();
+
   return (
     <Card
       className={cnAddBookForm(undefined, [props.className])}
       elevation={'md'}
     >
+      {form.isSubmitting && <Loader />}
+
       <FormTitle
         background={'green-100'}
         icon={
@@ -50,11 +51,11 @@ export const AddBookForm: FC<AddBookFormProps> = observer((props) => {
         title={'Добавить новую книгу'}
       />
 
-      <Form className={cnAddBookForm('Form')} methods={mockForm}>
+      <Form className={cnAddBookForm('Form')} methods={form}>
         <TextField
           fullWidth
           label={'Название книги'}
-          name={'name'}
+          name={'title'}
           placeholder={'Введите название книги'}
           required
         />
@@ -65,24 +66,13 @@ export const AddBookForm: FC<AddBookFormProps> = observer((props) => {
           placeholder={'Введите имя автора'}
           required
         />
-        <SelectField
-          label={'Жанр'}
-          labelField={'label'}
-          name={'genre'}
-          options={[
-            { id: '1', label: 'Фантастика' },
-            { id: '2', label: 'Художка' },
-            { id: '3', label: 'Чёто ещё' },
-          ]}
-          placeholder={'Выберите жанр'}
-          required
-          valueField={'id'}
-        />
+        <BookStatusSelect />
+        <GenresSelect />
         <div className={cnAddBookForm('CoverField')}>
           <TextField
             fullWidth
             label={'Обложка книги'}
-            name={'cover'}
+            name={'outerCoverUrl'}
             placeholder={'Вставьте ссылку на изображение'}
             required
           />
@@ -95,6 +85,7 @@ export const AddBookForm: FC<AddBookFormProps> = observer((props) => {
               />
             }
             className={cnAddBookForm('SearchButton')}
+            onClick={() => setPreviewCoverUrl(form.values.outerCoverUrl)}
             variant={'outline'}
           >
             Найти
@@ -102,16 +93,30 @@ export const AddBookForm: FC<AddBookFormProps> = observer((props) => {
         </div>
 
         <VStack fullWidth gap={'12'}>
-          <Dropzone name={'cover'} />
+          <DropzoneField bucketName={BucketsNames.covers} name={'coverUrl'} />
           <Typography size={'3xs'} variant={'light'}>
             Загрузите файл изображения, вставьте ссылку или используйте кнопку
             &#34;Найти&#34;
           </Typography>
         </VStack>
 
+        {previewCoverUrl && (
+          <VStack align={'center'} gap={'16'}>
+            <AppImage
+              alt={'Обложка книги'}
+              fallback={<Skeleton height={192} rounded={'14'} width={128} />}
+              height={192}
+              rounded={'14'}
+              src={previewCoverUrl}
+              width={128}
+            />
+            <Button onClick={resetPreviewCoverUrl}>Удалить</Button>
+          </VStack>
+        )}
         <Button
           addonLeft={<IconComponent name={'saveIcon'} size={'xxs'} />}
           className={cnAddBookForm('SubmitButton')}
+          disabled={form.isSubmitting}
           fullWidth
           type={'submit'}
         >

@@ -15,6 +15,7 @@ type Rounded = '14' | '16';
 interface SkeletonProps {
   animation?: 'none' | 'pulse' | 'wave';
   animationDelay?: number;
+  background?: 'dark' | 'light';
   borderRadius?: number | string;
   children?: ReactNode;
   className?: string;
@@ -30,6 +31,7 @@ export const Skeleton: FC<SkeletonProps> = memo((props) => {
   const {
     animation = 'pulse',
     animationDelay = 0,
+    background = 'light',
     borderRadius,
     children,
     className,
@@ -44,7 +46,7 @@ export const Skeleton: FC<SkeletonProps> = memo((props) => {
   const baseStyles: CSSProperties = {
     borderRadius: variant === 'circle' ? `${width}px` : `${borderRadius}px`,
     height: `${height}px`,
-    maxWidth: `${width}px`,
+    width: `${width}px`,
     ...style,
   };
 
@@ -52,9 +54,10 @@ export const Skeleton: FC<SkeletonProps> = memo((props) => {
     <div
       className={cnSkeleton(
         {
-          animation,
-          rounded,
-          variant,
+          animation: animation,
+          background: background,
+          rounded: rounded,
+          variant: variant,
         },
         [className],
       )}

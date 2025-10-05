@@ -45,33 +45,412 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
-      [_ in never]: never;
+      get_user_goal: {
+        Args: { puserid: string };
+        Returns: {
+          createdAt: string;
+          id: string;
+          readCount: number;
+          targetBooks: number;
+          targetDate: string;
+          updatedAt: string;
+          userId: string;
+        }[];
+      };
+      getgoalforyear: {
+        Args: { puserid: string };
+        Returns: {
+          createdat: string;
+          id: string;
+          targetbooks: number;
+          targetdate: string;
+          updatedat: string;
+          userid: string;
+        }[];
+      };
+      getGoalForYear: {
+        Args: { puserid: string };
+        Returns: {
+          createdAt: string;
+          id: string;
+          targetBooks: number;
+          targetDate: string;
+          updatedAt: string;
+          userId: string;
+        }[];
+      };
+      getgoalwithreadcount: {
+        Args: { puserid: string };
+        Returns: {
+          createdat: string;
+          id: string;
+          readcount: number;
+          targetbooks: number;
+          targetdate: string;
+          updatedat: string;
+          userid: string;
+        }[];
+      };
+      getRecentRated: {
+        Args: { plimit: number; puserid: string };
+        Returns: {
+          author: string;
+          coverUrl: string;
+          genre: string;
+          rating: number;
+          title: string;
+          updatedAt: string;
+          userBookId: string;
+        }[];
+      };
+      getusergoal: {
+        Args: { puserid: string };
+        Returns: {
+          createdAt: string;
+          id: string;
+          readCount: number;
+          targetBooks: number;
+          targetDate: string;
+          updatedAt: string;
+          userId: string;
+        }[];
+      };
+      getUserGoal: {
+        Args: { inUserId: string };
+        Returns: {
+          createdAt: string;
+          id: string;
+          readCount: number;
+          targetBooks: number;
+          targetDate: string;
+          updatedAt: string;
+          userId: string;
+        }[];
+      };
+      getUserGoalProgress: {
+        Args: { puserid: string };
+        Returns: {
+          createdAt: string;
+          goalId: string;
+          isCompleted: boolean;
+          progressPercent: number;
+          readBooks: number;
+          targetBooks: number;
+          targetDate: string;
+          updatedAt: string;
+        }[];
+      };
+      getUserStats: {
+        Args: { puserid: string };
+        Returns: {
+          read: number;
+          reading: number;
+          toRead: number;
+        }[];
+      };
+      upsertgoalforyear: {
+        Args: { ptargetbooks: number; puserid: string };
+        Returns: {
+          createdat: string;
+          id: string;
+          targetbooks: number;
+          targetdate: string;
+          updatedat: string;
+          userid: string;
+        }[];
+      };
+      upsertGoalForYear: {
+        Args: { ptargetbooks: number; puserid: string };
+        Returns: {
+          createdAt: string;
+          id: string;
+          targetBooks: number;
+          targetDate: string;
+          updatedAt: string;
+          userId: string;
+        }[];
+      };
     };
     Tables: {
+      books: {
+        Insert: {
+          author: string;
+          title: string;
+          coverUrl?: string | null;
+          createdAt?: string | null;
+          genreId?: string | null;
+          id?: string;
+          updatedAt?: string | null;
+        };
+        Relationships: [
+          {
+            columns: ['genreId'];
+            foreignKeyName: 'books_genreId_fkey';
+            isOneToOne: false;
+            referencedColumns: ['id'];
+            referencedRelation: 'genres';
+          },
+        ];
+        Row: {
+          author: string;
+          coverUrl: string | null;
+          createdAt: string | null;
+          genreId: string | null;
+          id: string;
+          title: string;
+          updatedAt: string | null;
+        };
+        Update: {
+          author?: string;
+          coverUrl?: string | null;
+          createdAt?: string | null;
+          genreId?: string | null;
+          id?: string;
+          title?: string;
+          updatedAt?: string | null;
+        };
+      };
+      genres: {
+        Insert: {
+          name: string;
+          id?: string;
+        };
+        Relationships: [];
+        Row: {
+          id: string;
+          name: string;
+        };
+        Update: {
+          id?: string;
+          name?: string;
+        };
+      };
+      goals: {
+        Insert: {
+          targetBooks: number;
+          createdAt?: string | null;
+          id?: string;
+          targetDate?: string | null;
+          updatedAt?: string | null;
+          userId?: string | null;
+        };
+        Relationships: [
+          {
+            columns: ['userId'];
+            foreignKeyName: 'goals_userId_fkey';
+            isOneToOne: false;
+            referencedColumns: ['id'];
+            referencedRelation: 'users';
+          },
+          {
+            columns: ['userId'];
+            foreignKeyName: 'goals_userId_fkey';
+            isOneToOne: false;
+            referencedColumns: ['userId'];
+            referencedRelation: 'viewUserStats';
+          },
+        ];
+        Row: {
+          createdAt: string | null;
+          id: string;
+          targetBooks: number;
+          targetDate: string | null;
+          updatedAt: string | null;
+          userId: string | null;
+        };
+        Update: {
+          createdAt?: string | null;
+          id?: string;
+          targetBooks?: number;
+          targetDate?: string | null;
+          updatedAt?: string | null;
+          userId?: string | null;
+        };
+      };
+      notes: {
+        Insert: {
+          content: string;
+          createdAt?: string | null;
+          id?: string;
+          updatedAt?: string | null;
+          userBookId?: string | null;
+        };
+        Relationships: [
+          {
+            columns: ['userBookId'];
+            foreignKeyName: 'notes_userBookId_fkey';
+            isOneToOne: false;
+            referencedColumns: ['id'];
+            referencedRelation: 'userBooks';
+          },
+          {
+            columns: ['userBookId'];
+            foreignKeyName: 'notes_userBookId_fkey';
+            isOneToOne: false;
+            referencedColumns: ['id'];
+            referencedRelation: 'viewUserBookDetails';
+          },
+        ];
+        Row: {
+          content: string;
+          createdAt: string | null;
+          id: string;
+          updatedAt: string | null;
+          userBookId: string | null;
+        };
+        Update: {
+          content?: string;
+          createdAt?: string | null;
+          id?: string;
+          updatedAt?: string | null;
+          userBookId?: string | null;
+        };
+      };
+      userBooks: {
+        Insert: {
+          bookId?: string | null;
+          createdAt?: string | null;
+          id?: string;
+          notes?: string | null;
+          progress?: number;
+          rating?: number | null;
+          status?: string;
+          updatedAt?: string | null;
+          userId?: string | null;
+        };
+        Relationships: [
+          {
+            columns: ['bookId'];
+            foreignKeyName: 'userBooks_bookId_fkey';
+            isOneToOne: false;
+            referencedColumns: ['id'];
+            referencedRelation: 'books';
+          },
+          {
+            columns: ['userId'];
+            foreignKeyName: 'userBooks_userId_fkey';
+            isOneToOne: false;
+            referencedColumns: ['id'];
+            referencedRelation: 'users';
+          },
+          {
+            columns: ['userId'];
+            foreignKeyName: 'userBooks_userId_fkey';
+            isOneToOne: false;
+            referencedColumns: ['userId'];
+            referencedRelation: 'viewUserStats';
+          },
+        ];
+        Row: {
+          bookId: string | null;
+          createdAt: string | null;
+          id: string;
+          notes: string | null;
+          progress: number;
+          rating: number | null;
+          status: string;
+          updatedAt: string | null;
+          userId: string | null;
+        };
+        Update: {
+          bookId?: string | null;
+          createdAt?: string | null;
+          id?: string;
+          notes?: string | null;
+          progress?: number;
+          rating?: number | null;
+          status?: string;
+          updatedAt?: string | null;
+          userId?: string | null;
+        };
+      };
       users: {
         Insert: {
           email: string;
           id: string;
           name: string;
-          created_at?: string | null;
+          createdAt?: string | null;
+          updatedAt?: string | null;
         };
         Relationships: [];
         Row: {
-          created_at: string | null;
+          createdAt: string | null;
           email: string;
           id: string;
           name: string;
+          updatedAt: string | null;
         };
         Update: {
-          created_at?: string | null;
+          createdAt?: string | null;
           email?: string;
           id?: string;
           name?: string;
+          updatedAt?: string | null;
         };
       };
     };
     Views: {
-      [_ in never]: never;
+      viewUserBookDetails: {
+        Relationships: [
+          {
+            columns: ['genreId'];
+            foreignKeyName: 'books_genreId_fkey';
+            isOneToOne: false;
+            referencedColumns: ['id'];
+            referencedRelation: 'genres';
+          },
+          {
+            columns: ['bookId'];
+            foreignKeyName: 'userBooks_bookId_fkey';
+            isOneToOne: false;
+            referencedColumns: ['id'];
+            referencedRelation: 'books';
+          },
+          {
+            columns: ['userId'];
+            foreignKeyName: 'userBooks_userId_fkey';
+            isOneToOne: false;
+            referencedColumns: ['id'];
+            referencedRelation: 'users';
+          },
+          {
+            columns: ['userId'];
+            foreignKeyName: 'userBooks_userId_fkey';
+            isOneToOne: false;
+            referencedColumns: ['userId'];
+            referencedRelation: 'viewUserStats';
+          },
+        ];
+        Row: {
+          author: string | null;
+          bookCreatedAt: string | null;
+          bookId: string | null;
+          bookUpdatedAt: string | null;
+          coverUrl: string | null;
+          createdAt: string | null;
+          genreId: string | null;
+          genreName: string | null;
+          id: string | null;
+          notes: string | null;
+          progress: number | null;
+          rating: number | null;
+          status: string | null;
+          title: string | null;
+          updatedAt: string | null;
+          userId: string | null;
+        };
+      };
+      viewUserStats: {
+        Relationships: [];
+        Row: {
+          email: string | null;
+          name: string | null;
+          readCount: number | null;
+          readingCount: number | null;
+          toReadCount: number | null;
+          userId: string | null;
+        };
+      };
     };
   };
 };

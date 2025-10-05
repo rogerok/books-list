@@ -1,21 +1,13 @@
+import type { ComponentProps } from 'react';
+
 import { Controller } from '@shared/lib/mobx/mobx-form/controller';
 import { useFormContext } from '@shared/lib/mobx/mobx-form/useFormContext.ts';
 import { Select, type SelectOptionType } from '@shared/ui/select/select.tsx';
 import { observer } from 'mobx-react-lite';
 
 type SelectFieldProps<T extends SelectOptionType> = {
-  labelField: keyof T;
   name: string;
-  options: T[];
-  valueField: keyof T;
-  className?: string;
-  description?: string;
-  disabled?: boolean;
-  isLoading?: boolean;
-  label?: string;
-  placeholder?: string;
-  required?: boolean;
-};
+} & Omit<ComponentProps<typeof Select<T>>, 'onChange'>;
 
 export const SelectField = observer(
   <T extends SelectOptionType>(props: SelectFieldProps<T>) => {
@@ -30,6 +22,7 @@ export const SelectField = observer(
       placeholder,
       required,
       valueField,
+      ...rest
     } = props;
 
     const { control } = useFormContext();
@@ -40,6 +33,7 @@ export const SelectField = observer(
         name={name}
         render={({ field, fieldState }) => (
           <Select<T>
+            {...rest}
             className={className}
             disabled={disabled}
             error={fieldState.error?.message}

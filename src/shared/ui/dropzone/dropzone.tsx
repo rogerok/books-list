@@ -8,6 +8,7 @@ import {
 } from '@shared/constants/files.ts';
 import { ColorConstant } from '@shared/constants/style-system/colors.ts';
 import { Notifier } from '@shared/lib/notifier/notifier.ts';
+import { UploadStore } from '@shared/stores/upload-store/upload-store.ts';
 import { IconComponent } from '@shared/ui/icon-component/icon-component.tsx';
 import { Typography } from '@shared/ui/typography/typography.tsx';
 import { VStack } from '@shared/ui/vstack/vstack.tsx';
@@ -17,12 +18,13 @@ import {
   formatSize,
 } from '@shared/utils/files.ts';
 import { observer } from 'mobx-react-lite';
-import { type FC, type MouseEvent, type ReactNode, useRef } from 'react';
+import { type FC, type MouseEvent, type ReactNode, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 
 const cnDropzone = cn('Dropzone');
 
 interface DropzoneProps {
+  bucketName: string;
   name: string;
   acceptedFiles?: Partial<AcceptedFilesType>;
   className?: string;
@@ -32,119 +34,32 @@ interface DropzoneProps {
   maxFileSize?: number;
   multiple?: boolean;
   title?: string;
-  // store?: Upload;
-  onFileRemove?: (originalFileName: string) => void;
-  // onFileUploadSuccess?: (fileData: AttachmentModel) => void;
+  onFileUploadSuccess: (path: string) => void;
 }
 
 export const Dropzone: FC<DropzoneProps> = observer((props) => {
-  const controllerRef = useRef<AbortController | null>(null);
-
   const {
-    acceptedFiles,
+    acceptedFiles = AcceptedFiles,
+    bucketName,
     className,
     disabled,
     maxFiles,
     maxFileSize = 5 * 1024 * 1024,
     multiple,
-    name,
-    onFileRemove,
-    title,
+    onFileUploadSuccess,
   } = props;
 
-  const isDropzoneDisabled =
-    // store.data.length === maxFiles || store.isLoading || disabled;
-    disabled;
+  const [store] = useState(() => new UploadStore());
 
-  // const handleUploadProgress = (
-  //   progressEvent: AxiosProgressEvent,
-  //   id: string
-  // ): void => {
-  //   if (progressEvent.total) {
-  //     const progress = (progressEvent.loaded / progressEvent.total) * 100;
-  //
-  //     store.setUploadingProgress(id, progress);
-  //   }
-  // };
-  //
-  // const handleFileRemove = (id: string, originalFileName: string): void => {
-  //   store.removeData(id);
-  //
-  //   if (onFileRemove) {
-  //     onFileRemove(originalFileName);
-  //   }
-  // };
+  const isDropzoneDisabled = store.isUploading || disabled;
 
-  // const handleOnDrop = async (acceptedFiles: File[]): Promise<void> => {
-  //   controllerRef.current = new AbortController();
-  //   if (
-  //     maxFiles &&
-  //     store.data.length + acceptedFiles.length > maxFiles
-  //   ) {
-  //     Notifier.error(
-  //       `Максимальное количество файлов для загрузки ${maxFiles}`,
-  //     );
-  //   } else if (acceptedFiles.length) {
-  //     store.setLoading(true);
-  //     const siteData = await getSiteByDomain(() =>
-  //       SiteService.getSiteByDomain(SiteCodes.main, controllerRef.current!),
-  //     );
-  //
-  //     if (siteData) {
-  //       const inputFiles = acceptedFiles.map<UploadStoreFileItem>((file) => ({
-  //         error: false,
-  //         file: file,
-  //         id: nanoid(),
-  //         uploadedFileName: '',
-  //         uploadProgress: 0,
-  //       }));
-  //
-  //       store.addMultipleData(inputFiles);
-  //
-  //       await Promise.all(
-  //         store.data.slice(-acceptedFiles.length).map(async (file) => {
-  //           const formData = new FormData();
-  //           formData.append(FileUploadConstants.AttachmentField, file.file);
-  //
-  //           formData.append(FileUploadConstants.SiteField, siteData.id);
-  //           formData.append(
-  //             FileUploadConstants.EntityField,
-  //             FileUploadConstants.EntityFieldValue,
-  //           );
-  //
-  //           const data = await uploadFile(() =>
-  //             serviceMethod(
-  //               formData,
-  //               controllerRef.current!,
-  //               handleUploadProgress,
-  //               file.id,
-  //             ),
-  //           );
-  //
-  //           if (data && onFileUploadSuccess) {
-  //             onFileUploadSuccess({
-  //               fileName: data.fileName,
-  //               hash: data.hash,
-  //               isMain: !!isMain,
-  //               mimeType: data.mimeType,
-  //               originalFileName: data.originalFileName,
-  //               size: data.size,
-  //             });
-  //             store.updateUploadedFileName(file.id, data.fileName);
-  //           } else {
-  //             store.setItemError(file.id, true);
-  //           }
-  //         }),
-  //       );
-  //     } else {
-  //       Notifier.error('Ошибка при загрузке файла.', {
-  //         variant: 'error',
-  //       });
-  //     }
-  //
-  //     store.setLoading(false);
-  //   }
-  // };
+  const handleOnDrop = async (acceptedFiles: File[]): Promise<void> => {
+    if (maxFiles && acceptedFiles.length > maxFiles) {
+      Notifier.error(`Максимальное количество файлов для загрузки ${maxFiles}`);
+    } else if (acceptedFiles.length) {
+      await store.uploadFile(bucketName, acceptedFiles, onFileUploadSuccess);
+    }
+  };
 
   const { getInputProps, getRootProps, isDragActive, isFileDialogActive } =
     useDropzone({
@@ -154,7 +69,7 @@ export const Dropzone: FC<DropzoneProps> = observer((props) => {
       maxSize: maxFileSize,
       minSize: FileUploadConstants.MinFileSize,
       multiple: multiple,
-      // onDrop: handleOnDrop,
+      onDrop: handleOnDrop,
       onDropRejected: (fileRejections) => {
         fileRejections.forEach((file) => {
           Notifier.error(
@@ -204,7 +119,7 @@ export const Dropzone: FC<DropzoneProps> = observer((props) => {
         {...getRootProps()}
         className={cnDropzone('Dropzone', {
           dragActive: isDragActive,
-          // loading: store.isLoading,
+          loading: store.isUploading,
         })}
         onClick={handleCustomOnClickHandler}
       >
@@ -226,14 +141,6 @@ export const Dropzone: FC<DropzoneProps> = observer((props) => {
             Перетащите файл или нажмите для выбора • {getRestrictions()}.
           </Typography>
         </VStack>
-
-        {/*{!!store.data.length && (*/}
-        {/*  <DropzoneFileList*/}
-        {/*    files={store.data}*/}
-        {/*    handleFileRemove={handleFileRemove}*/}
-        {/*    loading={store.isLoading}*/}
-        {/*  />*/}
-        {/*)}*/}
       </div>
     </div>
   );

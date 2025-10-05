@@ -29,9 +29,7 @@ type SelectProps<T extends SelectOptionType> = {
   disabled?: boolean;
   error?: string;
   fullWidth?: boolean;
-  isLoading?: boolean;
   label?: string;
-  placeholder?: string;
   value?: T | null;
   onChange: (option: T | null) => void;
 } & Omit<
@@ -59,6 +57,7 @@ export const Select = <T extends SelectOptionType>(props: SelectProps<T>) => {
     disabled,
     error,
     fullWidth,
+    isClearable = true,
     isLoading,
     label,
     labelField,
@@ -91,6 +90,7 @@ export const Select = <T extends SelectOptionType>(props: SelectProps<T>) => {
 
       <div className={cnSelect('Inner', { fullWidth: fullWidth })}>
         <ReactSelect<T, false, GroupBase<T>>
+          {...rest}
           className={cnSelect('Control', {
             error: !!error,
             fullWidth: fullWidth,
@@ -103,14 +103,14 @@ export const Select = <T extends SelectOptionType>(props: SelectProps<T>) => {
           getOptionLabel={(opt) => String(opt[labelField])}
           getOptionValue={(opt) => String(opt[valueField])}
           inputId={id}
+          isClearable={isClearable}
           isDisabled={disabled}
           isLoading={isLoading}
           onChange={(newValue: SingleValue<T>) => onChange(newValue ?? null)}
           options={options}
           placeholder={placeholder}
-          required
+          required={required}
           value={value ?? null}
-          {...rest}
         />
       </div>
 

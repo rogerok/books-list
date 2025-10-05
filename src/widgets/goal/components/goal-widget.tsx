@@ -1,25 +1,12 @@
 import { cn } from '@bem-react/classname';
+import { useRootStore } from '@shared/stores/root-store/root-store.ts';
 import { Card } from '@shared/ui/card/card.tsx';
 import { GoalWidgetLarge } from '@widgets/goal/components/goal-widget-large/goal-widget-large.tsx';
 import { GoalWidgetSmall } from '@widgets/goal/components/goal-widget-small/goal-widget-small.tsx';
 import { observer } from 'mobx-react-lite';
-import { type FC, useMemo } from 'react';
+import { type FC, useEffect, useMemo } from 'react';
 
 const cnGoalWidget = cn('GoalWidget');
-
-export type GoalMockData = {
-  completed: number; // 2
-  percent: number; // 10
-  total: number; // 20
-  year: number; // 2024
-};
-
-const mockData: GoalMockData = {
-  completed: 2,
-  percent: 20,
-  total: 20,
-  year: 2024,
-};
 
 interface GoalWidgetProps {
   variant: 'large' | 'small';
@@ -29,12 +16,18 @@ interface GoalWidgetProps {
 export const GoalWidget: FC<GoalWidgetProps> = observer((props) => {
   const { className, variant } = props;
 
+  const { goal } = useRootStore();
+
+  useEffect(() => {
+    goal.initialLoad();
+  }, [goal]);
+
   const component = useMemo(() => {
     switch (variant) {
       case 'small':
-        return <GoalWidgetSmall data={mockData} />;
+        return <GoalWidgetSmall />;
       case 'large':
-        return <GoalWidgetLarge data={mockData} />;
+        return <GoalWidgetLarge />;
     }
   }, [variant]);
 

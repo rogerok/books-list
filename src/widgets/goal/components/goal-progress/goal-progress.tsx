@@ -6,20 +6,21 @@ import { ProgressBar } from '@shared/ui/progress-bar/progress-bar.tsx';
 const cnGoalProgress = cn('GoalProgress');
 
 interface GoalProgressProps {
-  percent: number;
+  total: number;
+  value: number;
   className?: string;
   size?: ComponentProps<typeof ProgressBar>['size'];
 }
 
 export const GoalProgress: FC<GoalProgressProps> = (props) => {
-  const { className, percent, size } = props;
+  const { className, size, total, value } = props;
 
   return (
     <ProgressBar
       className={cnGoalProgress(undefined, [className])}
-      max={100}
+      max={total}
       size={size}
-      value={percent}
+      value={value}
     />
   );
 };

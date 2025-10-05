@@ -8,3 +8,12 @@ export const userCreate = async (data: UserCreateRequestModel) => {
     .insert([{ email: data.email, id: data.id, name: data.name }])
     .throwOnError();
 };
+
+export const getUSer = async (id: string) => {
+  return apiClient
+    .from('users')
+    .select('*')
+    .eq('id', id)
+    .single()
+    .throwOnError();
+};

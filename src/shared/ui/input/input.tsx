@@ -96,7 +96,11 @@ export const Input: FC<InputProps> = (props) => {
         )}
       </div>
 
-      {error && <Typography variant={'warn'}>{error}</Typography>}
+      {error && (
+        <Typography className={cnInput('ErrorText')} variant={'warn'}>
+          {error}
+        </Typography>
+      )}
     </VStack>
   );
 };
