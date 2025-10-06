@@ -1,7 +1,6 @@
 import { cn } from '@bem-react/classname';
 
 import './add-book-form.scss';
-import { BookStatusSelect } from '@pages/add-book/components/add-book-form/book-status-select.tsx';
 import { GenresSelect } from '@pages/add-book/components/add-book-form/genres-select.tsx';
 import { FormTitle } from '@pages/add-book/components/form-title/form-title.tsx';
 import { AddBookStore } from '@pages/add-book/store/add-book-store.ts';
@@ -74,7 +73,6 @@ export const AddBookForm: FC<AddBookFormProps> = observer((props) => {
           placeholder={'Введите имя автора'}
           required
         />
-        <BookStatusSelect />
         <GenresSelect />
         <div className={cnAddBookForm('CoverField')}>
           <TextField

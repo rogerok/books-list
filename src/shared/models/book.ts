@@ -16,7 +16,6 @@ export type BookCreateRequestModel = z.infer<typeof BookCreateRequestSchema>;
 
 export const UserBookCreateRequestSchema = z.object({
   bookId: z.string().uuid(),
-  status: BookStatusEnumSchema,
   userId: z.string().uuid(),
 });
 
