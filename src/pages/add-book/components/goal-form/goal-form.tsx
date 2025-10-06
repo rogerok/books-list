@@ -12,11 +12,12 @@ import { Button } from '@shared/ui/button/button.tsx';
 import { Card } from '@shared/ui/card/card.tsx';
 import { IconComponent } from '@shared/ui/icon-component/icon-component.tsx';
 import { ProgressBar } from '@shared/ui/progress-bar/progress-bar.tsx';
+import { Skeleton } from '@shared/ui/skeleton/skeleton.tsx';
 import { Typography } from '@shared/ui/typography/typography.tsx';
 import { capitalizeFirstLetter } from '@shared/utils/common.ts';
 import { pluralize, pluralizeBooks } from '@shared/utils/pluralize.ts';
 import { observer } from 'mobx-react-lite';
-import { type FC, useEffect, useState } from 'react';
+import { type FC, useState } from 'react';
 
 const cnGoalForm = cn('GoalForm');
 
@@ -28,14 +29,13 @@ export const GoalForm: FC<GoalFormProps> = observer((props) => {
   const { goal, user } = useRootStore();
 
   const [goalForm] = useState(() => new AddGoalStore(user, goal));
-  const { form, prepareForm } = goalForm;
+  const { form } = goalForm;
 
-  useEffect(() => {
-    prepareForm();
-  }, [prepareForm]);
+  if (goal.isLoading) {
+    return <Skeleton height={200} rounded={'16'} />;
+  }
 
   return (
-    form &&
     goal.data && (
       <Card
         className={cnGoalForm(undefined, [props.className])}
