@@ -80,7 +80,6 @@ export const AddBookForm: FC<AddBookFormProps> = observer((props) => {
             label={'Обложка книги'}
             name={'outerCoverUrl'}
             placeholder={'Вставьте ссылку на изображение'}
-            required
           />
           <Button
             addonLeft={

@@ -46,7 +46,7 @@ export type BookResponseModel = z.infer<typeof BookResponseSchema>;
 
 export const BookProgressUpdateRequestSchema = z.object({
   bookId: z.string().uuid(),
-  progress: z.coerce.number().min(0),
+  progress: z.coerce.number().min(0).max(100),
 });
 
 export type BookProgressUpdateModel = z.infer<
