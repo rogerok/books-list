@@ -30,9 +30,11 @@ interface AddBookFormProps {
 }
 
 export const AddBookForm: FC<AddBookFormProps> = observer((props) => {
-  const { goal, user } = useRootStore();
+  const { goal, stats, user } = useRootStore();
 
-  const [store] = useState(() => new AddBookStore(user, AppRouter, goal));
+  const [store] = useState(
+    () => new AddBookStore(user, AppRouter, goal, stats),
+  );
 
   const { form, previewCoverUrl, resetPreviewCoverUrl, setPreviewCoverUrl } =
     store;

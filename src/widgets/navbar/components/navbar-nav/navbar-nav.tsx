@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import './navbar-nav.scss';
 import { cn } from '@bem-react/classname';
 import { routes } from '@shared/config/router/routes.ts';
+import { useRootStore } from '@shared/stores/root-store/root-store.ts';
 import { AppLink } from '@shared/ui/app-link/app-link.tsx';
 import { IconComponent } from '@shared/ui/icon-component/icon-component.tsx';
 
@@ -13,6 +14,8 @@ interface NavbarNavProps {
 }
 
 export const NavbarNav: FC<NavbarNavProps> = (props) => {
+  const { stats } = useRootStore();
+
   return (
     <nav className={cnNavbarNav(undefined, [props.className])}>
       <AppLink
@@ -34,7 +37,7 @@ export const NavbarNav: FC<NavbarNavProps> = (props) => {
       >
         <IconComponent name={'booksIcon'} size={'xs'} />
         <span>Моя библиотека</span>
-        <span className={cnNavbarNav('BooksCount')}>4</span>
+        <span className={cnNavbarNav('BooksCount')}>{stats.total}</span>
       </AppLink>
       <AppLink
         activeOptions={{

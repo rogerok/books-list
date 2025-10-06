@@ -4,7 +4,7 @@ import { BooleanToggleStore } from '@shared/lib/toggle-boolean-store/booleanTogg
 import { AuthStore } from '@shared/stores/auth-store/auth-store.ts';
 import { GoalStore } from '@shared/stores/goal-store/goal-store.ts';
 import { ScreenStore } from '@shared/stores/screen-store/screen-store.ts';
-import { StatsStore } from '@shared/stores/statsStore/statsStore.ts';
+import { StatsStore } from '@shared/stores/stats-store/stats-store.ts';
 import { UserStore } from '@shared/stores/user-store/user-store.ts';
 import { makeAutoObservable } from 'mobx';
 
@@ -14,7 +14,7 @@ class RootStore {
   goal = new GoalStore(this.user);
   navbar = new BooleanToggleStore(false);
   screen = new ScreenStore();
-  stats = new StatsStore();
+  stats = new StatsStore(this.user);
 
   constructor() {
     makeAutoObservable(this);
