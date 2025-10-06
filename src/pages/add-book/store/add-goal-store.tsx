@@ -10,7 +10,7 @@ import {
   type GoalCreateRequestModel,
   GoalCreateRequestSchema,
 } from '@shared/models/goal.ts';
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, reaction } from 'mobx';
 
 export class AddGoalStore {
   createGoalRequest = new RequestStore(createGoal, {
@@ -38,13 +38,17 @@ export class AddGoalStore {
         autoBind: true,
       },
     );
-  }
 
-  async prepareForm() {
-    if (this.user.id) {
-      this.form.setValue('userId', this.user.id);
-      this.form.setValue('targetBooks', this.goal.data?.targetBooks ?? 0);
-    }
+    reaction(
+      () => [this.goal.data?.targetBooks, this.user.id],
+      ([targetBooks, userId]) => {
+        this.form.setValue(
+          'targetBooks',
+          typeof targetBooks === 'number' ? targetBooks : 0,
+        );
+        this.form.setValue('userId', typeof userId === 'string' ? userId : '');
+      },
+    );
   }
 
   async submitForm(formData: GoalCreateRequestModel) {

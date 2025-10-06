@@ -20,14 +20,16 @@ export class GoalStore {
   }
 
   async fetchGoal() {
-    if (this.user.id) {
-      const { response, status } = await this.getGoalRequest.execute(
-        this.user.id,
-      );
+    if (!this.user.id) {
+      return;
+    }
 
-      if (status === 'success' && response.data) {
-        this.data = response.data;
-      }
+    const { response, status } = await this.getGoalRequest.execute(
+      this.user.id,
+    );
+
+    if (status === 'success' && response.data) {
+      this.data = response.data;
     }
   }
 
