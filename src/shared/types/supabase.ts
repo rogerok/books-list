@@ -98,7 +98,7 @@ export type Database = {
         }[];
       };
       getUserGoal: {
-        Args: { inUserId: string };
+        Args: { inuserid: string };
         Returns: {
           createdAt: string;
           id: string;

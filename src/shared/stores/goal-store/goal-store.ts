@@ -39,6 +39,12 @@ export class GoalStore {
     }
   }
 
+  get goalDate() {
+    return this.data?.targetDate
+      ? new Date(this.data.targetDate).getFullYear()
+      : new Date().getFullYear();
+  }
+
   get isCompleted() {
     return this.restToGoal <= 0;
   }
@@ -48,13 +54,17 @@ export class GoalStore {
   }
 
   get percentageCompleted() {
-    if (this.data) {
-      return parseFloat(
-        ((this.data.readCount / this.data.targetBooks) * 100).toFixed(2),
-      );
+    if (!this.data || (!this.data.readCount && !this.data.targetBooks)) {
+      return 0;
     }
 
-    return 0;
+    if (!this.data.targetBooks && this.data.readCount) {
+      return 100;
+    }
+
+    return parseFloat(
+      ((this.data.readCount / this.data.targetBooks) * 100).toFixed(2),
+    );
   }
 
   get restToGoal() {

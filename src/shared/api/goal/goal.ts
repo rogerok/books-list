@@ -4,7 +4,7 @@ import { apiClient } from '@shared/api/client.ts';
 
 export const getGoal = async (userId: string) => {
   return apiClient
-    .rpc('getUserGoal', { inUserId: userId })
+    .rpc('getUserGoal', { inuserid: userId })
     .maybeSingle()
     .throwOnError();
 };

@@ -65,12 +65,14 @@ export const SignUpForm: FC<SignUpFormProps> = observer((props) => {
           label={'Пароль'}
           name={'password'}
           placeholder={'Минимум 6 символов'}
+          type={'password'}
         />
         <TextField
           fullWidth
           label={'Подтвердите пароль'}
           name={'confirmPassword'}
           placeholder={'Повторите пароль'}
+          type={'password'}
         />
         <Button
           addonLeft={

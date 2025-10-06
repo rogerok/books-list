@@ -38,7 +38,7 @@ export const GoalWidgetSmall: FC<GoalWidgetSmallProps> = observer((props) => {
             name={'progressIcon'}
             size={'xxs'}
           />
-          <GoalTitle year={new Date(goal.data.targetDate).getFullYear()} />
+          <GoalTitle year={goal.goalDate} />
         </HStack>
         <VStack gap={'8'}>
           <HStack flexJustify={'between'}>

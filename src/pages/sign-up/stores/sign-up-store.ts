@@ -15,10 +15,10 @@ import { makeAutoObservable } from 'mobx';
 export class SignUpStore {
   form = new MobxForm({
     defaultValues: {
-      confirmPassword: 'Password1!',
+      confirmPassword: '',
       email: '',
-      name: 'sss',
-      password: 'Password1!',
+      name: '',
+      password: '',
     },
     onSubmit: (data) => this.processSignUp(data),
     resolver: zodResolver(SignUpFormSchema),

@@ -2,14 +2,14 @@ import type { GoalStore } from '@shared/stores/goal-store/goal-store.ts';
 import type { UserStore } from '@shared/stores/user-store/user-store.ts';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import {
+  GoalCreateFormSchema,
+  type GoalCreateFormType,
+} from '@pages/add-book/models/goal.ts';
 import { createGoal } from '@shared/api/goal/goal.ts';
 import { MobxForm } from '@shared/lib/mobx/mobx-form/mobx-form.ts';
 import { Notifier } from '@shared/lib/notifier/notifier.ts';
 import { RequestStore } from '@shared/lib/request-store/request-store.ts';
-import {
-  type GoalCreateRequestModel,
-  GoalCreateRequestSchema,
-} from '@shared/models/goal.ts';
 import { makeAutoObservable, reaction } from 'mobx';
 
 export class AddGoalStore {
@@ -20,11 +20,10 @@ export class AddGoalStore {
 
   form = new MobxForm({
     defaultValues: {
-      targetBooks: 0,
-      userId: '',
+      targetBooks: 1,
     },
     onSubmit: (data) => this.submitForm(data),
-    resolver: zodResolver(GoalCreateRequestSchema),
+    resolver: zodResolver(GoalCreateFormSchema),
   });
 
   constructor(
@@ -40,21 +39,21 @@ export class AddGoalStore {
     );
 
     reaction(
-      () => [this.goal.data?.targetBooks, this.user.id],
-      ([targetBooks, userId]) => {
-        this.form.setValue(
-          'targetBooks',
-          typeof targetBooks === 'number' ? targetBooks : 0,
-        );
-        this.form.setValue('userId', typeof userId === 'string' ? userId : '');
+      () => this.goal.data?.targetBooks,
+      (targetBooks) => {
+        this.form.setValue('targetBooks', targetBooks ?? 1);
       },
     );
   }
 
-  async submitForm(formData: GoalCreateRequestModel) {
+  async submitForm(formData: GoalCreateFormType) {
+    if (!this.user.id) {
+      return;
+    }
+
     const { status } = await this.createGoalRequest.execute({
       targetBooks: formData.targetBooks,
-      userId: formData.userId,
+      userId: this.user.id,
     });
 
     if (status === 'success') {
