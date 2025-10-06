@@ -182,10 +182,6 @@ export class BookDetailsStore {
   get isLoading() {
     return this.getBookDetailsRequest.isLoading;
   }
-
-  get rating() {
-    return this.data?.rating ?? 0;
-  }
 }
 
 const { createProvider, useStore } = createStoreContext<BookDetailsStore>();
