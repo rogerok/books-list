@@ -14,13 +14,6 @@ export const BookCreateRequestSchema = z.object({
 
 export type BookCreateRequestModel = z.infer<typeof BookCreateRequestSchema>;
 
-export const BookCreateFormSchema = BookCreateRequestSchema.extend({
-  outerCoverUrl: z.string(),
-  status: BookStatusEnumSchema,
-});
-
-export type BookCreateFormModel = z.infer<typeof BookCreateFormSchema>;
-
 export const UserBookCreateRequestSchema = z.object({
   bookId: z.string().uuid(),
   status: BookStatusEnumSchema,
@@ -28,3 +21,61 @@ export const UserBookCreateRequestSchema = z.object({
 });
 
 export type UserBookRequestModel = z.infer<typeof UserBookCreateRequestSchema>;
+
+export const BookResponseSchema = z.object({
+  author: z.string(),
+  bookCreatedAt: z.string(),
+  bookId: z.string(),
+  bookUpdatedAt: z.string(),
+  coverUrl: z.string().nullable(),
+  createdAt: z.string(),
+  genreId: z.string().nullable(),
+  genreName: z.string().nullable(),
+  id: z.string().uuid(),
+  notes: z.string().nullable(),
+  progress: z.number(),
+  rating: z.number().nullable(),
+  // TODO: Find out how get from supabase response as enum of book's status
+  // status: BookStatusEnumSchema,
+  status: z.string(),
+  title: z.string(),
+  updatedAt: z.string(),
+  userId: z.string(),
+});
+
+export type BookResponseModel = z.infer<typeof BookResponseSchema>;
+
+export const BookProgressUpdateRequestSchema = z.object({
+  bookId: z.string().uuid(),
+  progress: z.coerce.number().min(0),
+});
+
+export type BookProgressUpdateModel = z.infer<
+  typeof BookProgressUpdateRequestSchema
+>;
+
+export const BookStatusUpdateRequestSchema = z.object({
+  bookId: z.string().uuid(),
+  status: BookStatusEnumSchema,
+});
+
+export type BookStatusUpdateRequestModel = z.infer<
+  typeof BookStatusUpdateRequestSchema
+>;
+
+export const BookNotesUpdateRequestSchema = z.object({
+  bookId: z.string().uuid(),
+  notes: z.string().max(500),
+});
+
+export type BookNotesUpdateRequestModel = z.infer<
+  typeof BookNotesUpdateRequestSchema
+>;
+
+export const BookGetListRequestSchema = z.object({
+  status: BookStatusEnumSchema.or(EmptyStringSchema),
+  title: z.string().or(EmptyStringSchema),
+  userId: z.string().uuid(),
+});
+
+export type BookGetListRequestModel = z.infer<typeof BookGetListRequestSchema>;

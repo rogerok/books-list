@@ -41,9 +41,10 @@ export class StatsStore {
   }
 
   get total() {
-    if (this.data) {
-      return Object.values(this.data).reduce((acc, item) => acc + item, 0);
+    if (!this.data) {
+      return;
     }
-    return 0;
+
+    return Object.values(this.data).reduce((acc, item) => acc + item, 0);
   }
 }

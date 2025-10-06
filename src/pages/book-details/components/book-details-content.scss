@@ -1,6 +1,6 @@
 @use '../../../shared/styles/breakpoints' as b;
 
-.BookDetailsPage {
+.BookDetailsContent {
   display: flex;
   flex-direction: column;
   gap: 3.2rem;
@@ -42,7 +42,7 @@
 }
 
 @media (min-width: b.$lg-breakpoint) {
-  .BookDetailsPage {
+  .BookDetailsContent {
     width: 832px;
     max-width: 100%;
 

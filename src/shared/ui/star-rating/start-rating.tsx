@@ -1,7 +1,7 @@
 import { cn } from '@bem-react/classname';
 import { ColorConstant } from '@shared/constants/style-system/colors.ts';
 import { IconComponent } from '@shared/ui/icon-component/icon-component.tsx';
-import { type ComponentProps, memo, useState } from 'react';
+import { type ComponentProps, useState } from 'react';
 
 interface StarRatingProps {
   className?: string;
@@ -13,7 +13,7 @@ const cnStarRating = cn('StarRating');
 
 const stars = [1, 2, 3, 4, 5];
 
-export const StarRating = memo((props: StarRatingProps) => {
+export const StarRating = (props: StarRatingProps) => {
   const { className, onSelect, selectedStars = 0, size = 'sm' } = props;
   const [currentStarsCount, setCurrentStarsCount] = useState(selectedStars);
   const [isSelected, setIsSelected] = useState(Boolean(selectedStars));
@@ -51,4 +51,4 @@ export const StarRating = memo((props: StarRatingProps) => {
       })}
     </div>
   );
-});
+};

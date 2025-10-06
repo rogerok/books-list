@@ -57,6 +57,48 @@ export type Database = {
           userBookId: string;
         }[];
       };
+      getUserBook: {
+        Args: { inbookid: string; inuserid: string };
+        Returns: {
+          author: string;
+          bookCreatedAt: string;
+          bookId: string;
+          bookUpdatedAt: string;
+          coverUrl: string;
+          createdAt: string;
+          genreId: string;
+          genreName: string;
+          id: string;
+          notes: string;
+          progress: number;
+          rating: number;
+          status: string;
+          title: string;
+          updatedAt: string;
+          userId: string;
+        }[];
+      };
+      getUserBooks: {
+        Args: { inuserid: string; instatus?: string; intitle?: string };
+        Returns: {
+          author: string;
+          bookCreatedAt: string;
+          bookId: string;
+          bookUpdatedAt: string;
+          coverUrl: string;
+          createdAt: string;
+          genreId: string;
+          genreName: string;
+          id: string;
+          notes: string;
+          progress: number;
+          rating: number;
+          status: string;
+          title: string;
+          updatedAt: string;
+          userId: string;
+        }[];
+      };
       getUserGoal: {
         Args: { inUserId: string };
         Returns: {

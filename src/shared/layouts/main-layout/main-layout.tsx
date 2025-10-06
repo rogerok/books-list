@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import './main-layout.scss';
 import { cn } from '@bem-react/classname';
 import { Outlet } from '@tanstack/react-router';
-import { BookWidget } from '@widgets/book';
+import { BooksListWidget } from '@widgets/book/components/books-list-widget.tsx';
 import { GoalWidget } from '@widgets/goal';
 import { Header } from '@widgets/header';
 import { Navbar } from '@widgets/navbar';
@@ -20,7 +20,7 @@ export const MainLayout: FC<MainLayoutProps> = (props) => {
   return (
     <div className={cnMainLayout(undefined, [props.className])}>
       <Navbar
-        bookWidget={<BookWidget variant={'compact'} />}
+        bookWidget={<BooksListWidget variant={'compact'} />}
         className={cnMainLayout('Navbar')}
         goalWidget={<GoalWidget variant={'small'} />}
         statisticWidget={<StatisticWidget />}
