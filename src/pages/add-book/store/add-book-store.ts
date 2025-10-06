@@ -1,4 +1,5 @@
 import type { GoalStore } from '@shared/stores/goal-store/goal-store.ts';
+import type { StatsStore } from '@shared/stores/stats-store/stats-store.ts';
 import type { UserStore } from '@shared/stores/user-store/user-store.ts';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -49,6 +50,7 @@ export class AddBookStore {
     private user: UserStore,
     private router: RouterController,
     private goal: GoalStore,
+    private stats: StatsStore,
   ) {
     makeAutoObservable(
       this,
@@ -111,6 +113,7 @@ export class AddBookStore {
 
       if (userResp.status === 'success') {
         void this.goal.fetchGoal();
+        void this.stats.fetchStats();
 
         this.router.navigate({
           params: {
