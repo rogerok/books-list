@@ -1,7 +1,7 @@
 import { cn } from '@bem-react/classname';
 
 import './home-page.scss';
-import { LastActivity } from '@pages/home/components/last-activity/last-activity.tsx';
+import { LastRated } from '@pages/home/components/last-rated/last-rated.tsx';
 import { routes } from '@shared/config/router/routes.ts';
 import { ColorConstant } from '@shared/constants/style-system/colors.ts';
 import { AppLink } from '@shared/ui/app-link/app-link.tsx';
@@ -79,7 +79,7 @@ export const HomePage = () => {
         <Typography as={'h5'} size={'lg'} weight={'semibold'}>
           Последние активности
         </Typography>
-        <LastActivity />
+        <LastRated />
       </section>
     </section>
   );

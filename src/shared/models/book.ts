@@ -78,3 +78,24 @@ export const BookGetListRequestSchema = z.object({
 });
 
 export type BookGetListRequestModel = z.infer<typeof BookGetListRequestSchema>;
+
+export const BooksGetLastRatedRequestSchema = z.object({
+  limit: z.number(),
+  userId: z.string().uuid(),
+});
+
+export type BooksGetLastRatedRequestModel = z.infer<
+  typeof BooksGetLastRatedRequestSchema
+>;
+
+export const BooksGetLastRatedResponseSchema = z.object({
+  author: z.string(),
+  rating: z.number(),
+  status: z.string(),
+  title: z.string(),
+  userBookId: z.string().uuid(),
+});
+
+export type BooksGetLastRatedResponseModel = z.infer<
+  typeof BooksGetLastRatedResponseSchema
+>;
