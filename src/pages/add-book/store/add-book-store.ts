@@ -15,7 +15,6 @@ import { MobxForm } from '@shared/lib/mobx/mobx-form/mobx-form.ts';
 import { Notifier } from '@shared/lib/notifier/notifier.ts';
 import { RequestStore } from '@shared/lib/request-store/request-store.ts';
 import { type RouterController } from '@shared/lib/router/app-router.ts';
-import { BookStatusEnumSchema } from '@shared/models/book.ts';
 import { convertEmptyStringToNull } from '@shared/utils/converters.ts';
 import { makeAutoObservable, reaction } from 'mobx';
 
@@ -27,7 +26,6 @@ export class AddBookStore {
       coverUrl: '',
       genre: '',
       outerCoverUrl: '',
-      status: BookStatusEnumSchema.enum.toRead,
       title: '',
     },
     onSubmit: (data) => this.submitForm(data),
@@ -107,7 +105,6 @@ export class AddBookStore {
     ) {
       const userResp = await this.userBookCreateRequest.execute({
         bookId: bookResp.response.data.id,
-        status: formData.status,
         userId: this.user.data?.id,
       });
 

@@ -13,7 +13,6 @@ export const createUserBook = async (data: UserBookRequestModel) => {
     .from('userBooks')
     .insert({
       bookId: data.bookId,
-      status: data.status,
       userId: data.userId,
     })
     .throwOnError();
