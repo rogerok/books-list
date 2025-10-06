@@ -4,6 +4,7 @@ import {
   type BookGetListRequestModel,
   type BookNotesUpdateRequestModel,
   type BookProgressUpdateModel,
+  type BooksGetLastRatedRequestModel,
   type BookStatusUpdateRequestModel,
   type UserBookRequestModel,
 } from '@shared/models/book.ts';
@@ -96,6 +97,17 @@ export const getBooks = async (data: BookGetListRequestModel) => {
       instatus: data.status,
       intitle: data.title,
       inuserid: data.userId,
+    })
+    .throwOnError();
+};
+
+export const getLastRatedBooks = async (
+  data: BooksGetLastRatedRequestModel,
+) => {
+  return apiClient
+    .rpc('getRecentRated', {
+      plimit: data.limit,
+      puserid: data.userId,
     })
     .throwOnError();
 };
