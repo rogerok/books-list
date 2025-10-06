@@ -3,6 +3,10 @@ import type { StatsStore } from '@shared/stores/stats-store/stats-store.ts';
 import type { UserStore } from '@shared/stores/user-store/user-store.ts';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import {
+  type BookCreateFormModel,
+  BookCreateFormSchema,
+} from '@pages/add-book/models/book.ts';
 import { createBook, createUserBook } from '@shared/api/book/book.ts';
 import { getPublicUrl } from '@shared/api/storage/storage.ts';
 import { routes } from '@shared/config/router/routes.ts';
@@ -11,11 +15,7 @@ import { MobxForm } from '@shared/lib/mobx/mobx-form/mobx-form.ts';
 import { Notifier } from '@shared/lib/notifier/notifier.ts';
 import { RequestStore } from '@shared/lib/request-store/request-store.ts';
 import { type RouterController } from '@shared/lib/router/app-router.ts';
-import {
-  type BookCreateFormModel,
-  BookCreateFormSchema,
-  BookStatusEnumSchema,
-} from '@shared/models/book.ts';
+import { BookStatusEnumSchema } from '@shared/models/book.ts';
 import { convertEmptyStringToNull } from '@shared/utils/converters.ts';
 import { makeAutoObservable, reaction } from 'mobx';
 

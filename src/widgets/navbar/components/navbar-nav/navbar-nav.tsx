@@ -6,6 +6,7 @@ import { routes } from '@shared/config/router/routes.ts';
 import { useRootStore } from '@shared/stores/root-store/root-store.ts';
 import { AppLink } from '@shared/ui/app-link/app-link.tsx';
 import { IconComponent } from '@shared/ui/icon-component/icon-component.tsx';
+import { observer } from 'mobx-react-lite';
 
 const cnNavbarNav = cn('NavbarNav');
 
@@ -13,7 +14,7 @@ interface NavbarNavProps {
   className?: string;
 }
 
-export const NavbarNav: FC<NavbarNavProps> = (props) => {
+export const NavbarNav: FC<NavbarNavProps> = observer((props) => {
   const { stats } = useRootStore();
 
   return (
@@ -37,7 +38,9 @@ export const NavbarNav: FC<NavbarNavProps> = (props) => {
       >
         <IconComponent name={'booksIcon'} size={'xs'} />
         <span>Моя библиотека</span>
-        <span className={cnNavbarNav('BooksCount')}>{stats.total}</span>
+        {stats.total && stats.total >= 0 && (
+          <span className={cnNavbarNav('BooksCount')}>{stats.total}</span>
+        )}
       </AppLink>
       <AppLink
         activeOptions={{
@@ -51,4 +54,4 @@ export const NavbarNav: FC<NavbarNavProps> = (props) => {
       </AppLink>
     </nav>
   );
-};
+});

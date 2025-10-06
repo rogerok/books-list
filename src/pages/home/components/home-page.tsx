@@ -8,7 +8,7 @@ import { AppLink } from '@shared/ui/app-link/app-link.tsx';
 import { IconComponent } from '@shared/ui/icon-component/icon-component.tsx';
 import { Typography } from '@shared/ui/typography/typography.tsx';
 import { VStack } from '@shared/ui/vstack/vstack.tsx';
-import { BookWidget } from '@widgets/book';
+import { BooksListWidget } from '@widgets/book/components/books-list-widget.tsx';
 import { GoalWidget } from '@widgets/goal';
 
 const cnHomePage = cn('HomePage');
@@ -72,7 +72,7 @@ export const HomePage = () => {
         <Typography as={'h6'} size={'lg'} weight={'semibold'}>
           Текущие книги
         </Typography>
-        <BookWidget variant={'wide'} />
+        <BooksListWidget variant={'wide'} />
       </VStack>
 
       <section className={cnHomePage('Activities')}>

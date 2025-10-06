@@ -21,9 +21,15 @@ interface NavbarProps {
 
 const cnNavbar = cn('Navbar');
 
-const Navbar: FC<NavbarProps> = observer((props) => {
-  const { bookWidget, className, goalWidget, statisticWidget, userMenu } =
-    props;
+export const Navbar: FC<NavbarProps> = observer((props) => {
+  const {
+    bookWidget,
+
+    className,
+    goalWidget,
+    statisticWidget,
+    userMenu,
+  } = props;
 
   const { navbar } = useRootStore();
 
@@ -88,4 +94,3 @@ const Navbar: FC<NavbarProps> = observer((props) => {
     </>
   );
 });
-export default Navbar;

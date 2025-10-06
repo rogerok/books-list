@@ -1,9 +1,12 @@
 import './book-status-badge.scss';
-import type { BookStatusType } from '@shared/models/book.ts';
 import type { FC } from 'react';
 
 import { cn } from '@bem-react/classname';
 import { ColorConstant } from '@shared/constants/style-system/colors.ts';
+import {
+  BookStatusEnumSchema,
+  type BookStatusType,
+} from '@shared/models/book.ts';
 import { Badge } from '@shared/ui/badge/badge.tsx';
 import { HStack } from '@shared/ui/hstack/hstack.tsx';
 import { IconComponent } from '@shared/ui/icon-component/icon-component.tsx';
@@ -12,7 +15,7 @@ import { Typography } from '@shared/ui/typography/typography.tsx';
 const cnBookStatusBadge = cn('BookStatusBadge');
 
 interface BookStatusBadgeProps {
-  status: BookStatusType;
+  status: string;
   className?: string;
 }
 
@@ -87,13 +90,18 @@ const getContent = (status: BookStatusType) => {
 export const BookStatusBadge: FC<BookStatusBadgeProps> = (props) => {
   const { className, status } = props;
 
+  // TODO: find out how get from supabase as enum
+  const validStatus = BookStatusEnumSchema.safeParse(status).data;
+
   return (
-    <HStack
-      align={'center'}
-      className={cnBookStatusBadge(undefined, [className])}
-      gap={'8'}
-    >
-      {getContent(status)}
-    </HStack>
+    validStatus && (
+      <HStack
+        align={'center'}
+        className={cnBookStatusBadge(undefined, [className])}
+        gap={'8'}
+      >
+        {getContent(validStatus)}
+      </HStack>
+    )
   );
 };

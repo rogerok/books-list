@@ -1,14 +1,20 @@
-import { BooleanToggleStore } from '@shared/lib/toggle-boolean-store/booleanToggleStore.ts';
+import { useBookDetailsStore } from '@pages/book-details/stores/book-details-store.ts';
+import { Form } from '@shared/components/form/form.tsx';
+import { TextAreaField } from '@shared/components/text-area-field/text-area-field.tsx';
 import { Button } from '@shared/ui/button/button.tsx';
 import { HStack } from '@shared/ui/hstack/hstack.tsx';
 import { IconComponent } from '@shared/ui/icon-component/icon-component.tsx';
-import { TextArea } from '@shared/ui/text-area/text-area.tsx';
+import { Skeleton } from '@shared/ui/skeleton/skeleton.tsx';
 import { Typography } from '@shared/ui/typography/typography.tsx';
 import { observer } from 'mobx-react-lite';
-import { type FC, useState } from 'react';
+import { type FC } from 'react';
 
 export const BookNotes: FC = observer(() => {
-  const [editable] = useState(() => new BooleanToggleStore(false));
+  const { bookNotesEditable, isLoading, notesForm } = useBookDetailsStore();
+
+  if (isLoading) {
+    return <Skeleton height={80} />;
+  }
 
   return (
     <>
@@ -18,29 +24,27 @@ export const BookNotes: FC = observer(() => {
         </Typography>
         <IconComponent
           name={'pencilIcon'}
-          onClick={editable.toggle}
+          onClick={bookNotesEditable.toggle}
           size={'xxs'}
         />
       </HStack>
-      {editable.value ? (
-        // TODO: replace with form
-        <HStack gap={'12'}>
-          <TextArea
-            fullWidth
-            value={
-              'Очень нравятся философские размышления о параллельных жизнях.'
-            }
-          />
-          <HStack gap={'8'}>
-            <Button variant={'dark'}>Сохранить</Button>
-            <Button onClick={editable.setFalse} variant={'clear'}>
-              Отмена
-            </Button>
+      {bookNotesEditable.value ? (
+        <Form methods={notesForm}>
+          <HStack gap={'12'}>
+            <TextAreaField fullWidth name={'notes'} />
+            <HStack gap={'8'}>
+              <Button type={'submit'} variant={'dark'}>
+                Сохранить
+              </Button>
+              <Button onClick={bookNotesEditable.setFalse} variant={'clear'}>
+                Отмена
+              </Button>
+            </HStack>
           </HStack>
-        </HStack>
+        </Form>
       ) : (
         <Typography size={'sm'} variant={'lightDark'}>
-          Очень нравятся философские размышления о параллельных жизнях.
+          {notesForm.values.notes}
         </Typography>
       )}
     </>

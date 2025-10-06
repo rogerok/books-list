@@ -9,7 +9,7 @@ export const userCreate = async (data: UserCreateRequestModel) => {
     .throwOnError();
 };
 
-export const getUSer = async (id: string) => {
+export const getUser = async (id: string) => {
   return apiClient
     .from('users')
     .select('*')
