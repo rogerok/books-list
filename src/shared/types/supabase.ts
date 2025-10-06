@@ -49,11 +49,9 @@ export type Database = {
         Args: { plimit: number; puserid: string };
         Returns: {
           author: string;
-          coverUrl: string;
-          genre: string;
           rating: number;
+          status: string;
           title: string;
-          updatedAt: string;
           userBookId: string;
         }[];
       };
