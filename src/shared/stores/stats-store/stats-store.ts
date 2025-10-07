@@ -9,7 +9,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 export class StatsStore {
   data: StatsResponseModel | null = null;
 
-  getStatsRequest = new RequestStore(getStats, {
+  private getStatsRequest = new RequestStore(getStats, {
     onError: () =>
       Notifier.error('Не удалось загрузить статистику пользователя'),
   });

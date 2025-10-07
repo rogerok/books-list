@@ -10,7 +10,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 
 export class BooksStore {
   data: BookResponseModel[] = [];
-  getBooksRequest = new RequestStore(getBooks);
+  private getBooksRequest = new RequestStore(getBooks);
 
   constructor(private user: UserStore) {
     makeAutoObservable(

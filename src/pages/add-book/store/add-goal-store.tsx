@@ -13,11 +13,10 @@ import { RequestStore } from '@shared/lib/request-store/request-store.ts';
 import { makeAutoObservable, reaction } from 'mobx';
 
 export class AddGoalStore {
-  createGoalRequest = new RequestStore(createGoal, {
+  private createGoalRequest = new RequestStore(createGoal, {
     onError: () => Notifier.success('Ошибка обновления цели'),
     onSuccess: () => Notifier.success('Цель успешно обновлена'),
   });
-
   form = new MobxForm({
     defaultValues: {
       targetBooks: 1,

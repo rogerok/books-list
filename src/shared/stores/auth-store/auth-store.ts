@@ -15,12 +15,11 @@ import { RouterController } from '@shared/lib/router/app-router.ts';
 import { makeAutoObservable, runInAction } from 'mobx';
 
 export class AuthStore {
-  session: Session | null = null;
-  sessionRequest = new RequestStore(getSessionRequest);
-  signInRequest = new RequestStore(signInRequest);
-  signOutRequest = new RequestStore(signOutRequest);
-
-  subscription: Subscription | undefined;
+  private session: Session | null = null;
+  private sessionRequest = new RequestStore(getSessionRequest);
+  private signInRequest = new RequestStore(signInRequest);
+  private signOutRequest = new RequestStore(signOutRequest);
+  private subscription: Subscription | undefined;
 
   constructor(
     private router: RouterController,

@@ -19,12 +19,10 @@ import { z } from 'zod';
 
 export class BooksPageStore {
   data: BookResponseModel[] = [];
-  getBooksRequest = new RequestStore(getBooks);
-  getStatsRequest = new RequestStore(getStats);
-
+  private getBooksRequest = new RequestStore(getBooks);
+  private getStatsRequest = new RequestStore(getStats);
   searchTerm = '';
   searchTermErrorMsg: string | undefined = '';
-
   tabManager = createTabManager({
     fallbackTab: BookStatusFilterEnumSchema.enum.all,
     onChangeActiveTab: this.fetchBooks,
@@ -95,7 +93,7 @@ export class BooksPageStore {
     this.searchTerm = value;
   }
 
-  validateSearchTerm() {
+  private validateSearchTerm() {
     const result = z.string().min(2).max(50).trim().safeParse(this.searchTerm);
 
     runInAction(() => {

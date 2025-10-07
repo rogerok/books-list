@@ -24,8 +24,9 @@ export class SignUpStore {
     resolver: zodResolver(SignUpFormSchema),
   });
 
-  signUpRequest = new RequestStore(signUpRequest);
-  userCreateRequest = new RequestStore(userCreate, {
+  private signUpRequest = new RequestStore(signUpRequest);
+
+  private userCreateRequest = new RequestStore(userCreate, {
     onError: (errorMessage) =>
       Notifier.error(errorMessage || 'Ошибка регистрации'),
     onSuccess: () =>
@@ -44,7 +45,7 @@ export class SignUpStore {
     );
   }
 
-  async processSignUp(credentials: SignUpFormType): Promise<void> {
+  private async processSignUp(credentials: SignUpFormType): Promise<void> {
     const { email, name, password } = credentials;
 
     const { response, status } = await this.signUpRequest.execute({

@@ -5,8 +5,8 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import { nanoid } from 'nanoid';
 
 export class UploadStore {
-  uploadingCount = 0;
-  uploadRequest = new RequestStore(uploadFileRequest, {
+  private uploadingCount = 0;
+  private uploadRequest = new RequestStore(uploadFileRequest, {
     onError: () => Notifier.error('Ошибка загрузки файла'),
     onSuccess: () => Notifier.success('Файл загружен'),
   });
@@ -19,10 +19,6 @@ export class UploadStore {
         autoBind: true,
       },
     );
-  }
-
-  generatePath() {
-    return `${nanoid()}/${Date.now()}`;
   }
 
   async uploadFile(
@@ -61,5 +57,9 @@ export class UploadStore {
 
   get isUploading(): boolean {
     return this.uploadRequest.isLoading;
+  }
+
+  private generatePath() {
+    return `${nanoid()}/${Date.now()}`;
   }
 }

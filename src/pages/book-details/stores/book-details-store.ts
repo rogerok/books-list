@@ -31,16 +31,14 @@ export class BookDetailsStore {
   bookProgressEditable = new BooleanToggleStore(false);
 
   data: BookResponseModel | null = null;
-
-  getBookDetailsRequest = new RequestStore(getBook);
-  markAsReadRequest = new RequestStore(setBookStatus, {
+  private getBookDetailsRequest = new RequestStore(getBook);
+  private markAsReadRequest = new RequestStore(setBookStatus, {
     onError: () =>
       Notifier.error(
         'Не удалось отметить книгу как прочитанную. Попробуйте ещё раз.',
       ),
     onSuccess: () => Notifier.success('Книга прочитана! Так держать!'),
   });
-
   notesForm = new MobxForm({
     defaultValues: {
       bookId: '',
@@ -49,7 +47,6 @@ export class BookDetailsStore {
     onSubmit: (data) => this.submitNotesForm(data),
     resolver: zodResolver(BookNotesUpdateRequestSchema),
   });
-
   progressForm = new MobxForm({
     defaultValues: {
       bookId: '',
@@ -58,14 +55,12 @@ export class BookDetailsStore {
     onSubmit: (data) => this.submitProgressForm(data),
     resolver: zodResolver(BookProgressUpdateRequestSchema),
   });
-
-  updateNotesRequest = new RequestStore(updateBookNotes, {
+  private updateNotesRequest = new RequestStore(updateBookNotes, {
     onError: () => Notifier.error('Не удалось обновить заметку.'),
     onSuccess: () => Notifier.success('Заметка обновлена'),
   });
-  updateProgressRequest = new RequestStore(updateBookProgress);
-
-  updateRatingRequest = new RequestStore(updateBookRating, {
+  private updateProgressRequest = new RequestStore(updateBookProgress);
+  private updateRatingRequest = new RequestStore(updateBookRating, {
     onError: () =>
       Notifier.error('Ошибка обновления рейтинга. Попробуйте ещё раз.'),
     onSuccess: () => Notifier.success('Рейтинг успешно обновлён'),

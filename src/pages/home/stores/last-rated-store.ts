@@ -7,9 +7,8 @@ import { makeAutoObservable } from 'mobx';
 
 export class LastRatedStore {
   data: BooksGetLastRatedResponseModel[] = [];
-  getLastRatedRequest = new RequestStore(getLastRatedBooks);
-
-  ratedBooksLimit = 2;
+  private getLastRatedRequest = new RequestStore(getLastRatedBooks);
+  private ratedBooksLimit = 2;
 
   constructor(private user: UserStore) {
     makeAutoObservable(this, {}, { autoBind: true });

@@ -7,16 +7,10 @@ import { makeAutoObservable, runInAction } from 'mobx';
 export class UserStore {
   data: UserResponseModel | null = null;
 
-  getUserRequest = new RequestStore(getUser);
+  private getUserRequest = new RequestStore(getUser);
 
   constructor() {
     makeAutoObservable(this);
-  }
-
-  clear() {
-    runInAction(() => {
-      this.data = null;
-    });
   }
 
   async fetchUser(id: string): Promise<void> {

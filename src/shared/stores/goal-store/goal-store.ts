@@ -7,7 +7,7 @@ import { makeAutoObservable } from 'mobx';
 
 export class GoalStore {
   data: GoalResponseModel | null = null;
-  getGoalRequest = new RequestStore(getGoal);
+  private getGoalRequest = new RequestStore(getGoal);
 
   constructor(private user: UserStore) {
     makeAutoObservable(
