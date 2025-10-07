@@ -94,8 +94,8 @@ export const updateBookNotes = async (data: BookNotesUpdateRequestModel) => {
 export const getBooks = async (data: BookGetListRequestModel) => {
   return apiClient
     .rpc('getUserBooks', {
+      insearchterm: data.searchTerm,
       instatus: data.status,
-      intitle: data.title,
       inuserid: data.userId,
     })
     .throwOnError();

@@ -17,7 +17,7 @@ export const StatisticWidget: FC<StatisticWidgetProps> = observer((props) => {
   const { stats } = useRootStore();
 
   useEffect(() => {
-    stats.fetchStats();
+    stats.initialFetch();
   }, [stats]);
 
   if (stats.isLoading) {

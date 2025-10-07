@@ -4,7 +4,7 @@ export const ValidationMessages = {
   invalidEmail: () => 'Неверный адрес почты.',
   invalidPassword: () =>
     'Пароль должен содержать только латинские буквы, цифры и спец символы. Должны быть минимум 1 строчная, 1 заглавная, 1 цифра и 1 один спецсимвол',
-  maxLength: (length: number) => `Максимальное значение ${length}`,
+  maxLength: (length: number) => `Максимальное длина строки ${length}`,
   maxNumber: (val: number) =>
     `Значение слишком большое.Должно быть равно ${val} или меньше.`,
   minLength: (length: number) =>

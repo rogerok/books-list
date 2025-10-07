@@ -28,7 +28,7 @@ export class GoalStore {
       this.user.id,
     );
 
-    if (status === 'success' && response.data) {
+    if (status === 'success') {
       this.data = response.data;
     }
   }

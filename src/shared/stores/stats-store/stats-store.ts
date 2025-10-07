@@ -1,4 +1,4 @@
-import type { StatsResponsetModel } from '@shared/models/stats.ts';
+import type { StatsResponseModel } from '@shared/models/stats.ts';
 import type { UserStore } from '@shared/stores/user-store/user-store.ts';
 
 import { getStats } from '@shared/api/stats/stats.ts';
@@ -7,7 +7,7 @@ import { RequestStore } from '@shared/lib/request-store/request-store.ts';
 import { makeAutoObservable } from 'mobx';
 
 export class StatsStore {
-  data: StatsResponsetModel | null = null;
+  data: StatsResponseModel | null = null;
 
   getStatsRequest = new RequestStore(getStats, {
     onError: () =>
@@ -25,14 +25,22 @@ export class StatsStore {
   }
 
   async fetchStats() {
-    if (this.user.id) {
-      const { response, status } = await this.getStatsRequest.execute(
-        this.user.id,
-      );
+    if (!this.user.id) {
+      return;
+    }
+    const { response, status } = await this.getStatsRequest.execute({
+      searchTerm: '',
+      userId: this.user.id,
+    });
 
-      if (status === 'success' && response.data) {
-        this.data = response.data;
-      }
+    if (status === 'success') {
+      this.data = response.data;
+    }
+  }
+
+  async initialFetch() {
+    if (!this.isLoading && !this.data) {
+      await this.fetchStats();
     }
   }
 

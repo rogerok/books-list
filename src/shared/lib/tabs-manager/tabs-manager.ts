@@ -19,7 +19,7 @@ interface TabManagerConfig<TItem extends TabManagerItem> {
   ) => void;
 }
 
-class TabsManager<T extends TabManagerItem> {
+export class TabsManager<T extends TabManagerItem> {
   abortController: AbortController;
   activeTabId: T['id'] | undefined;
   config: TabManagerConfig<T>;
@@ -27,9 +27,7 @@ class TabsManager<T extends TabManagerItem> {
    * This is needed ONLY WHEN `getActiveTab` IS NOT SET
    */
   private localActiveTab!: T['id'];
-
   tabs!: Array<T> | ReadonlyArray<T>;
-
   tabsIndexesMap!: Map<T['id'], number>;
 
   constructor(config: TabManagerConfig<T>) {

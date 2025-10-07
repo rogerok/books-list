@@ -19,7 +19,7 @@ interface BadgeProps {
   children: ReactNode;
   className?: string;
   rounded?: Rounded;
-  size?: 'lg' | 'md' | 'unset' | 'xl';
+  size?: 'lg' | 'md' | 'sm' | 'unset' | 'xl';
 }
 
 export const Badge: FC<BadgeProps> = (props) => {

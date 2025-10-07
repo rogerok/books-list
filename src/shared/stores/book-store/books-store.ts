@@ -4,7 +4,7 @@ import { getBooks } from '@shared/api/book/book.ts';
 import { RequestStore } from '@shared/lib/request-store/request-store.ts';
 import {
   type BookResponseModel,
-  BookStatusEnumSchema,
+  BookStatusFilterEnumSchema,
 } from '@shared/models/book.ts';
 import { makeAutoObservable } from 'mobx';
 
@@ -28,12 +28,12 @@ export class BooksStore {
     }
 
     const { response, status } = await this.getBooksRequest.execute({
-      status: BookStatusEnumSchema.enum.reading,
-      title: '',
+      searchTerm: '',
+      status: BookStatusFilterEnumSchema.enum.reading,
       userId: this.user.id,
     });
 
-    if (status === 'success' && response.data) {
+    if (status === 'success') {
       this.data = response.data;
     }
   }
