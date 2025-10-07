@@ -1,0 +1,28 @@
+@use '../../../../shared/styles/breakpoints' as b;
+
+.BooksList {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+
+  &-Item {
+    height: 100%;
+    list-style: none;
+  }
+
+  &-Widget {
+    height: 100%;
+  }
+
+  @media (min-width: b.$lg-breakpoint) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: b.$xl-breakpoint) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (width >= 1600px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
