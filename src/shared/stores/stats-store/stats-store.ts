@@ -4,7 +4,7 @@ import type { UserStore } from '@shared/stores/user-store/user-store.ts';
 import { getStats } from '@shared/api/stats/stats.ts';
 import { Notifier } from '@shared/lib/notifier/notifier.ts';
 import { RequestStore } from '@shared/lib/request-store/request-store.ts';
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 
 export class StatsStore {
   data: StatsResponseModel | null = null;
@@ -34,7 +34,9 @@ export class StatsStore {
     });
 
     if (status === 'success') {
-      this.data = response.data;
+      runInAction(() => {
+        this.data = response.data;
+      });
     }
   }
 
@@ -49,10 +51,8 @@ export class StatsStore {
   }
 
   get total() {
-    if (!this.data) {
-      return;
-    }
-
-    return Object.values(this.data).reduce((acc, item) => acc + item, 0);
+    return this.data
+      ? Object.values(this.data).reduce((acc, item) => acc + item, 0)
+      : 0;
   }
 }

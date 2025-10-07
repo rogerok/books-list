@@ -96,7 +96,7 @@ export class BooksPageStore {
   }
 
   validateSearchTerm() {
-    const result = z.string().min(2).max(50).safeParse(this.searchTerm);
+    const result = z.string().min(2).max(50).trim().safeParse(this.searchTerm);
 
     runInAction(() => {
       this.searchTermErrorMsg = result.success

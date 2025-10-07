@@ -6,7 +6,7 @@ import {
   type BookResponseModel,
   BookStatusFilterEnumSchema,
 } from '@shared/models/book.ts';
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 
 export class BooksStore {
   data: BookResponseModel[] = [];
@@ -34,7 +34,9 @@ export class BooksStore {
     });
 
     if (status === 'success') {
-      this.data = response.data;
+      runInAction(() => {
+        this.data = response.data;
+      });
     }
   }
 

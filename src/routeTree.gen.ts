@@ -20,9 +20,6 @@ import { Route as ProtecteddashboardRouteRouteImport } from './app/routes/_prote
 const ProtecteddashboardHomeLazyRouteImport = createFileRoute(
   '/_protected/(dashboard)/home',
 )()
-const ProtecteddashboardAddBookLazyRouteImport = createFileRoute(
-  '/_protected/(dashboard)/add-book',
-)()
 const ProtecteddashboardBooksIndexLazyRouteImport = createFileRoute(
   '/_protected/(dashboard)/books/',
 )()
@@ -66,16 +63,6 @@ const ProtecteddashboardHomeLazyRoute =
       (d) => d.Route,
     ),
   )
-const ProtecteddashboardAddBookLazyRoute =
-  ProtecteddashboardAddBookLazyRouteImport.update({
-    id: '/add-book',
-    path: '/add-book',
-    getParentRoute: () => ProtecteddashboardRouteRoute,
-  } as any).lazy(() =>
-    import('./app/routes/_protected/(dashboard)/add-book.lazy').then(
-      (d) => d.Route,
-    ),
-  )
 const ProtecteddashboardBooksIndexLazyRoute =
   ProtecteddashboardBooksIndexLazyRouteImport.update({
     id: '/books/',
@@ -111,7 +98,6 @@ export interface FileRoutesByFullPath {
   '/': typeof ProtecteddashboardRouteRouteWithChildren
   '/sign-in': typeof authSignInRoute
   '/sign-up': typeof authSignUpRoute
-  '/add-book': typeof ProtecteddashboardAddBookLazyRoute
   '/home': typeof ProtecteddashboardHomeLazyRoute
   '/books/$bookId': typeof ProtecteddashboardBooksBookIdLazyRoute
   '/books/add': typeof ProtecteddashboardBooksAddLazyRoute
@@ -121,7 +107,6 @@ export interface FileRoutesByTo {
   '/': typeof ProtecteddashboardRouteRouteWithChildren
   '/sign-in': typeof authSignInRoute
   '/sign-up': typeof authSignUpRoute
-  '/add-book': typeof ProtecteddashboardAddBookLazyRoute
   '/home': typeof ProtecteddashboardHomeLazyRoute
   '/books/$bookId': typeof ProtecteddashboardBooksBookIdLazyRoute
   '/books/add': typeof ProtecteddashboardBooksAddLazyRoute
@@ -134,7 +119,6 @@ export interface FileRoutesById {
   '/_protected/(dashboard)': typeof ProtecteddashboardRouteRouteWithChildren
   '/(auth)/sign-in': typeof authSignInRoute
   '/(auth)/sign-up': typeof authSignUpRoute
-  '/_protected/(dashboard)/add-book': typeof ProtecteddashboardAddBookLazyRoute
   '/_protected/(dashboard)/home': typeof ProtecteddashboardHomeLazyRoute
   '/_protected/(dashboard)/books/$bookId': typeof ProtecteddashboardBooksBookIdLazyRoute
   '/_protected/(dashboard)/books/add': typeof ProtecteddashboardBooksAddLazyRoute
@@ -146,7 +130,6 @@ export interface FileRouteTypes {
     | '/'
     | '/sign-in'
     | '/sign-up'
-    | '/add-book'
     | '/home'
     | '/books/$bookId'
     | '/books/add'
@@ -156,7 +139,6 @@ export interface FileRouteTypes {
     | '/'
     | '/sign-in'
     | '/sign-up'
-    | '/add-book'
     | '/home'
     | '/books/$bookId'
     | '/books/add'
@@ -168,7 +150,6 @@ export interface FileRouteTypes {
     | '/_protected/(dashboard)'
     | '/(auth)/sign-in'
     | '/(auth)/sign-up'
-    | '/_protected/(dashboard)/add-book'
     | '/_protected/(dashboard)/home'
     | '/_protected/(dashboard)/books/$bookId'
     | '/_protected/(dashboard)/books/add'
@@ -226,13 +207,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtecteddashboardHomeLazyRouteImport
       parentRoute: typeof ProtecteddashboardRouteRoute
     }
-    '/_protected/(dashboard)/add-book': {
-      id: '/_protected/(dashboard)/add-book'
-      path: '/add-book'
-      fullPath: '/add-book'
-      preLoaderRoute: typeof ProtecteddashboardAddBookLazyRouteImport
-      parentRoute: typeof ProtecteddashboardRouteRoute
-    }
     '/_protected/(dashboard)/books/': {
       id: '/_protected/(dashboard)/books/'
       path: '/books'
@@ -258,7 +232,6 @@ declare module '@tanstack/react-router' {
 }
 
 interface ProtecteddashboardRouteRouteChildren {
-  ProtecteddashboardAddBookLazyRoute: typeof ProtecteddashboardAddBookLazyRoute
   ProtecteddashboardHomeLazyRoute: typeof ProtecteddashboardHomeLazyRoute
   ProtecteddashboardBooksBookIdLazyRoute: typeof ProtecteddashboardBooksBookIdLazyRoute
   ProtecteddashboardBooksAddLazyRoute: typeof ProtecteddashboardBooksAddLazyRoute
@@ -267,7 +240,6 @@ interface ProtecteddashboardRouteRouteChildren {
 
 const ProtecteddashboardRouteRouteChildren: ProtecteddashboardRouteRouteChildren =
   {
-    ProtecteddashboardAddBookLazyRoute: ProtecteddashboardAddBookLazyRoute,
     ProtecteddashboardHomeLazyRoute: ProtecteddashboardHomeLazyRoute,
     ProtecteddashboardBooksBookIdLazyRoute:
       ProtecteddashboardBooksBookIdLazyRoute,

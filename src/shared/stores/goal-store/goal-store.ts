@@ -39,7 +39,7 @@ export class GoalStore {
     }
   }
 
-  get goalDate() {
+  get goalYear() {
     return this.data?.targetDate
       ? new Date(this.data.targetDate).getFullYear()
       : new Date().getFullYear();

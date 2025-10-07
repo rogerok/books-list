@@ -14,10 +14,15 @@ export type BreakpointsInPxType = ObjectValues<typeof BreakpointsInPxConstant>;
 
 export class ScreenStore {
   currentWidth: number = window.innerWidth;
+  private resizeRaf?: number;
 
   constructor() {
     makeAutoObservable(this);
     window.addEventListener('resize', this.handleResize);
+  }
+
+  destroy() {
+    window.removeEventListener('resize', this.handleResize);
   }
 
   get downLg(): boolean {
@@ -57,7 +62,10 @@ export class ScreenStore {
   }
 
   handleResize = (): void => {
-    this.currentWidth = window.innerWidth;
+    cancelAnimationFrame(this.resizeRaf!);
+    this.resizeRaf = requestAnimationFrame(() => {
+      this.currentWidth = window.innerWidth;
+    });
   };
 
   isWidthMatchMaxByValue = (value: BreakpointsInPxType): boolean => {
