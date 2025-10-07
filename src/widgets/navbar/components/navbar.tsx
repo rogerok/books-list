@@ -40,9 +40,9 @@ export const Navbar: FC<NavbarProps> = observer((props) => {
       <aside
         className={cnNavbar(
           {
-            open: navbar.value,
+            open: navbar.isOpen,
           },
-          [className, navbar.value ? 'open' : ''],
+          [className, navbar.isOpen ? 'open' : ''],
         )}
       >
         <div className={cnNavbar('Inner')}>
@@ -67,7 +67,7 @@ export const Navbar: FC<NavbarProps> = observer((props) => {
                 className={cnNavbar('CloseButton')}
                 color={ColorConstant.Neutral900}
                 name={'cancelIcon'}
-                onClick={navbar.setFalse}
+                onClick={navbar.close}
                 size={'md'}
               />
             </div>
@@ -91,9 +91,9 @@ export const Navbar: FC<NavbarProps> = observer((props) => {
 
       <div
         className={cnNavbar('Overlay', {
-          open: navbar.value,
+          open: navbar.isOpen,
         })}
-        onClick={navbar.setFalse}
+        onClick={navbar.close}
       />
     </>
   );

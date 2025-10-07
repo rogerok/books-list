@@ -9,29 +9,33 @@ import React from 'react';
 
 const cnHeader = cn('Header');
 
-export const Header: React.FC<{ className?: string }> = observer(
-  ({ className }) => {
-    const { navbar } = useRootStore();
-    const title = useHeaderTitle();
+interface HeaderProps {
+  className?: string;
+}
 
-    return (
-      <header className={cnHeader(undefined, [className])}>
-        <IconComponent
-          className={cnHeader('Burger')}
-          name={'burgerMenuIcon'}
-          onClick={navbar.setTrue}
-          size={'md'}
-        />
+export const Header: React.FC<HeaderProps> = observer((props) => {
+  const { className } = props;
 
-        <Typography
-          as={'h2'}
-          className={cnHeader('Title')}
-          size={'xl'}
-          weight={'semibold'}
-        >
-          {title ?? 'Book Tracker'}
-        </Typography>
-      </header>
-    );
-  },
-);
+  const { navbar } = useRootStore();
+  const title = useHeaderTitle();
+
+  return (
+    <header className={cnHeader(undefined, [className])}>
+      <IconComponent
+        className={cnHeader('Burger')}
+        name={'burgerMenuIcon'}
+        onClick={navbar.open}
+        size={'md'}
+      />
+
+      <Typography
+        as={'h2'}
+        className={cnHeader('Title')}
+        size={'xl'}
+        weight={'semibold'}
+      >
+        {title ?? 'Book Tracker'}
+      </Typography>
+    </header>
+  );
+});
