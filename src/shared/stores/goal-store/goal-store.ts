@@ -3,7 +3,7 @@ import type { UserStore } from '@shared/stores/user-store/user-store.ts';
 
 import { getGoal } from '@shared/api/goal/goal.ts';
 import { RequestStore } from '@shared/lib/request-store/request-store.ts';
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 
 export class GoalStore {
   data: GoalResponseModel | null = null;
@@ -29,7 +29,9 @@ export class GoalStore {
     );
 
     if (status === 'success') {
-      this.data = response.data;
+      runInAction(() => {
+        this.data = response.data;
+      });
     }
   }
 
