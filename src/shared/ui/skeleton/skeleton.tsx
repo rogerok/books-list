@@ -10,7 +10,7 @@ import {
 
 const cnSkeleton = cn('Skeleton');
 
-type Rounded = '14' | '16';
+type Rounded = '10' | '14' | '16';
 
 interface SkeletonProps {
   animation?: 'none' | 'pulse' | 'wave';

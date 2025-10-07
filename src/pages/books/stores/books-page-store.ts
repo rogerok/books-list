@@ -90,11 +90,15 @@ export class BooksPageStore {
   }
 
   setSearchTerm(value: string) {
-    this.searchTerm = value;
+    this.searchTerm = value.toLowerCase();
+  }
+
+  get isBooksLoading() {
+    return this.getBooksRequest.isLoading;
   }
 
   private validateSearchTerm() {
-    const result = z.string().min(2).max(50).trim().safeParse(this.searchTerm);
+    const result = z.string().max(50).trim().safeParse(this.searchTerm);
 
     runInAction(() => {
       this.searchTermErrorMsg = result.success

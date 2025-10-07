@@ -64,6 +64,10 @@
       background: var(--neutral-1100);
     }
 
+    &_warn {
+      background: var(--warn);
+    }
+
   }
 
   &_fullWidth {

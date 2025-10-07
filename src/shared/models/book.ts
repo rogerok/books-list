@@ -107,3 +107,10 @@ export const BooksGetLastRatedResponseSchema = z.object({
 export type BooksGetLastRatedResponseModel = z.infer<
   typeof BooksGetLastRatedResponseSchema
 >;
+
+export const BookDeleteRequestSchema = z.object({
+  bookId: z.string().uuid(),
+  userId: z.string().uuid(),
+});
+
+export type BookDeleteRequestModel = z.infer<typeof BookDeleteRequestSchema>;

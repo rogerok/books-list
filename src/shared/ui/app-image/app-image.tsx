@@ -14,6 +14,7 @@ const cnAppImage = cn('AppImage');
 
 interface AppImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   alt: string;
+  aspect?: boolean;
   className?: string;
   errorFallback?: ReactElement;
   fallback?: ReactElement;

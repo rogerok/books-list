@@ -1,6 +1,7 @@
 import { apiClient } from '@shared/api/client.ts';
 import {
   type BookCreateRequestModel,
+  type BookDeleteRequestModel,
   type BookGetListRequestModel,
   type BookNotesUpdateRequestModel,
   type BookProgressUpdateModel,
@@ -109,5 +110,14 @@ export const getLastRatedBooks = async (
       plimit: data.limit,
       puserid: data.userId,
     })
+    .throwOnError();
+};
+
+export const deleteBook = async (data: BookDeleteRequestModel) => {
+  return apiClient
+    .from('userBooks')
+    .delete()
+    .eq('bookId', data.bookId)
+    .eq('userId', data.userId)
     .throwOnError();
 };

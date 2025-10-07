@@ -12,7 +12,8 @@ type ButtonVariantsType =
   | 'light'
   | 'outline'
   | 'primary'
-  | 'secondary';
+  | 'secondary'
+  | 'warn';
 
 export type ButtonProps = {
   addonLeft?: ReactNode;
