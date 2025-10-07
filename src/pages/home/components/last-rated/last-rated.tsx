@@ -59,40 +59,40 @@ export const LastRated: FC<LastActivityProps> = observer((props) => {
 
           return (
             <li className={cnLastActivity('Item')} key={idx}>
-              <Card
-                className={cnLastActivity('ItemInner', {
-                  status: validStatus,
-                })}
-                elevation={'sm'}
+              <AppLink
+                params={{
+                  bookId: book.userBookId,
+                }}
+                to={routes.bookDetails()}
               >
-                <VStack>
-                  {validStatus && (
-                    <AppLink
-                      params={{
-                        bookId: book.userBookId,
-                      }}
-                      to={routes.bookDetails()}
-                    >
-                      <Typography as={'h6'} size={'sm'} weight={'medium'}>
+                <Card
+                  className={cnLastActivity('ItemInner', {
+                    status: validStatus,
+                  })}
+                  elevation={'sm'}
+                >
+                  <VStack>
+                    {validStatus && (
+                      <Typography as={'h6'} clamp size={'sm'} weight={'medium'}>
                         {labelsMap[validStatus]} {book.title}
                       </Typography>
-                    </AppLink>
-                  )}
-                  <Typography size={'2xs'} variant={'secondary'}>
-                    {book.author}
-                  </Typography>
-                </VStack>
-                <div className={cnLastActivity('Rating')}>
-                  <IconComponent
-                    color={ColorConstant.Orange200}
-                    name={'starFilledIcon'}
-                    size={'xxxs'}
-                  />
-                  <Typography size={'xs'} variant={'secondary'}>
-                    {book.rating}
-                  </Typography>
-                </div>
-              </Card>
+                    )}
+                    <Typography clamp size={'2xs'} variant={'secondary'}>
+                      {book.author}
+                    </Typography>
+                  </VStack>
+                  <div className={cnLastActivity('Rating')}>
+                    <IconComponent
+                      color={ColorConstant.Orange200}
+                      name={'starFilledIcon'}
+                      size={'xxxs'}
+                    />
+                    <Typography size={'xs'} variant={'secondary'}>
+                      {book.rating}
+                    </Typography>
+                  </div>
+                </Card>
+              </AppLink>
             </li>
           );
         })}

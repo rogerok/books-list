@@ -28,80 +28,81 @@ const BookWidgetCard: FC<BookWidgetCardProps> = (props) => {
   const hasRating = !!data.rating && data.rating >= 0;
 
   return (
-    <VStack className={cnBookWidgetCard(undefined, [className])} gap={'16'}>
-      {data.coverUrl ? (
+    <VStack className={cnBookWidgetCard(undefined, [className])} gap={'12'}>
+      <AppLink
+        params={{
+          bookId: data.bookId,
+        }}
+        to={routes.bookDetails()}
+      >
         <div className={cnBookWidgetCard('Cover')}>
-          <AppImage
-            alt={data.title}
-            className={cnBookWidgetCard('Img')}
-            fallback={<Skeleton height={238} rounded={'14'} />}
-            fit={'cover'}
-            height={238}
-            rounded={'10'}
-            src={data.coverUrl}
-          />
-        </div>
-      ) : (
-        <Typography
-          className={cnBookWidgetCard('CoverFallback')}
-          size={'sm'}
-          weight={'medium'}
-        >
-          🖼️ Обложка отсутствует
-        </Typography>
-      )}
-
-      <VStack gap={'12'}>
-        <AppLink
-          params={{
-            bookId: data.bookId,
-          }}
-          to={routes.bookDetails()}
-        >
-          <VStack as={'p'} gap={'4'}>
+          {data.coverUrl ? (
+            <AppImage
+              alt={data.title}
+              className={cnBookWidgetCard('Img')}
+              fallback={<Skeleton height={238} rounded={'14'} />}
+              fit={'cover'}
+              height={238}
+              rounded={'10'}
+              src={data.coverUrl}
+            />
+          ) : (
             <Typography
-              className={cnBookWidgetCard('Text')}
-              size={'md'}
+              className={cnBookWidgetCard('CoverFallback')}
+              size={'sm'}
               weight={'medium'}
             >
-              {data.title}
+              🖼️ Обложка отсутствует
             </Typography>
+          )}
+        </div>
+
+        <VStack as={'p'} gap={'4'}>
+          <Typography
+            clamp
+            className={cnBookWidgetCard('Text')}
+            size={'md'}
+            weight={'medium'}
+          >
+            {data.title}
+          </Typography>
+          <Typography
+            clamp
+            className={cnBookWidgetCard('Text')}
+            size={'sm'}
+            variant={'secondary'}
+          >
+            {data.author}
+          </Typography>
+          {data.genreName && (
             <Typography
+              clamp
               className={cnBookWidgetCard('Text')}
-              size={'sm'}
+              size={'2xs'}
               variant={'secondary'}
             >
-              {data.author}
+              {data.genreName}
             </Typography>
-            {data.genreName && (
-              <Typography
-                className={cnBookWidgetCard('Text')}
-                size={'2xs'}
-                variant={'secondary'}
-              >
-                {data.genreName}
-              </Typography>
-            )}
-          </VStack>
-        </AppLink>
+          )}
+        </VStack>
+      </AppLink>
 
-        <BookStatusBadge status={data.status} />
-        {hasRating ? (
-          <HStack gap={'4'}>
-            <Typography variant={'secondary'}>{data.rating}</Typography>
-            <IconComponent
-              color={ColorConstant.Orange200}
-              name={'starFilledIcon'}
-              size={'xxs'}
-            />
-          </HStack>
-        ) : (
-          <Typography size={'xs'} variant={'secondary'}>
-            Вы ещё не оценивали книгу
-          </Typography>
-        )}
-        <BookProgress percent={data.progress} />
-      </VStack>
+      <BookStatusBadge status={data.status} />
+      {hasRating ? (
+        <HStack gap={'4'}>
+          <Typography variant={'secondary'}>{data.rating}</Typography>
+          <IconComponent
+            color={ColorConstant.Orange200}
+            name={'starFilledIcon'}
+            size={'xxs'}
+          />
+        </HStack>
+      ) : (
+        <Typography size={'xs'} variant={'secondary'}>
+          Вы ещё не оценивали книгу
+        </Typography>
+      )}
+      <BookProgress percent={data.progress} />
     </VStack>
   );
 };

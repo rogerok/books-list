@@ -26,12 +26,12 @@ export const BookWidgetCompact: FC<BookWidgetCompactProps> = (props) => {
         }}
         to={routes.bookDetails()}
       >
-        <Typography as={'h5'} size={'2xs'} weight={'medium'}>
+        <Typography as={'h5'} clamp size={'2xs'} weight={'medium'}>
           {data.title}
         </Typography>
       </AppLink>
 
-      <Typography gutterBottom size={'3xs'} variant={'secondary'}>
+      <Typography clamp gutterBottom size={'3xs'} variant={'secondary'}>
         {data.author}
       </Typography>
       <BookProgress percent={data.progress ?? 0} />

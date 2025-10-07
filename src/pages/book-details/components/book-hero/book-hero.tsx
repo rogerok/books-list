@@ -36,6 +36,7 @@ export const BookHero: FC<BookHeroProps> = observer((props) => {
             height={320}
             rounded={'10'}
             src={data.coverUrl}
+            width={224}
           />
         )}
 

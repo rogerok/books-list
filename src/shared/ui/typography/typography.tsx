@@ -41,6 +41,7 @@ type TypographyProps<T extends ElementType> = {
   children: ReactNode;
   align?: TypographyAlign;
   as?: T;
+  clamp?: boolean;
   className?: string;
   dataTestId?: string;
   fullWidth?: boolean;
@@ -58,6 +59,7 @@ export const Typography = <T extends ElementType = 'span'>(
     align = 'left',
     as,
     children,
+    clamp,
     className,
     dataTestId,
     fullWidth,
@@ -72,6 +74,7 @@ export const Typography = <T extends ElementType = 'span'>(
   const mods = {
     align: align,
     break: wordBreak,
+    clamp: clamp,
     fullWidth: fullWidth,
     gutterBottom: gutterBottom,
     size: size,

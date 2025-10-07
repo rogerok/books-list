@@ -199,7 +199,7 @@ export class BookDetailsStore {
       this.data.status = response.data.status;
       this.bookProgressEditable.setFalse();
 
-      if (response.data.status === BookStatusEnumSchema.enum.read) {
+      if (response.data.status !== BookStatusEnumSchema.enum.reading) {
         void this.deps.goal.fetchGoal();
       }
 
@@ -223,6 +223,10 @@ export class BookDetailsStore {
     }
   }
 
+  get isBookRead() {
+    return this.data?.status === BookStatusEnumSchema.enum.read;
+  }
+
   get isDeleting() {
     return this.deleteBookRequest.isLoading;
   }
@@ -231,7 +235,7 @@ export class BookDetailsStore {
     return this.getBookDetailsRequest.isLoading;
   }
 
-  get isReading() {
+  get isReadingRequestLoad() {
     return this.markAsReadRequest.isLoading;
   }
 }

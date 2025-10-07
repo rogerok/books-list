@@ -7,8 +7,13 @@ import { IconComponent } from '@shared/ui/icon-component/icon-component.tsx';
 import { observer } from 'mobx-react-lite';
 
 export const BookDetailsActionButtons: FC = observer(() => {
-  const { deleteBook, isDeleting, isReading, markAsRead } =
-    useBookDetailsStore();
+  const {
+    deleteBook,
+    isBookRead,
+    isDeleting,
+    isReadingRequestLoad,
+    markAsRead,
+  } = useBookDetailsStore();
 
   return (
     <>
@@ -20,16 +25,16 @@ export const BookDetailsActionButtons: FC = observer(() => {
             size={'xxs'}
           />
         }
-        disabled={isReading || isDeleting}
+        disabled={isReadingRequestLoad || isDeleting || isBookRead}
         fullWidth
-        isLoading={isReading}
+        isLoading={isReadingRequestLoad}
         onClick={markAsRead}
         variant={'accent'}
       >
         Прочитано
       </Button>
       <Button
-        disabled={isReading || isDeleting}
+        disabled={isReadingRequestLoad || isDeleting}
         fullWidth
         isLoading={isDeleting}
         onClick={deleteBook}

@@ -1,3 +1,5 @@
+@use '../../../../shared/styles/breakpoints' as b;
+
 .BookHero {
   display: flex;
   flex-wrap: wrap;
@@ -18,10 +20,17 @@
   }
 
   &-Genre {
+    flex-grow: 0;
     padding: 0.25rem 0.5rem;
   }
 
   &-GenreTitle {
     color: var(--neutral-1100);
+  }
+}
+
+@media (min-width: b.$lg-breakpoint) {
+  .BookHero {
+    flex-wrap: nowrap;
   }
 }

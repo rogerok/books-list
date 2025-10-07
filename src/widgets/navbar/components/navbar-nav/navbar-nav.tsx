@@ -15,7 +15,7 @@ interface NavbarNavProps {
 }
 
 export const NavbarNav: FC<NavbarNavProps> = observer((props) => {
-  const { stats } = useRootStore();
+  const { navbar, stats } = useRootStore();
 
   return (
     <nav className={cnNavbarNav(undefined, [props.className])}>
@@ -24,6 +24,7 @@ export const NavbarNav: FC<NavbarNavProps> = observer((props) => {
           exact: true,
         }}
         className={cnNavbarNav('Link')}
+        onClick={navbar.closeOnDownMdScreen}
         to={routes.home()}
       >
         <IconComponent name={'homeIcon'} size={'xs'} />
@@ -34,6 +35,7 @@ export const NavbarNav: FC<NavbarNavProps> = observer((props) => {
           exact: true,
         }}
         className={cnNavbarNav('Link')}
+        onClick={navbar.closeOnDownMdScreen}
         to={routes.books()}
       >
         <IconComponent name={'booksIcon'} size={'xs'} />
@@ -47,6 +49,7 @@ export const NavbarNav: FC<NavbarNavProps> = observer((props) => {
           exact: true,
         }}
         className={cnNavbarNav('Link')}
+        onClick={navbar.closeOnDownMdScreen}
         to={routes.addBook()}
       >
         <IconComponent name={'plusIcon'} size={'xs'} />

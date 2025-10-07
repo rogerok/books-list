@@ -137,12 +137,22 @@
 
   &_break {
     hyphens: auto;
+    line-break: anywhere;
     overflow-wrap: break-word;
   }
 
   &_gutterBottom {
     display: block;
     margin-bottom: 0.5rem;
+  }
+
+  &_clamp {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+
+    text-overflow: ellipsis;
   }
 
 }

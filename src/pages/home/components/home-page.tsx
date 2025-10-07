@@ -54,7 +54,7 @@ export const HomePage = () => {
         <AppLink className={cnHomePage('ActionLink')} to={routes.books()}>
           <IconComponent
             color={ColorConstant.Neutral700}
-            name={'plusIcon'}
+            name={'booksIcon'}
             size={'xxs'}
           />
           <Typography

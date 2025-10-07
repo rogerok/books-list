@@ -1,10 +1,12 @@
 import type { FC, ReactNode } from 'react';
 
 import { cn } from '@bem-react/classname';
+import { routes } from '@shared/config/router/routes.ts';
 import { ColorConstant } from '@shared/constants/style-system/colors.ts';
-import { useRootStore } from '@shared/stores/root-store/root-store.ts';
 
 import './navbar.scss';
+import { useRootStore } from '@shared/stores/root-store/root-store.ts';
+import { AppLink } from '@shared/ui/app-link/app-link.tsx';
 import { IconComponent } from '@shared/ui/icon-component/icon-component.tsx';
 import { Typography } from '@shared/ui/typography/typography.tsx';
 import { VStack } from '@shared/ui/vstack/vstack.tsx';
@@ -38,36 +40,38 @@ export const Navbar: FC<NavbarProps> = observer((props) => {
       <aside
         className={cnNavbar(
           {
-            open: navbar.value,
+            open: navbar.isOpen,
           },
-          [className, navbar.value ? 'open' : ''],
+          [className, navbar.isOpen ? 'open' : ''],
         )}
       >
         <div className={cnNavbar('Inner')}>
-          <div className={cnNavbar('Logo')}>
-            <div className={cnNavbar('Icon')}>
+          <AppLink to={routes.home()}>
+            <div className={cnNavbar('Logo')}>
+              <div className={cnNavbar('Icon')}>
+                <IconComponent
+                  color={ColorConstant.White}
+                  name={'bookIcon'}
+                  size={'sm'}
+                />
+              </div>
+              <div>
+                <Typography as={'h2'} size={'lg'} weight={'semibold'}>
+                  Book Tracker
+                </Typography>
+                <Typography size={'2xs'} variant={'secondary'}>
+                  Ваш читательский журнал
+                </Typography>
+              </div>
               <IconComponent
-                color={ColorConstant.White}
-                name={'bookIcon'}
-                size={'sm'}
+                className={cnNavbar('CloseButton')}
+                color={ColorConstant.Neutral900}
+                name={'cancelIcon'}
+                onClick={navbar.close}
+                size={'md'}
               />
             </div>
-            <div>
-              <Typography as={'h2'} size={'lg'} weight={'semibold'}>
-                Book Tracker
-              </Typography>
-              <Typography size={'2xs'} variant={'secondary'}>
-                Ваш читательский журнал
-              </Typography>
-            </div>
-            <IconComponent
-              className={cnNavbar('CloseButton')}
-              color={ColorConstant.Neutral900}
-              name={'cancelIcon'}
-              onClick={navbar.setFalse}
-              size={'md'}
-            />
-          </div>
+          </AppLink>
 
           <div className={cnNavbar('UserMenu')}>{userMenu}</div>
 
@@ -87,9 +91,9 @@ export const Navbar: FC<NavbarProps> = observer((props) => {
 
       <div
         className={cnNavbar('Overlay', {
-          open: navbar.value,
+          open: navbar.isOpen,
         })}
-        onClick={navbar.setFalse}
+        onClick={navbar.close}
       />
     </>
   );
