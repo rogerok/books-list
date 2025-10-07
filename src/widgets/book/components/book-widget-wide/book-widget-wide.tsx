@@ -31,10 +31,10 @@ export const BookWidgetWide: FC<BookWidgetWideProps> = (props) => {
           <AppImage
             alt={`Обложка книги ${data.title}`}
             className={cnBookWidgetWide('Cover')}
-            height={96}
+            height={144}
             rounded={'10'}
             src={data.coverUrl}
-            width={144}
+            width={96}
           />
         )}
 
@@ -46,12 +46,12 @@ export const BookWidgetWide: FC<BookWidgetWideProps> = (props) => {
               }}
               to={routes.bookDetails()}
             >
-              <Typography as={'h5'} size={'md'} weight={'medium'}>
+              <Typography as={'h5'} clamp size={'md'} weight={'medium'}>
                 {data.title}
               </Typography>
             </AppLink>
 
-            <Typography size={'xs'} variant={'secondary'}>
+            <Typography clamp size={'xs'} variant={'secondary'}>
               {data.author}
             </Typography>
           </div>
