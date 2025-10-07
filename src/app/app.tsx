@@ -19,7 +19,6 @@ const router = createRouter({
   },
   defaultPendingComponent: () => <Loader fullPage />,
   routeTree,
-  scrollRestoration: true,
 });
 
 declare module '@tanstack/react-router' {

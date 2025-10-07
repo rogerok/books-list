@@ -3,7 +3,7 @@ import type { UserStore } from '@shared/stores/user-store/user-store.ts';
 
 import { getLastRatedBooks } from '@shared/api/book/book.ts';
 import { RequestStore } from '@shared/lib/request-store/request-store.ts';
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 
 export class LastRatedStore {
   data: BooksGetLastRatedResponseModel[] = [];
@@ -24,7 +24,9 @@ export class LastRatedStore {
     });
 
     if (status === 'success') {
-      this.data = response.data;
+      runInAction(() => {
+        this.data = response.data;
+      });
     }
   }
 

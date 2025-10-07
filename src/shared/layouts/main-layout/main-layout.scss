@@ -5,7 +5,7 @@
   display: grid;
   grid-template:
     "header" var(--header-height) "content" 1fr / 1fr;
-  height: 100vh;
+   height: 100svh;
 
   &-Navbar {
     @media (min-width: b.$md-breakpoint) {
@@ -21,7 +21,7 @@
   &-Content {
     overflow-y: auto;
     grid-area: content;
-    height: calc(100vh - var(--header-height));
+    height: calc(100svh - var(--header-height));
     padding: 1rem;
   }
 
