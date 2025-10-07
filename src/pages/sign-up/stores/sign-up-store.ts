@@ -15,17 +15,18 @@ import { makeAutoObservable } from 'mobx';
 export class SignUpStore {
   form = new MobxForm({
     defaultValues: {
-      confirmPassword: 'Password1!',
+      confirmPassword: '',
       email: '',
-      name: 'sss',
-      password: 'Password1!',
+      name: '',
+      password: '',
     },
     onSubmit: (data) => this.processSignUp(data),
     resolver: zodResolver(SignUpFormSchema),
   });
 
-  signUpRequest = new RequestStore(signUpRequest);
-  userCreateRequest = new RequestStore(userCreate, {
+  private signUpRequest = new RequestStore(signUpRequest);
+
+  private userCreateRequest = new RequestStore(userCreate, {
     onError: (errorMessage) =>
       Notifier.error(errorMessage || 'Ошибка регистрации'),
     onSuccess: () =>
@@ -44,7 +45,7 @@ export class SignUpStore {
     );
   }
 
-  async processSignUp(credentials: SignUpFormType): Promise<void> {
+  private async processSignUp(credentials: SignUpFormType): Promise<void> {
     const { email, name, password } = credentials;
 
     const { response, status } = await this.signUpRequest.execute({

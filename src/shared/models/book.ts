@@ -5,6 +5,14 @@ export const BookStatusEnumSchema = z.enum(['read', 'reading', 'toRead']);
 
 export type BookStatusType = z.infer<typeof BookStatusEnumSchema>;
 
+export const BookStatusFilterEnumSchema = z.enum([
+  'all',
+  'read',
+  'reading',
+  'toRead',
+]);
+export type BookStatusFilterModel = z.infer<typeof BookStatusFilterEnumSchema>;
+
 export const BookCreateRequestSchema = z.object({
   author: z.string().min(2).max(255),
   coverUrl: z.string().or(EmptyStringSchema),
@@ -46,7 +54,7 @@ export type BookResponseModel = z.infer<typeof BookResponseSchema>;
 
 export const BookProgressUpdateRequestSchema = z.object({
   bookId: z.string().uuid(),
-  progress: z.coerce.number().min(0),
+  progress: z.coerce.number().min(0).max(100),
 });
 
 export type BookProgressUpdateModel = z.infer<
@@ -72,8 +80,8 @@ export type BookNotesUpdateRequestModel = z.infer<
 >;
 
 export const BookGetListRequestSchema = z.object({
-  status: BookStatusEnumSchema.or(EmptyStringSchema),
-  title: z.string().or(EmptyStringSchema),
+  searchTerm: z.string().or(EmptyStringSchema),
+  status: BookStatusFilterEnumSchema.or(EmptyStringSchema),
   userId: z.string().uuid(),
 });
 
@@ -99,3 +107,10 @@ export const BooksGetLastRatedResponseSchema = z.object({
 export type BooksGetLastRatedResponseModel = z.infer<
   typeof BooksGetLastRatedResponseSchema
 >;
+
+export const BookDeleteRequestSchema = z.object({
+  bookId: z.string().uuid(),
+  userId: z.string().uuid(),
+});
+
+export type BookDeleteRequestModel = z.infer<typeof BookDeleteRequestSchema>;

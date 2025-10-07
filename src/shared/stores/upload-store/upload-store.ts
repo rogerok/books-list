@@ -6,7 +6,7 @@ import { nanoid } from 'nanoid';
 
 export class UploadStore {
   uploadRequest = new RequestStore(uploadFileRequest, {
-    onError: () => Notifier.error('Ошибка создания книги'),
+    onError: () => Notifier.error('Ошибка загрузки файла'),
     onSuccess: () => Notifier.success('Файл загружен'),
   });
 
@@ -20,6 +20,10 @@ export class UploadStore {
     );
   }
 
+  generatePath() {
+    return `${nanoid()}/${Date.now()}`;
+  }
+
   async uploadFile(
     bucketName: string,
     files: File[],
@@ -27,7 +31,7 @@ export class UploadStore {
   ): Promise<void> {
     await Promise.all(
       files.map(async (file) => {
-        const path = `${nanoid()}/${Date.now()}`;
+        const path = this.generatePath();
 
         const { response, status } = await this.uploadRequest.execute(
           bucketName,

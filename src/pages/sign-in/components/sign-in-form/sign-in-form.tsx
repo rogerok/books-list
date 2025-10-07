@@ -59,6 +59,7 @@ export const SignInForm: FC<SignInFormProps> = observer((props) => {
           label={'Пароль'}
           name={'password'}
           placeholder={'Введите пароль'}
+          type={'password'}
         />
         <Button
           addonLeft={

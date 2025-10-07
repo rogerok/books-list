@@ -7,7 +7,7 @@ import { makeAutoObservable } from 'mobx';
 
 export class GoalStore {
   data: GoalResponseModel | null = null;
-  getGoalRequest = new RequestStore(getGoal);
+  private getGoalRequest = new RequestStore(getGoal);
 
   constructor(private user: UserStore) {
     makeAutoObservable(
@@ -28,7 +28,7 @@ export class GoalStore {
       this.user.id,
     );
 
-    if (status === 'success' && response.data) {
+    if (status === 'success') {
       this.data = response.data;
     }
   }
@@ -37,6 +37,12 @@ export class GoalStore {
     if (!this.isLoading) {
       await this.fetchGoal();
     }
+  }
+
+  get goalYear() {
+    return this.data?.targetDate
+      ? new Date(this.data.targetDate).getFullYear()
+      : new Date().getFullYear();
   }
 
   get isCompleted() {
@@ -48,13 +54,17 @@ export class GoalStore {
   }
 
   get percentageCompleted() {
-    if (this.data) {
-      return parseFloat(
-        ((this.data.readCount / this.data.targetBooks) * 100).toFixed(2),
-      );
+    if (!this.data || (!this.data.readCount && !this.data.targetBooks)) {
+      return 0;
     }
 
-    return 0;
+    if (!this.data.targetBooks && this.data.readCount) {
+      return 100;
+    }
+
+    return parseFloat(
+      ((this.data.readCount / this.data.targetBooks) * 100).toFixed(2),
+    );
   }
 
   get restToGoal() {

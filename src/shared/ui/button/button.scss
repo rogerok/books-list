@@ -21,17 +21,6 @@
   transition: var(--transition-1);
 
 
-  &-Content {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-    justify-content: center;
-
-    visibility: visible;
-
-    transition: opacity 0.2s ease;
-  }
-
   .Button-AddonLeft,
   .Button-AddonRight {
     display: flex;
@@ -73,6 +62,10 @@
 
     &_dark {
       background: var(--neutral-1100);
+    }
+
+    &_warn {
+      background: var(--warn);
     }
 
   }

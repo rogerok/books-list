@@ -1,0 +1,37 @@
+@use '../../styles/helpers' as h;
+
+.Tabs {
+  user-select: none;
+  display: flex;
+  gap: 0.75rem;
+  width: 100%;
+
+
+  &-Tab {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+
+    padding: #{h.to-rem(5)} 0.75rem;
+    border: 1px solid var(--neutral-300);
+
+    font: var(--font-xs);
+    font-weight: 500;
+    color: var(--neutral-1000);
+
+    background: rgb(255 255 255 / 80%);
+    backdrop-filter: blur(8px);
+    box-shadow: none;
+
+    &_active {
+      background: var(--green-200);
+      backdrop-filter: none;
+    }
+  }
+
+  &-Label {
+    &_active {
+      color: var(--white);
+    }
+  }
+}

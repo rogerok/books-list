@@ -4,13 +4,13 @@ import { getBooks } from '@shared/api/book/book.ts';
 import { RequestStore } from '@shared/lib/request-store/request-store.ts';
 import {
   type BookResponseModel,
-  BookStatusEnumSchema,
+  BookStatusFilterEnumSchema,
 } from '@shared/models/book.ts';
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 
 export class BooksStore {
   data: BookResponseModel[] = [];
-  getBooksRequest = new RequestStore(getBooks);
+  private getBooksRequest = new RequestStore(getBooks);
 
   constructor(private user: UserStore) {
     makeAutoObservable(
@@ -28,13 +28,15 @@ export class BooksStore {
     }
 
     const { response, status } = await this.getBooksRequest.execute({
-      status: BookStatusEnumSchema.enum.reading,
-      title: '',
+      searchTerm: '',
+      status: BookStatusFilterEnumSchema.enum.reading,
       userId: this.user.id,
     });
 
-    if (status === 'success' && response.data) {
-      this.data = response.data;
+    if (status === 'success') {
+      runInAction(() => {
+        this.data = response.data;
+      });
     }
   }
 

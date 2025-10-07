@@ -57,7 +57,7 @@ export const GoalForm: FC<GoalFormProps> = observer((props) => {
           <div className={cnGoalForm('GoalField')}>
             <TextField
               fullWidth
-              label={`Книг к прочтению в ${new Date(goal.data.targetDate).getFullYear()} году`}
+              label={`Книг к прочтению в ${goal.goalYear} году`}
               min={0}
               name={'targetBooks'}
               type={'number'}

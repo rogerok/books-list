@@ -19,7 +19,8 @@ import { convertEmptyStringToNull } from '@shared/utils/converters.ts';
 import { makeAutoObservable, reaction } from 'mobx';
 
 export class AddBookStore {
-  bookCreateRequest = new RequestStore(createBook);
+  private bookCreateRequest = new RequestStore(createBook);
+
   form = new MobxForm<BookCreateFormModel>({
     defaultValues: {
       author: '',
@@ -32,13 +33,13 @@ export class AddBookStore {
     resolver: zodResolver(BookCreateFormSchema),
   });
 
-  getPublicImageUrl = new RequestStore(getPublicUrl, {
+  private getPublicImageUrl = new RequestStore(getPublicUrl, {
     onError: () => Notifier.error('Ошибка получения изображения'),
   });
 
   previewCoverUrl: string = '';
 
-  userBookCreateRequest = new RequestStore(createUserBook, {
+  private userBookCreateRequest = new RequestStore(createUserBook, {
     onError: () => Notifier.error('Ошибка создания книги'),
     onSuccess: () =>
       Notifier.success('Книга создана. Перенаправляем к деталям книги.'),

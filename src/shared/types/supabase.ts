@@ -77,7 +77,7 @@ export type Database = {
         }[];
       };
       getUserBooks: {
-        Args: { inuserid: string; instatus?: string; intitle?: string };
+        Args: { inuserid: string; insearchterm?: string; instatus?: string };
         Returns: {
           author: string;
           bookCreatedAt: string;
@@ -98,7 +98,7 @@ export type Database = {
         }[];
       };
       getUserGoal: {
-        Args: { inUserId: string };
+        Args: { inuserid: string };
         Returns: {
           createdAt: string;
           id: string;
@@ -110,7 +110,7 @@ export type Database = {
         }[];
       };
       getUserStats: {
-        Args: { puserid: string };
+        Args: { puserid: string; insearchterm?: string };
         Returns: {
           read: number;
           reading: number;
@@ -138,6 +138,7 @@ export type Database = {
           createdAt?: string | null;
           genreId?: string | null;
           id?: string;
+          search?: unknown | null;
           updatedAt?: string | null;
         };
         Relationships: [
@@ -155,6 +156,7 @@ export type Database = {
           createdAt: string | null;
           genreId: string | null;
           id: string;
+          search: unknown | null;
           title: string;
           updatedAt: string | null;
         };
@@ -164,6 +166,7 @@ export type Database = {
           createdAt?: string | null;
           genreId?: string | null;
           id?: string;
+          search?: unknown | null;
           title?: string;
           updatedAt?: string | null;
         };

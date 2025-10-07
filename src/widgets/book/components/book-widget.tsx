@@ -2,6 +2,7 @@ import type { BookResponseModel } from '@shared/models/book.ts';
 
 import { cn } from '@bem-react/classname';
 import { Card } from '@shared/ui/card/card.tsx';
+import BookWidgetCard from '@widgets/book/components/book-widget-card/book-widget-card.tsx';
 import { BookWidgetCompact } from '@widgets/book/components/book-widget-compact/book-widget-compact.tsx';
 import { BookWidgetWide } from '@widgets/book/components/book-widget-wide/book-widget-wide.tsx';
 import { observer } from 'mobx-react-lite';
@@ -24,6 +25,8 @@ export const BookWidget: FC<BookWidgetProps> = observer((props) => {
         return <BookWidgetCompact data={data} />;
       case 'wide':
         return <BookWidgetWide data={data} />;
+      case 'card':
+        return <BookWidgetCard data={data} />;
     }
   }, [data, variant]);
 

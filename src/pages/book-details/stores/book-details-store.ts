@@ -1,19 +1,26 @@
 import type { BooksStore } from '@shared/stores/book-store/books-store.ts';
+import type { GoalStore } from '@shared/stores/goal-store/goal-store.ts';
 import type { StatsStore } from '@shared/stores/stats-store/stats-store.ts';
 import type { UserStore } from '@shared/stores/user-store/user-store.ts';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
+  deleteBook,
   getBook,
   setBookStatus,
   updateBookNotes,
   updateBookProgress,
   updateBookRating,
 } from '@shared/api/book/book.ts';
+import { routes } from '@shared/config/router/routes.ts';
 import { MobxForm } from '@shared/lib/mobx/mobx-form/mobx-form.ts';
 import { createStoreContext } from '@shared/lib/mobx/store-factory.tsx';
 import { Notifier } from '@shared/lib/notifier/notifier.ts';
 import { RequestStore } from '@shared/lib/request-store/request-store.ts';
+import {
+  AppRouter,
+  type RouterController,
+} from '@shared/lib/router/app-router.ts';
 import { BooleanToggleStore } from '@shared/lib/toggle-boolean-store/booleanToggleStore.ts';
 import {
   type BookNotesUpdateRequestModel,
@@ -26,14 +33,28 @@ import {
 import { useRootStore } from '@shared/stores/root-store/root-store.ts';
 import { makeAutoObservable } from 'mobx';
 
+interface BookDetailsStoreParams {
+  books: BooksStore;
+  goal: GoalStore;
+  router: RouterController;
+  stats: StatsStore;
+  user: UserStore;
+}
+
 export class BookDetailsStore {
   bookNotesEditable = new BooleanToggleStore(false);
   bookProgressEditable = new BooleanToggleStore(false);
 
   data: BookResponseModel | null = null;
 
-  getBookDetailsRequest = new RequestStore(getBook);
-  markAsReadRequest = new RequestStore(setBookStatus, {
+  private deleteBookRequest = new RequestStore(deleteBook, {
+    onError: () => Notifier.error('Не удалось удалить книгу'),
+    onSuccess: () => Notifier.success('Книга удалена'),
+  });
+
+  private getBookDetailsRequest = new RequestStore(getBook);
+
+  private markAsReadRequest = new RequestStore(setBookStatus, {
     onError: () =>
       Notifier.error(
         'Не удалось отметить книгу как прочитанную. Попробуйте ещё раз.',
@@ -59,23 +80,20 @@ export class BookDetailsStore {
     resolver: zodResolver(BookProgressUpdateRequestSchema),
   });
 
-  updateNotesRequest = new RequestStore(updateBookNotes, {
+  private updateNotesRequest = new RequestStore(updateBookNotes, {
     onError: () => Notifier.error('Не удалось обновить заметку.'),
     onSuccess: () => Notifier.success('Заметка обновлена'),
   });
-  updateProgressRequest = new RequestStore(updateBookProgress);
 
-  updateRatingRequest = new RequestStore(updateBookRating, {
+  private updateProgressRequest = new RequestStore(updateBookProgress);
+
+  private updateRatingRequest = new RequestStore(updateBookRating, {
     onError: () =>
       Notifier.error('Ошибка обновления рейтинга. Попробуйте ещё раз.'),
     onSuccess: () => Notifier.success('Рейтинг успешно обновлён'),
   });
 
-  constructor(
-    private user: UserStore,
-    private stats: StatsStore,
-    private books: BooksStore,
-  ) {
+  constructor(private deps: BookDetailsStoreParams) {
     makeAutoObservable(
       this,
       {},
@@ -85,19 +103,40 @@ export class BookDetailsStore {
     );
   }
 
-  destroy() {
+  clear() {
     this.data = null;
     this.bookNotesEditable.reset();
     this.bookNotesEditable.reset();
   }
 
+  async deleteBook() {
+    if (!this.deps.user.id || !this.data?.bookId) {
+      return;
+    }
+    const { status } = await this.deleteBookRequest.execute({
+      bookId: this.data.bookId,
+      userId: this.data.userId,
+    });
+
+    if (status === 'success') {
+      this.deps.router.navigate({
+        replace: true,
+        to: routes.books(),
+      });
+
+      void this.deps.stats.fetchStats();
+      void this.deps.goal.fetchGoal();
+      void this.deps.books.fetchReadingBooks();
+    }
+  }
+
   async fetchBook(bookId: string) {
-    if (!this.user.id) {
+    if (!this.deps.user.id) {
       return;
     }
 
     const { response, status } = await this.getBookDetailsRequest.execute(
-      this.user.id,
+      this.deps.user.id,
       bookId,
     );
 
@@ -127,8 +166,9 @@ export class BookDetailsStore {
       this.data.progress = response.data.progress;
       this.progressForm.setValue('progress', response.data.progress);
 
-      void this.stats.fetchStats();
-      void this.books.fetchReadingBooks();
+      void this.deps.stats.fetchStats();
+      void this.deps.books.fetchReadingBooks();
+      void this.deps.goal.fetchGoal();
     }
   }
 
@@ -159,8 +199,12 @@ export class BookDetailsStore {
       this.data.status = response.data.status;
       this.bookProgressEditable.setFalse();
 
-      void this.stats.fetchStats();
-      void this.books.fetchReadingBooks();
+      if (response.data.status === BookStatusEnumSchema.enum.read) {
+        void this.deps.goal.fetchGoal();
+      }
+
+      void this.deps.stats.fetchStats();
+      void this.deps.books.fetchReadingBooks();
     }
   }
 
@@ -179,8 +223,16 @@ export class BookDetailsStore {
     }
   }
 
+  get isDeleting() {
+    return this.deleteBookRequest.isLoading;
+  }
+
   get isLoading() {
     return this.getBookDetailsRequest.isLoading;
+  }
+
+  get isReading() {
+    return this.markAsReadRequest.isLoading;
   }
 }
 
@@ -189,7 +241,13 @@ const { createProvider, useStore } = createStoreContext<BookDetailsStore>();
 export const useBookDetailsStore = useStore;
 
 export const BookDetailsStoreProvider = createProvider(() => {
-  const { books, stats, user } = useRootStore();
+  const { books, goal, stats, user } = useRootStore();
 
-  return new BookDetailsStore(user, stats, books);
+  return new BookDetailsStore({
+    books: books,
+    goal: goal,
+    router: AppRouter,
+    stats: stats,
+    user: user,
+  });
 });

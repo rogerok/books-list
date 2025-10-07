@@ -12,15 +12,14 @@ import { routes } from '@shared/config/router/routes.ts';
 import { Notifier } from '@shared/lib/notifier/notifier.ts';
 import { RequestStore } from '@shared/lib/request-store/request-store.ts';
 import { RouterController } from '@shared/lib/router/app-router.ts';
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 
 export class AuthStore {
-  session: Session | null = null;
-  sessionRequest = new RequestStore(getSessionRequest);
-  signInRequest = new RequestStore(signInRequest);
-  signOutRequest = new RequestStore(signOutRequest);
-
-  subscription: Subscription | undefined;
+  private session: Session | null = null;
+  private sessionRequest = new RequestStore(getSessionRequest);
+  private signInRequest = new RequestStore(signInRequest);
+  private signOutRequest = new RequestStore(signOutRequest);
+  private subscription: Subscription | undefined;
 
   constructor(
     private router: RouterController,
@@ -39,16 +38,21 @@ export class AuthStore {
     const { response, status } = await this.sessionRequest.execute();
 
     if (status === 'success' && response?.data.session) {
-      this.session = response.data.session;
-      await this.user.fetchUser(this.session.user.id);
+      const session = response.data.session;
+      runInAction(() => {
+        this.session = session;
+      });
+
+      await this.user.fetchUser(session.user.id);
 
       const subscription = apiClient.auth.onAuthStateChange(
         async (_event, session) => {
           if (session) {
-            this.session = session;
+            runInAction(() => {
+              this.session = session;
+            });
           } else {
             this.router.toSignIn();
-            // TODO: maybe remove
 
             window.location.reload();
           }
@@ -76,9 +80,10 @@ export class AuthStore {
 
   async signOut(): Promise<void> {
     await this.signOutRequest.execute();
-    this.session = null;
+    runInAction(() => {
+      this.session = null;
+    });
     this.router.toSignIn();
-    // TODO: maybe remove
     window.location.reload();
   }
 
@@ -92,9 +97,5 @@ export class AuthStore {
 
   get isSigningOut(): boolean {
     return this.signOutRequest.isLoading;
-  }
-
-  get userEmail(): string | undefined {
-    return this.session?.user?.email;
   }
 }
