@@ -18,7 +18,9 @@ const router = createRouter({
     authStore: undefined,
   },
   defaultPendingComponent: () => <Loader fullPage />,
+  defaultPreload: 'intent',
   routeTree,
+  scrollToTopSelectors: ['#root'],
 });
 
 declare module '@tanstack/react-router' {

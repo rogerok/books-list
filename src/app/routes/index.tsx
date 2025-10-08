@@ -7,5 +7,5 @@ export const Route = createFileRoute('/')({
       to: routes.home(),
     });
   },
-  component: () => <Outlet />,
+  component: Outlet,
 });

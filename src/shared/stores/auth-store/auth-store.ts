@@ -83,7 +83,7 @@ export class AuthStore {
     runInAction(() => {
       this.session = null;
     });
-    this.router.toSignIn();
+
     window.location.reload();
   }
 

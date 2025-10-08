@@ -13,5 +13,5 @@ export const Route = createFileRoute('/_protected')({
       }
     }
   },
-  component: () => <Outlet />,
+  component: Outlet,
 });
