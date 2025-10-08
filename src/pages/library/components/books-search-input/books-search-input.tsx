@@ -22,6 +22,7 @@ export const BooksSearchInput: FC<BooksSearchInputProps> = observer((props) => {
       error={searchTermErrorMsg}
       fullWidth
       onChange={(value) => setSearchTerm(String(value))}
+      placeholder={'Поиск книги или автора'}
       value={searchTerm}
     />
   );

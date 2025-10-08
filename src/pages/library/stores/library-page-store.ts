@@ -47,7 +47,7 @@ export class LibraryPageStore {
 
         this.fetchTabsStats();
         this.fetchBooks(this.tabManager.activeTab);
-      }, 500),
+      }, 300),
     );
   }
 
