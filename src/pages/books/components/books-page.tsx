@@ -4,6 +4,7 @@ import './books-page.scss';
 import { cn } from '@bem-react/classname';
 import { BooksContent } from '@pages/books/components/books-content/books-content.tsx';
 import { BooksPageStoreProvider } from '@pages/books/stores/books-page-store.ts';
+import { PageMeta } from '@shared/ui/page-meta/page-meta.tsx';
 import { StatisticWidget } from '@widgets/statistic';
 
 const cnBooksPage = cn('BooksPage');
@@ -11,6 +12,7 @@ const cnBooksPage = cn('BooksPage');
 export const BooksPage: FC = () => {
   return (
     <section className={cnBooksPage(undefined, [])}>
+      <PageMeta title={'Моя библиотека'} />
       <BooksPageStoreProvider>
         <BooksContent />
       </BooksPageStoreProvider>
