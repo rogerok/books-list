@@ -5,7 +5,7 @@
   display: grid;
   grid-template:
     "header" var(--header-height) "content" 1fr / 1fr;
-   height: 100svh;
+  height: 100svh;
 
   &-Navbar {
     @media (min-width: b.$md-breakpoint) {
@@ -41,7 +41,5 @@
       padding: 2rem;
     }
   }
-
-
 }
 

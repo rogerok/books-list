@@ -14,7 +14,7 @@ export const SignInPage: FC = observer(() => {
       <PageMeta title={'Авторизация'} />
       <SignLayout
         form={<SignInForm />}
-        infoPanel={screen.upMd && <SignInInfoPanel />}
+        infoPanel={screen.upLg && <SignInInfoPanel />}
       />
     </>
   );

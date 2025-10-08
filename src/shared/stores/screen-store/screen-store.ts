@@ -61,6 +61,10 @@ export class ScreenStore {
     return this.isWidthMatchMinByValue(BreakpointsInPxConstant.Xs);
   }
 
+  private setWidth(width: number) {
+    this.currentWidth = width;
+  }
+
   isWidthMatchMaxByValue = (value: BreakpointsInPxType): boolean => {
     return this.currentWidth <= value;
   };
@@ -72,7 +76,7 @@ export class ScreenStore {
   private handleResize = (): void => {
     cancelAnimationFrame(this.resizeRaf!);
     this.resizeRaf = requestAnimationFrame(() => {
-      this.currentWidth = window.innerWidth;
+      this.setWidth(window.innerWidth);
     });
   };
 }

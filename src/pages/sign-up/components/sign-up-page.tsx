@@ -15,7 +15,7 @@ export const SignUpPage: FC = observer(() => {
       <PageMeta title={'Регистрация'} />
       <SignLayout
         form={<SignUpForm />}
-        infoPanel={screen.upMd && <SignUpInfoPanel />}
+        infoPanel={screen.upLg && <SignUpInfoPanel />}
       />
     </>
   );

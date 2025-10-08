@@ -1,6 +1,11 @@
 html {
   overflow-y: auto;
+  height: 100svh;
   background: linear-gradient(167deg, var(--neutral-100) 0%, var(--blue-50) 100%);
+}
+
+body {
+  height: 100svh;
 }
 
 .App {

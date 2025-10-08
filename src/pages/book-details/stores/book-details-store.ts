@@ -31,7 +31,7 @@ import {
   BookStatusEnumSchema,
 } from '@shared/models/book.ts';
 import { useRootStore } from '@shared/stores/root-store/root-store.ts';
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 
 interface BookDetailsStoreParams {
   books: BooksStore;
@@ -46,14 +46,11 @@ export class BookDetailsStore {
   bookProgressEditable = new BooleanToggleStore(false);
 
   data: BookResponseModel | null = null;
-
   private deleteBookRequest = new RequestStore(deleteBook, {
     onError: () => Notifier.error('Не удалось удалить книгу'),
     onSuccess: () => Notifier.success('Книга удалена'),
   });
-
   private getBookDetailsRequest = new RequestStore(getBook);
-
   private markAsReadRequest = new RequestStore(setBookStatus, {
     onError: () =>
       Notifier.error(
@@ -61,7 +58,6 @@ export class BookDetailsStore {
       ),
     onSuccess: () => Notifier.success('Книга прочитана! Так держать!'),
   });
-
   notesForm = new MobxForm({
     defaultValues: {
       bookId: '',
@@ -70,7 +66,6 @@ export class BookDetailsStore {
     onSubmit: (data) => this.submitNotesForm(data),
     resolver: zodResolver(BookNotesUpdateRequestSchema),
   });
-
   progressForm = new MobxForm({
     defaultValues: {
       bookId: '',
@@ -79,7 +74,6 @@ export class BookDetailsStore {
     onSubmit: (data) => this.submitProgressForm(data),
     resolver: zodResolver(BookProgressUpdateRequestSchema),
   });
-
   private updateNotesRequest = new RequestStore(updateBookNotes, {
     onError: () => Notifier.error('Не удалось обновить заметку.'),
     onSuccess: () => Notifier.success('Заметка обновлена'),
@@ -141,7 +135,9 @@ export class BookDetailsStore {
     );
 
     if (status === 'success' && response.data) {
-      this.data = response.data;
+      runInAction(() => {
+        this.data = response.data;
+      });
 
       this.progressForm.setValue('progress', response.data.progress);
       this.progressForm.setValue('bookId', response.data.bookId);

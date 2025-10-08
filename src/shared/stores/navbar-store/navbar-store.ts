@@ -22,6 +22,7 @@ export class NavbarStore {
         autoBind: true,
       },
     );
+    window.addEventListener('resize', this.handleResize);
   }
 
   close() {
@@ -31,13 +32,6 @@ export class NavbarStore {
 
   closeOnDownMdScreen() {
     if (this.screen.downMd) {
-      requestAnimationFrame(() => {
-        document.documentElement.scrollTo({
-          behavior: 'smooth',
-          top: 0,
-        });
-      });
-
       this.close();
     }
   }
@@ -51,6 +45,12 @@ export class NavbarStore {
   get isOpen() {
     return this.booleanToggle.value;
   }
+
+  handleResize = (): void => {
+    if (this.screen.downMd) {
+      this.booleanToggle.setFalse();
+    }
+  };
 
   setBodyOverflow = (overflow: OverflowBodyValues) => {
     document.body.style = overflow;

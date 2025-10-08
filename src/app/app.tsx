@@ -18,6 +18,7 @@ const router = createRouter({
     authStore: undefined,
   },
   defaultPendingComponent: () => <Loader fullPage />,
+  defaultPreload: 'intent',
   routeTree,
 });
 
