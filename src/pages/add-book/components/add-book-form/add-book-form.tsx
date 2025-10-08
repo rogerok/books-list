@@ -115,7 +115,9 @@ export const AddBookForm: FC<AddBookFormProps> = observer((props) => {
               src={previewCoverUrl}
               width={128}
             />
-            <Button onClick={resetPreviewCoverUrl}>Удалить</Button>
+            <Button onClick={resetPreviewCoverUrl} variant={'warn'}>
+              Удалить
+            </Button>
           </VStack>
         )}
         <Button
