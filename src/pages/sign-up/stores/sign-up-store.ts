@@ -67,7 +67,7 @@ export class SignUpStore {
         });
       }
     } else {
-      Notifier.notify(response?.error?.message ?? 'Ошибка регистрации');
+      Notifier.error(response?.error?.message ?? 'Ошибка регистрации');
     }
   }
 }

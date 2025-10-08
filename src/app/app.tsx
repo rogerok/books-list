@@ -57,7 +57,7 @@ export const App: FC = observer(() => {
     <Suspense fallback={<Loader fullPage />}>
       <RootStoreProvider>
         <InnerApp />
-        <ToastContainer />
+        <ToastContainer position={'bottom-left'} />
       </RootStoreProvider>
     </Suspense>
   );

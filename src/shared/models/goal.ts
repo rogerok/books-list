@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export const GoalCreateRequestSchema = z.object({
-  targetBooks: z.coerce.number().min(1),
+  targetBooks: z.coerce.number().min(1).max(99999999),
   userId: z.string().uuid(),
 });
 

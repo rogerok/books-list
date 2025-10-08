@@ -14,7 +14,7 @@ import { makeAutoObservable, reaction } from 'mobx';
 
 export class AddGoalStore {
   private createGoalRequest = new RequestStore(createGoal, {
-    onError: () => Notifier.success('Ошибка обновления цели'),
+    onError: () => Notifier.error('Ошибка обновления цели'),
     onSuccess: () => Notifier.success('Цель успешно обновлена'),
   });
   form = new MobxForm({
