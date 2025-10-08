@@ -18,14 +18,6 @@ interface BooksListProps {
   className?: string;
 }
 
-const BookListSkeleton = () => {
-  return (
-    <ElementRepeater count={4}>
-      <Skeleton height={280} rounded={'14'} width={280} />
-    </ElementRepeater>
-  );
-};
-
 export const BooksList: FC<BooksListProps> = observer((props) => {
   const { className } = props;
 
@@ -39,7 +31,13 @@ export const BooksList: FC<BooksListProps> = observer((props) => {
   if (isBooksLoading) {
     return (
       <ul className={cnBooksList(undefined, [className])}>
-        <BookListSkeleton />
+        <ElementRepeater count={4}>
+          <Skeleton
+            className={cnBooksList('Item')}
+            height={280}
+            rounded={'14'}
+          />
+        </ElementRepeater>
       </ul>
     );
   }
