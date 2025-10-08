@@ -20,6 +20,7 @@ export default defineConfig(({ mode }) => {
   }
 
   return {
+    base: env.data.VITE_BASE_PATH ?? '/',
     plugins: [
       tanstackRouter({
         routesDirectory: './src/app/routes',

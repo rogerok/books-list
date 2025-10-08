@@ -16,7 +16,7 @@ import { useEffect } from 'react';
 
 const cnBookDetailsContent = cn('BookDetailsContent');
 
-const route = getRouteApi('/_protected/(dashboard)/books/$bookId');
+const route = getRouteApi('/_protected/(dashboard)/library/$bookId');
 
 export const BookDetailsContent = observer(() => {
   const params = route.useParams();

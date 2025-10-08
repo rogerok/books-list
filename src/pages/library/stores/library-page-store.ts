@@ -1,7 +1,7 @@
 import type { UserStore } from '@shared/stores/user-store/user-store.ts';
 
-import { DefaultTabsCounters } from '@pages/books/constants/constants.ts';
-import { createBookStatusTabsOptions } from '@pages/books/utils/utils.ts';
+import { DefaultTabsCounters } from '@pages/library/constants/constants.ts';
+import { createBookStatusTabsOptions } from '@pages/library/utils/utils.ts';
 import { getBooks } from '@shared/api/book/book.ts';
 import { getStats } from '@shared/api/stats/stats.ts';
 import { createStoreContext } from '@shared/lib/mobx/store-factory.tsx';
@@ -17,7 +17,7 @@ import { debounce } from '@shared/utils/debounce.ts';
 import { makeAutoObservable, reaction, runInAction } from 'mobx';
 import { z } from 'zod';
 
-export class BooksPageStore {
+export class LibraryPageStore {
   data: BookResponseModel[] = [];
   private getBooksRequest = new RequestStore(getBooks);
   private getStatsRequest = new RequestStore(getStats);
@@ -110,10 +110,10 @@ export class BooksPageStore {
   }
 }
 
-const { createProvider, useStore } = createStoreContext<BooksPageStore>();
+const { createProvider, useStore } = createStoreContext<LibraryPageStore>();
 
-export const useBooksPageStore = useStore;
+export const useLibraryPageStore = useStore;
 
-export const BooksPageStoreProvider = createProvider(
-  () => new BooksPageStore(useRootStore().user),
+export const LibraryPageStoreProvider = createProvider(
+  () => new LibraryPageStore(useRootStore().user),
 );
