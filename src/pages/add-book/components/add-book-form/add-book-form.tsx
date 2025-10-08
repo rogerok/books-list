@@ -29,11 +29,11 @@ interface AddBookFormProps {
 export const AddBookForm: FC<AddBookFormProps> = observer((props) => {
   const { className } = props;
 
-  const { form } = useAddBookStore();
+  const { form, isFormSubmitting } = useAddBookStore();
 
   return (
     <Card className={cnAddBookForm(undefined, [className])} elevation={'md'}>
-      {form.isSubmitting && <Loader />}
+      {isFormSubmitting && <Loader />}
 
       <FormTitle
         background={'green-100'}
@@ -76,7 +76,7 @@ export const AddBookForm: FC<AddBookFormProps> = observer((props) => {
         <Button
           addonLeft={<IconComponent name={'saveIcon'} size={'xxs'} />}
           className={cnAddBookForm('SubmitButton')}
-          disabled={form.isSubmitting}
+          disabled={isFormSubmitting}
           fullWidth
           type={'submit'}
         >

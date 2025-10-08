@@ -22,7 +22,7 @@
     grid-template-columns: repeat(3, 1fr);
   }
 
-  @media (width >= 1600px) {
+  @media (min-width: b.$xxl-breakpoint) {
     grid-template-columns: repeat(4, 1fr);
   }
 }

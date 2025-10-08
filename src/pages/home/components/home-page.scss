@@ -1,12 +1,15 @@
+@use '../../../shared/styles/breakpoints' as b;
+
 .HomePage {
   display: grid;
   grid-template-areas:
-    "header header"
-    "goal actions"
-    "current activities";
-  grid-template-columns: 2fr 1fr;
+      "header"
+      "goal"
+      "actions"
+      "current"
+      "activities";
+  grid-template-columns: 1fr;
   gap: 2rem;
-
 
   &-Header {
     display: flex;
@@ -63,14 +66,13 @@
   }
 }
 
-@media (width <= 1024px) {
+
+@media (min-width: b.$lg-breakpoint) {
   .HomePage {
     grid-template-areas:
-      "header"
-      "goal"
-      "actions"
-      "current"
-      "activities";
-    grid-template-columns: 1fr;
+    "header header"
+    "goal actions"
+    "current activities";
+    grid-template-columns: 2fr 1fr;
   }
 }

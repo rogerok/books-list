@@ -45,6 +45,10 @@ export class SignUpStore {
     );
   }
 
+  get isFormSubmitting() {
+    return this.form.isSubmitting;
+  }
+
   private async processSignUp(credentials: SignUpFormType): Promise<void> {
     const { email, name, password } = credentials;
 

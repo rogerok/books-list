@@ -79,7 +79,7 @@ export const HomePage = () => {
       </VStack>
 
       <section className={cnHomePage('Activities')}>
-        <Typography as={'h5'} size={'lg'} weight={'semibold'}>
+        <Typography as={'h5'} size={'lg'} weight={'semibold'} wordBreak={false}>
           Последние активности
         </Typography>
         <LastRated />

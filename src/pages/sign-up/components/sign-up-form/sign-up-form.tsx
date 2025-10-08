@@ -31,11 +31,11 @@ export const SignUpForm: FC<SignUpFormProps> = observer((props) => {
 
   const [store] = useState(() => new SignUpStore(auth));
 
-  const { form } = store;
+  const { form, isFormSubmitting } = store;
 
   return (
     <Card className={cnSignUpForm(undefined, [className])} elevation={'sm'}>
-      {form.isSubmitting && <Loader overlay />}
+      {isFormSubmitting && <Loader overlay />}
 
       <VStack gap={'8'}>
         <Typography as={'h2'} size={'xl'} weight={'semibold'}>
@@ -59,7 +59,6 @@ export const SignUpForm: FC<SignUpFormProps> = observer((props) => {
           name={'email'}
           placeholder={'example@email.com'}
         />
-        {/*TODO add show/hide button*/}
         <TextField
           fullWidth
           label={'Пароль'}
@@ -83,6 +82,7 @@ export const SignUpForm: FC<SignUpFormProps> = observer((props) => {
             />
           }
           className={cnSignUpForm('FormButton')}
+          disabled={isFormSubmitting}
           fullWidth
           type={'submit'}
           variant={'secondary'}
@@ -112,6 +112,7 @@ export const SignUpForm: FC<SignUpFormProps> = observer((props) => {
         </Typography>
         <AppLink
           className={cnSignUpForm('Link')}
+          disabled={isFormSubmitting}
           to={routes.signIn()}
           variant={'outline'}
         >

@@ -120,6 +120,10 @@ export class AddBookStore {
       }
     }
   }
+
+  get isFormSubmitting() {
+    return this.form.isSubmitting;
+  }
 }
 
 const { createProvider, useStore } = createStoreContext<AddBookStore>();

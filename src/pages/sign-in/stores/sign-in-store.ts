@@ -31,4 +31,8 @@ export class SignInStore {
   async signIn(data: SignInRequestModel): Promise<void> {
     await this.authStore.signIn(data);
   }
+
+  get isFormSubmitting() {
+    return this.form.isSubmitting;
+  }
 }
