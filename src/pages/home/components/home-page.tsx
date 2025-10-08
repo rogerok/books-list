@@ -6,6 +6,7 @@ import { routes } from '@shared/config/router/routes.ts';
 import { ColorConstant } from '@shared/constants/style-system/colors.ts';
 import { AppLink } from '@shared/ui/app-link/app-link.tsx';
 import { IconComponent } from '@shared/ui/icon-component/icon-component.tsx';
+import { PageMeta } from '@shared/ui/page-meta/page-meta.tsx';
 import { Typography } from '@shared/ui/typography/typography.tsx';
 import { VStack } from '@shared/ui/vstack/vstack.tsx';
 import { BooksListWidget } from '@widgets/book/components/books-list-widget.tsx';
@@ -16,6 +17,8 @@ const cnHomePage = cn('HomePage');
 export const HomePage = () => {
   return (
     <section className={cnHomePage()}>
+      <PageMeta title={'Главная'} />
+
       <header className={cnHomePage('Header')}>
         <Typography as={'h1'} size={'3xl'} weight={'semibold'}>
           Привет! 📚

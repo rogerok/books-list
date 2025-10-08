@@ -12,6 +12,20 @@
     border-radius: 10px;
   }
 
+  &-CoverFallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 224px;
+    height: 320px;
+    padding: 0.5rem;
+    border-radius: 10px;
+
+    background: var(--neutral-200);
+  }
+
+
   &-Info {
     display: flex;
     flex-direction: column;

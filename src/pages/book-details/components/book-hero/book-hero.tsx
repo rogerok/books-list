@@ -29,17 +29,27 @@ export const BookHero: FC<BookHeroProps> = observer((props) => {
   return (
     data && (
       <Card className={cnBookHero(undefined, [className])}>
-        {data.coverUrl && (
-          <AppImage
-            alt={`Обложка книги ${data.title}`}
-            className={cnBookHero('Cover')}
-            fit={'cover'}
-            height={320}
-            rounded={'10'}
-            src={data.coverUrl}
-            width={224}
-          />
-        )}
+        <div className={cnBookHero('Cover')}>
+          {data.coverUrl ? (
+            <AppImage
+              alt={`Обложка книги ${data.title}`}
+              fallback={<Skeleton height={320} rounded={'14'} />}
+              fit={'cover'}
+              height={320}
+              rounded={'10'}
+              src={data.coverUrl}
+              width={224}
+            />
+          ) : (
+            <Typography
+              className={cnBookHero('CoverFallback')}
+              size={'sm'}
+              weight={'medium'}
+            >
+              🖼️ Обложка отсутствует
+            </Typography>
+          )}
+        </div>
 
         <div className={cnBookHero('Info')}>
           <Typography as={'h5'} size={'md'} weight={'medium'}>

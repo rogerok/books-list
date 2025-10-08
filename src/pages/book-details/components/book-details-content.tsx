@@ -8,6 +8,7 @@ import { BookProgress } from '@pages/book-details/components/book-progress/book-
 import { BookRating } from '@pages/book-details/components/book-rating/book-rating.tsx';
 import { useBookDetailsStore } from '@pages/book-details/stores/book-details-store.ts';
 import { Card } from '@shared/ui/card/card.tsx';
+import { PageMeta } from '@shared/ui/page-meta/page-meta.tsx';
 import { VStack } from '@shared/ui/vstack/vstack.tsx';
 import { getRouteApi } from '@tanstack/react-router';
 import { observer } from 'mobx-react-lite';
@@ -20,7 +21,7 @@ const route = getRouteApi('/_protected/(dashboard)/books/$bookId');
 export const BookDetailsContent = observer(() => {
   const params = route.useParams();
 
-  const { clear, fetchBook } = useBookDetailsStore();
+  const { clear, data, fetchBook } = useBookDetailsStore();
 
   useEffect(() => {
     fetchBook(params.bookId);
@@ -32,6 +33,8 @@ export const BookDetailsContent = observer(() => {
 
   return (
     <section className={cnBookDetailsContent()}>
+      <PageMeta title={`Детали книги ${data?.title ?? ''}`} />
+
       <BookHero className={cnBookDetailsContent('Header')} />
 
       <div className={cnBookDetailsContent('Cards')}>
