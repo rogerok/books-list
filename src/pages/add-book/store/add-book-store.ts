@@ -25,12 +25,13 @@ import { makeAutoObservable, reaction } from 'mobx';
 
 export class AddBookStore {
   private bookCreateRequest = new RequestStore(createBook);
+  previewCoverUrl: string = '';
   form = new MobxForm<BookCreateFormModel>({
     defaultValues: {
       author: '',
       coverUrl: '',
       genre: '',
-      outerCoverUrl: '',
+      outerCoverUrl: this.previewCoverUrl,
       title: '',
     },
     onSubmit: (data) => this.submitForm(data),
@@ -39,7 +40,6 @@ export class AddBookStore {
   private getPublicImageUrl = new RequestStore(getPublicUrl, {
     onError: () => Notifier.error('Ошибка получения изображения'),
   });
-  previewCoverUrl: string = '';
   private userBookCreateRequest = new RequestStore(createUserBook, {
     onError: () => Notifier.error('Ошибка создания книги'),
     onSuccess: () =>
@@ -61,12 +61,8 @@ export class AddBookStore {
     );
 
     reaction(
-      () => [this.form.values.coverUrl, this.form.values.outerCoverUrl],
-      async ([cover, outer]) => {
-        if (outer) {
-          this.setPreviewCoverUrl(outer);
-        }
-
+      () => this.form.values.coverUrl,
+      async (cover) => {
         if (cover) {
           const { response } = await this.getPublicImageUrl.execute(
             BucketsNames.covers,
@@ -75,6 +71,7 @@ export class AddBookStore {
 
           if (response?.data.publicUrl) {
             this.setPreviewCoverUrl(response.data.publicUrl);
+            this.form.setValue('outerCoverUrl', '');
           }
         } else {
           this.previewCoverUrl = '';
