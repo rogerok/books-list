@@ -20,7 +20,7 @@ export default defineConfig(({ mode }) => {
   }
 
   return {
-    base: env.data.VITE_BASE_PATH ?? '/',
+    base: env.data.VITE_BASE_PATH ?? '/books-list',
     plugins: [
       tanstackRouter({
         routesDirectory: './src/app/routes',
