@@ -1,0 +1,94 @@
+@use '../../styles/breakpoints' as b;
+
+.Modal {
+  $parent: &;
+
+  position: fixed;
+  z-index: var(--modal-z-index);
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font: var(--font-xs);
+
+  &-ModalOverlay {
+    z-index: 11;
+  }
+
+  &-Content {
+    z-index: var(--modal-z-index);
+
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    width: 60%;
+    max-height: 100%;
+    padding: 1rem;
+    border-radius: 16px;
+
+    background: linear-gradient(167deg, var(--neutral-100) 0%, var(--blue-50) 100%);
+
+    &_fullScreen {
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+    }
+
+    &:not(&_fullScreen) {
+      #{$parent}-Content_size_xs {
+        width: 20%;
+      }
+
+      #{$parent}-Content_size_sm {
+        width: 40%;
+      }
+
+      #{$parent}-Content_size_md {
+        width: 60%;
+      }
+
+      #{$parent}-Content_size_lg {
+        width: 80%;
+      }
+    }
+  }
+
+  &-CloseButton {
+    margin-left: auto;
+    border-radius: 1rem;
+    background: var(--bg-secondary);
+    @media (min-width: b.$md-breakpoint) {
+      transition: var(--transition-1);
+
+    }
+  }
+
+  &-Title {
+    padding-right: 1rem;
+  }
+
+  &-Transition-enter {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+
+  &-Transition-enter-active {
+    transform: translateX(0);
+    opacity: 1;
+    transition: all 0.2s;
+  }
+
+  &-Transition-exit {
+    opacity: 1;
+  }
+
+  &-Transition-exit-active {
+    transform: scale(0.9);
+    opacity: 0;
+    transition: all 0.2s;
+  }
+}

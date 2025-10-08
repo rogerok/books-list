@@ -1,9 +1,9 @@
 import './loader.scss';
 
 import { cn } from '@bem-react/classname';
-import { Dots } from '@shared/ui/Loader/dots/dots.tsx';
-import { Pulse } from '@shared/ui/Loader/pulse/pulse.tsx';
-import { Spinner } from '@shared/ui/Loader/spinner/spinner.tsx';
+import { Dots } from '@shared/ui/loader/dots/dots.tsx';
+import { Pulse } from '@shared/ui/loader/pulse/pulse.tsx';
+import { Spinner } from '@shared/ui/loader/spinner/spinner.tsx';
 import { Typography } from '@shared/ui/typography/typography.tsx';
 import { type FC, type ReactNode, useEffect, useRef } from 'react';
 
