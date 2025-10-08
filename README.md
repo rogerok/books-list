@@ -23,3 +23,5 @@ Set up environment variables:
 VITE_SUPABASE_KEY
 VITE_SUPABASE_URL
 ```
+
+[DeepWiki](https://deepwiki.com/rogerok/books-list)
