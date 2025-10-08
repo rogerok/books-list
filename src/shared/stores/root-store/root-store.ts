@@ -19,7 +19,13 @@ class RootStore {
   stats = new StatsStore(this.user);
 
   constructor() {
-    makeAutoObservable(this);
+    makeAutoObservable(
+      this,
+      {},
+      {
+        autoBind: true,
+      },
+    );
   }
 }
 

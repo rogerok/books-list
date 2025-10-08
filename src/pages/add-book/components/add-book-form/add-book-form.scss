@@ -39,25 +39,6 @@
   }
 
 
-  &-CoverField {
-    display: flex;
-    flex-flow: column wrap;
-    gap: 1rem;
-    align-items: flex-end;
-
-    color: var(--neutral-550)
-  }
-
-  &-SearchButton {
-    align-self: flex-end;
-
-    padding: 0.5rem 1rem;
-
-    font: var(--font-xs);
-    font-weight: 500;
-    color: var(--neutral-550);
-  }
-
   &-SubmitButton {
     opacity: 0.5;
     background: linear-gradient(90deg, var(--green-200) 0%, var(--green-600) 100%);
@@ -71,13 +52,6 @@
     &-Logo {
       display: flex;
       flex-direction: row;
-    }
-
-    &-CoverField {
-      display: flex;
-      flex-flow: row nowrap;
-      gap: 0.5rem;
-      align-items: center;
     }
   }
 
