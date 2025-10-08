@@ -1,4 +1,11 @@
 .NotFoundComponent {
-  min-height: 100vh;
-  padding-bottom: 8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 100svh;
+  margin: 0 auto;
+  padding-bottom: 4rem;
 }

@@ -2,6 +2,10 @@
   text-decoration: none;
   transition: var(--transition-1);
 
+  &:visited {
+    color: inherit;
+  }
+
   &_variant {
     &_primary {
       color: var(--neutral-900);
