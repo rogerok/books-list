@@ -1,5 +1,5 @@
 import { cn } from '@bem-react/classname';
-import { useBooksPageStore } from '@pages/books/stores/books-page-store.ts';
+import { useLibraryPageStore } from '@pages/library/stores/library-page-store.ts';
 import { Tabs } from '@shared/components/tabs/tabs.tsx';
 import { Badge } from '@shared/ui/badge/badge.tsx';
 import { observer } from 'mobx-react-lite';
@@ -13,7 +13,7 @@ interface BooksTabsProps {
 
 export const BooksTabs: FC<BooksTabsProps> = observer((props) => {
   const { className } = props;
-  const { fetchTabsStats, tabManager } = useBooksPageStore();
+  const { fetchTabsStats, tabManager } = useLibraryPageStore();
 
   useEffect(() => {
     fetchTabsStats();

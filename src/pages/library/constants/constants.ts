@@ -1,4 +1,4 @@
-import type { BooksStatsTabsCounters } from '@pages/books/types/types.ts';
+import type { BooksStatsTabsCounters } from '@pages/library/types/types.ts';
 
 export const DefaultTabsCounters: BooksStatsTabsCounters = {
   all: 0,

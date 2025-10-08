@@ -1,5 +1,5 @@
 import { cn } from '@bem-react/classname';
-import { useBooksPageStore } from '@pages/books/stores/books-page-store.ts';
+import { useLibraryPageStore } from '@pages/library/stores/library-page-store.ts';
 import { ColorConstant } from '@shared/constants/style-system/colors.ts';
 import { ElementRepeater } from '@shared/ui/element-repeater/element-repeater.tsx';
 
@@ -29,7 +29,8 @@ const BookListSkeleton = () => {
 export const BooksList: FC<BooksListProps> = observer((props) => {
   const { className } = props;
 
-  const { data, fetchBooks, isBooksLoading, tabManager } = useBooksPageStore();
+  const { data, fetchBooks, isBooksLoading, tabManager } =
+    useLibraryPageStore();
 
   useEffect(() => {
     fetchBooks(tabManager.activeTab);

@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 
 import { cn } from '@bem-react/classname';
-import { useBooksPageStore } from '@pages/books/stores/books-page-store.ts';
+import { useLibraryPageStore } from '@pages/library/stores/library-page-store.ts';
 import { Input } from '@shared/ui/input/input.tsx';
 import { observer } from 'mobx-react-lite';
 
@@ -13,7 +13,8 @@ interface BooksSearchInputProps {
 
 export const BooksSearchInput: FC<BooksSearchInputProps> = observer((props) => {
   const { className } = props;
-  const { searchTerm, searchTermErrorMsg, setSearchTerm } = useBooksPageStore();
+  const { searchTerm, searchTermErrorMsg, setSearchTerm } =
+    useLibraryPageStore();
 
   return (
     <Input

@@ -1,7 +1,7 @@
 import { cn } from '@bem-react/classname';
-import { BooksList } from '@pages/books/components/books-list/books-list.tsx';
-import { BooksSearchInput } from '@pages/books/components/books-search-input/books-search-input.tsx';
-import { BooksTabs } from '@pages/books/components/books-tabs/books-tabs.tsx';
+import { BooksList } from '@pages/library/components/books-list/books-list.tsx';
+import { BooksSearchInput } from '@pages/library/components/books-search-input/books-search-input.tsx';
+import { BooksTabs } from '@pages/library/components/books-tabs/books-tabs.tsx';
 import { VStack } from '@shared/ui/vstack/vstack.tsx';
 import { observer } from 'mobx-react-lite';
 import { type FC } from 'react';

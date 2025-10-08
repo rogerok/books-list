@@ -31,9 +31,6 @@ export const NavbarNav: FC<NavbarNavProps> = observer((props) => {
         <span>Главная</span>
       </AppLink>
       <AppLink
-        activeOptions={{
-          exact: true,
-        }}
         className={cnNavbarNav('Link')}
         onClick={navbar.closeOnDownMdScreen}
         to={routes.books()}
