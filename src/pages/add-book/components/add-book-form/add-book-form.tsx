@@ -14,7 +14,7 @@ import { ColorConstant } from '@shared/constants/style-system/colors.ts';
 import { Button } from '@shared/ui/button/button.tsx';
 import { Card } from '@shared/ui/card/card.tsx';
 import { IconComponent } from '@shared/ui/icon-component/icon-component.tsx';
-import { Loader } from '@shared/ui/Loader/loader.tsx';
+import { Loader } from '@shared/ui/loader/loader.tsx';
 import { Typography } from '@shared/ui/typography/typography.tsx';
 import { VStack } from '@shared/ui/vstack/vstack.tsx';
 import { observer } from 'mobx-react-lite';

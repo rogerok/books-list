@@ -5,7 +5,7 @@ import {
   RootStoreProvider,
   useRootStore,
 } from '@shared/stores/root-store/root-store.ts';
-import { Loader } from '@shared/ui/Loader/loader.tsx';
+import { Loader } from '@shared/ui/loader/loader.tsx';
 import { createRouter, RouterProvider } from '@tanstack/react-router';
 import { observer } from 'mobx-react-lite';
 import { type FC, Suspense, useEffect } from 'react';
