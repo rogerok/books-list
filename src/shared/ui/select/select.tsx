@@ -2,6 +2,7 @@ import './select.scss';
 
 import { cn } from '@bem-react/classname';
 import { ColorConstant } from '@shared/constants/style-system/colors.ts';
+import { HStack } from '@shared/ui/hstack/hstack.tsx';
 import { IconComponent } from '@shared/ui/icon-component/icon-component.tsx';
 import { Typography } from '@shared/ui/typography/typography';
 import { VStack } from '@shared/ui/vstack/vstack';
@@ -99,6 +100,13 @@ export const Select = <T extends SelectOptionType>(props: SelectProps<T>) => {
           classNamePrefix="Select"
           components={{
             DropdownIndicator: DropdownIndicator,
+            NoOptionsMessage: () => (
+              <HStack align={'center'} flexJustify={'center'}>
+                <Typography align={'center'} size={'md'}>
+                  Не найдено
+                </Typography>
+              </HStack>
+            ),
           }}
           getOptionLabel={(opt) => String(opt[labelField])}
           getOptionValue={(opt) => String(opt[valueField])}

@@ -42,6 +42,9 @@ export class AddGoalStore {
       (targetBooks) => {
         this.form.setValue('targetBooks', targetBooks ?? 1);
       },
+      {
+        fireImmediately: true,
+      },
     );
   }
 

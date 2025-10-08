@@ -21,7 +21,6 @@ export const Card: FC<CardProps> = (props) => {
     children,
     className,
     elevation,
-    // TODO: maybe remove default value
     rounded = '14',
     variant = 'primary',
   } = props;

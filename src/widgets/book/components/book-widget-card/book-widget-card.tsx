@@ -39,8 +39,7 @@ const BookWidgetCard: FC<BookWidgetCardProps> = (props) => {
           {data.coverUrl ? (
             <AppImage
               alt={data.title}
-              className={cnBookWidgetCard('Img')}
-              fallback={<Skeleton height={238} rounded={'14'} />}
+              fallback={<Skeleton height={238} rounded={'10'} />}
               fit={'cover'}
               height={238}
               rounded={'10'}

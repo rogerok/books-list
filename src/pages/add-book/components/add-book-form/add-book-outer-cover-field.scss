@@ -1,0 +1,32 @@
+@use '../../../../shared/styles/breakpoints' as b;
+
+.AddBookOuterCoverField {
+  display: flex;
+  flex-flow: column wrap;
+  gap: 1rem;
+  align-items: flex-end;
+
+  width: 100%;
+
+  color: var(--neutral-550);
+
+
+  &-SearchButton {
+    align-self: flex-end;
+
+    padding: 0.5rem 1rem;
+
+    font: var(--font-xs);
+    font-weight: 500;
+    color: var(--neutral-550);
+  }
+}
+
+@media (min-width: b.$md-breakpoint) {
+  .AddBookOuterCoverField {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 0.5rem;
+    align-items: center;
+  }
+}

@@ -29,12 +29,12 @@ export const BookWidgetCompact: FC<BookWidgetCompactProps> = (props) => {
         <Typography as={'h5'} clamp size={'2xs'} weight={'medium'}>
           {data.title}
         </Typography>
-      </AppLink>
 
-      <Typography clamp gutterBottom size={'3xs'} variant={'secondary'}>
-        {data.author}
-      </Typography>
-      <BookProgress percent={data.progress ?? 0} />
+        <Typography clamp gutterBottom size={'3xs'} variant={'secondary'}>
+          {data.author}
+        </Typography>
+        <BookProgress percent={data.progress ?? 0} />
+      </AppLink>
     </div>
   );
 };

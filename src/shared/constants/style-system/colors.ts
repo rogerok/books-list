@@ -41,6 +41,7 @@ export const ColorConstant = {
   Purple300: 'purple-300',
 
   // Other
+  Warn: 'warn',
   White: 'white',
 } as const;
 

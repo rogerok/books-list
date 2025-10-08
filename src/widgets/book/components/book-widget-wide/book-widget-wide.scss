@@ -1,7 +1,23 @@
 .BookWidgetWide {
-  display: flex;
-  gap: 1.5rem;
-  padding: 1.5rem;
+  &-Inner {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  &-CoverFallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    // width: 100%;
+    width: 96px;
+    height: 144px;
+    padding: 0.5rem;
+    border-radius: 10px;
+
+    background: var(--neutral-200);
+  }
 
   &-Cover {
     border-radius: 10px;

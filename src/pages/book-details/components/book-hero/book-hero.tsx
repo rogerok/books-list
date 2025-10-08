@@ -33,6 +33,7 @@ export const BookHero: FC<BookHeroProps> = observer((props) => {
           <AppImage
             alt={`Обложка книги ${data.title}`}
             className={cnBookHero('Cover')}
+            fit={'cover'}
             height={320}
             rounded={'10'}
             src={data.coverUrl}

@@ -12,33 +12,34 @@ import { getPublicUrl } from '@shared/api/storage/storage.ts';
 import { routes } from '@shared/config/router/routes.ts';
 import { BucketsNames } from '@shared/constants/storage.ts';
 import { MobxForm } from '@shared/lib/mobx/mobx-form/mobx-form.ts';
+import { createStoreContext } from '@shared/lib/mobx/store-factory.tsx';
 import { Notifier } from '@shared/lib/notifier/notifier.ts';
 import { RequestStore } from '@shared/lib/request-store/request-store.ts';
-import { type RouterController } from '@shared/lib/router/app-router.ts';
+import {
+  AppRouter,
+  type RouterController,
+} from '@shared/lib/router/app-router.ts';
+import { useRootStore } from '@shared/stores/root-store/root-store.ts';
 import { convertEmptyStringToNull } from '@shared/utils/converters.ts';
 import { makeAutoObservable, reaction } from 'mobx';
 
 export class AddBookStore {
   private bookCreateRequest = new RequestStore(createBook);
-
+  previewCoverUrl: string = '';
   form = new MobxForm<BookCreateFormModel>({
     defaultValues: {
       author: '',
       coverUrl: '',
       genre: '',
-      outerCoverUrl: '',
+      outerCoverUrl: this.previewCoverUrl,
       title: '',
     },
     onSubmit: (data) => this.submitForm(data),
     resolver: zodResolver(BookCreateFormSchema),
   });
-
   private getPublicImageUrl = new RequestStore(getPublicUrl, {
     onError: () => Notifier.error('Ошибка получения изображения'),
   });
-
-  previewCoverUrl: string = '';
-
   private userBookCreateRequest = new RequestStore(createUserBook, {
     onError: () => Notifier.error('Ошибка создания книги'),
     onSuccess: () =>
@@ -47,9 +48,9 @@ export class AddBookStore {
 
   constructor(
     private user: UserStore,
-    private router: RouterController,
     private goal: GoalStore,
     private stats: StatsStore,
+    private router: RouterController,
   ) {
     makeAutoObservable(
       this,
@@ -60,12 +61,8 @@ export class AddBookStore {
     );
 
     reaction(
-      () => [this.form.values.coverUrl, this.form.values.outerCoverUrl],
-      async ([cover, outer]) => {
-        if (outer) {
-          this.setPreviewCoverUrl(outer);
-        }
-
+      () => this.form.values.coverUrl,
+      async (cover) => {
         if (cover) {
           const { response } = await this.getPublicImageUrl.execute(
             BucketsNames.covers,
@@ -74,6 +71,7 @@ export class AddBookStore {
 
           if (response?.data.publicUrl) {
             this.setPreviewCoverUrl(response.data.publicUrl);
+            this.form.setValue('outerCoverUrl', '');
           }
         } else {
           this.previewCoverUrl = '';
@@ -123,3 +121,13 @@ export class AddBookStore {
     }
   }
 }
+
+const { createProvider, useStore } = createStoreContext<AddBookStore>();
+
+export const useAddBookStore = useStore;
+
+export const AddBookStoreProvider = createProvider(() => {
+  const { goal, stats, user } = useRootStore();
+
+  return new AddBookStore(user, goal, stats, AppRouter);
+});
