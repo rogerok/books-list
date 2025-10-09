@@ -22,6 +22,7 @@ export const GenresSelect: FC = observer(() => {
       name={'genre'}
       options={data ?? []}
       placeholder={'Выберите жанр'}
+      required
       valueField={'id'}
     />
   );

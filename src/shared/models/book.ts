@@ -16,7 +16,7 @@ export type BookStatusFilterModel = z.infer<typeof BookStatusFilterEnumSchema>;
 export const BookCreateRequestSchema = z.object({
   author: z.string().min(2).max(255),
   coverUrl: z.string().or(EmptyStringSchema),
-  genre: z.string().or(EmptyStringSchema).nullable(),
+  genre: z.string().uuid(),
   title: z.string().min(2).max(255),
 });
 
