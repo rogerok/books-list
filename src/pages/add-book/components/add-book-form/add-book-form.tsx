@@ -33,7 +33,7 @@ export const AddBookForm: FC<AddBookFormProps> = observer((props) => {
 
   return (
     <Card className={cnAddBookForm(undefined, [className])} elevation={'md'}>
-      {isFormSubmitting && <Loader />}
+      {isFormSubmitting && <Loader overlay />}
 
       <FormTitle
         background={'green-100'}
