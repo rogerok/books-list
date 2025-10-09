@@ -6,7 +6,11 @@ export const SignUpFormSchema = z
   .object({
     ...SignUpRequestSchema.shape,
     confirmPassword: PasswordSchema,
-    name: z.string().min(3).max(255),
+    name: z
+      .string()
+      .trim()
+      .min(3, 'Имя должно содержать минимум 3 символа')
+      .max(255),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: 'Пароли не совпадают',
