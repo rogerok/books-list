@@ -20,7 +20,6 @@ import {
   type RouterController,
 } from '@shared/lib/router/app-router.ts';
 import { useRootStore } from '@shared/stores/root-store/root-store.ts';
-import { convertEmptyStringToNull } from '@shared/utils/converters.ts';
 import { makeAutoObservable, reaction } from 'mobx';
 
 export class AddBookStore {
@@ -93,7 +92,7 @@ export class AddBookStore {
     const bookResp = await this.bookCreateRequest.execute({
       author: formData.author,
       coverUrl: this.previewCoverUrl,
-      genre: convertEmptyStringToNull(formData.genre),
+      genre: formData.genre,
       title: formData.title,
     });
 
