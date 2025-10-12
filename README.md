@@ -1,3 +1,10 @@
+# 🏆 First-Place React Intensive Project
+
+This project was the **winning submission** of a React intensive organized by [Frontend вдохновляет </> Александр Белькевич](https://t.me/front_everyday).  
+
+It’s the result of two intense, idea-packed weeks of coding, experimenting, and refining.
+
+
 ### Prerequisites
 
 Before you begin working with the books-list project, ensure you have the following installed:
